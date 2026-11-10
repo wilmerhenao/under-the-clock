@@ -1,0 +1,59 @@
+{
+  "tag": "adapter",
+  "model_id": "g4dev_sft_b",
+  "status": "complete",
+  "eval_secs": 239.8,
+  "n_tasks": 2,
+  "task_set": "canary",
+  "order_seed": null,
+  "control": null,
+  "extra_wheels": null,
+  "isolate": true,
+  "py313": "/tmp/py313/cpython-3.13.15-linux-x86_64-gnu/bin/python3.13",
+  "official_env": true,
+  "repo_wheels": "/kaggle/input/datasets/debmalya84/repograph-verified-swe-tasks-wheels",
+  "uv_task_env": false,
+  "official_paths": true,
+  "n_finished": 2,
+  "n_resolved": 2,
+  "n_errors": 0,
+  "n_llm_calls": 25,
+  "n_tool_calls": 21,
+  "tool_calls_per_llm_call": 0.84,
+  "healthy": true,
+  "errors_sample": [],
+  "drop_thinking_budget": false,
+  "stop_token_ids": [],
+  "resolved_ids": [
+    "rich_2943",
+    "rich_3043"
+  ],
+  "generated_tokens": 5945.0,
+  "gen_tok_per_s": 24.8,
+  "finished_per_hour": 30.0,
+  "run_ids": [
+    "rich_2943",
+    "rich_3043"
+  ],
+  "concurrency": 2,
+  "sampling": "temperature: 0.2\ntop_p: 0.95\nmax_output_tokens: 8192\nthinking_config:\n  thinking_budget: 4096\n  include_thoughts: true\n",
+  "bundle": "sub-v9c",
+  "caps": {
+    "max_time_minutes": 16.0,
+    "max_tool_calls": 24,
+    "max_turns": 80,
+    "timeout_seconds": 240
+  },
+  "row_keys": [
+    "agent_patch_size",
+    "duration_seconds",
+    "error",
+    "instance_id",
+    "repo",
+    "resolved",
+    "task_index",
+    "test_exit_code",
+    "tool_calls",
+    "total_llm_calls"
+  ]
+}

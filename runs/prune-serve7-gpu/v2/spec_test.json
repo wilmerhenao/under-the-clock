@@ -1,0 +1,69 @@
+{
+ "states": 109,
+ "speedup": {
+  "p2k": 3.372,
+  "p16k": 1.581,
+  "streams8": 2.911,
+  "turns_streams1": 1.069,
+  "turns_streams8": 1.048
+ },
+ "agreement_parsed": {
+  "share": 0.89,
+  "ci95": [
+   0.825,
+   0.948
+  ],
+  "states": 100,
+  "rows": 40
+ },
+ "malformed": [
+  2,
+  103
+ ],
+ "malformed_plain": [
+  2,
+  100
+ ],
+ "identical_turn_text": 68,
+ "behaviour_kept": true,
+ "engine": {
+  "max_num_batched_tokens": 1024,
+  "gpu_memory_utilization": 0.8,
+  "speculative_config": {
+   "method": "ngram",
+   "num_speculative_tokens": 4,
+   "prompt_lookup_min": 2,
+   "prompt_lookup_max": 4
+  }
+ },
+ "turn_speed": {
+  "full": {
+   "streams1": {
+    "states": 16,
+    "tokens": 3403,
+    "s": 140.0,
+    "tok_s": 24.31
+   },
+   "streams8": {
+    "states": 16,
+    "tokens": 3083,
+    "s": 78.2,
+    "tok_s": 39.45
+   }
+  },
+  "full_b": {
+   "streams1": {
+    "states": 16,
+    "tokens": 3384,
+    "s": 130.2,
+    "tok_s": 25.99
+   },
+   "streams8": {
+    "states": 16,
+    "tokens": 3122,
+    "s": 75.5,
+    "tok_s": 41.36
+   }
+  }
+ }
+}

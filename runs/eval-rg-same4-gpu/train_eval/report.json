@@ -1,0 +1,509 @@
+{
+  "machine": "gpu-4xL4",
+  "started": "2026-11-07 08:18:45",
+  "stages": [
+    {
+      "stage": "env",
+      "t": 0.0,
+      "python": "3.12.13",
+      "gpus": [
+        "NVIDIA L4, 23034 MiB",
+        "NVIDIA L4, 23034 MiB",
+        "NVIDIA L4, 23034 MiB",
+        "NVIDIA L4, 23034 MiB"
+      ],
+      "cpus": 48
+    },
+    {
+      "stage": "train_libs",
+      "t": 99.4,
+      "installed": {}
+    },
+    {
+      "stage": "libs",
+      "t": 109.2,
+      "versions": "2.10.0+cu128 5.13.1 0.19.1 0.46.1 1.13.0"
+    },
+    {
+      "stage": "vllm",
+      "t": 111.9,
+      "version": "0.19.1",
+      "chat_utils_mentions_reasoning_content": true,
+      "wheel_drops_past_thoughts": true,
+      "patched": false,
+      "reasoning_lines": [
+        "reasoning: str | None",
+        "\"\"\"The reasoning content for interleaved thinking.\"\"\"",
+        "reasoning: str | None",
+        "\"\"\"The reasoning content for interleaved thinking.\"\"\"",
+        "reasoning_content: str | None",
+        "\"\"\"Deprecated: The reasoning content for interleaved thinking.\"\"\"",
+        "reasoning = message.get(\"reasoning\")",
+        "# Include reasoning if present for interleaved thinking.",
+        "if reasoning is not None:",
+        "result_msg[\"reasoning\"] = cast(str, reasoning)",
+        "result_msg[\"reasoning_content\"] = cast(",
+        "str, reasoning"
+      ]
+    },
+    {
+      "stage": "repograph_data",
+      "t": 404.0,
+      "split": "priv_eval",
+      "tasks": 221,
+      "trusted": 215,
+      "eval_ids": 150,
+      "excluded_repos": 10,
+      "graphs": 220,
+      "embeddings": 220,
+      "controls": [
+        "/kaggle/input/notebooks/verracodeguacas/g4dev-repograph-controls-cpu/controls/controls.csv",
+        "/kaggle/input/notebooks/verracodeguacas/g4dev-repograph-controls2-cpu/controls/controls.csv"
+      ]
+    },
+    {
+      "stage": "inputs",
+      "t": 404.0,
+      "sft": "/kaggle/input/notebooks/verracodeguacas/g4dev-render-daily-cpu/render/sft.jsonl",
+      "qat_bf16": "/kaggle/input/models/google/gemma-4/transformers/gemma-4-31b-it-qat-q4_0-unquantized/2",
+      "serve": "/kaggle/input/models/google/gemma-4/other/gemma-4-31b-it-qat-w4a16-ct/2",
+      "env_args": [
+        "--py313-kit",
+        "/kaggle/input/datasets/verracodeguacas/g4dev-sandbox313",
+        "--find-links",
+        "/kaggle/input/datasets/verracodeguacas/g4dev-py313-wheels",
+        "--official-env",
+        "--repo-wheels",
+        "/kaggle/input/datasets/debmalya84/repograph-verified-swe-tasks-wheels"
+      ],
+      "eval_data": "/kaggle/working/rgdata"
+    },
+    {
+      "stage": "block_exclude",
+      "t": 425.4,
+      "repos": [
+        "omni-us/jsonargparse",
+        "tophat/syrupy"
+      ],
+      "dropped": 0
+    },
+    {
+      "stage": "models_blocks",
+      "t": 425.4,
+      "sizes": {
+        "block0": 56,
+        "block1": 56
+      },
+      "first": [
+        [
+          "skylos_961",
+          "casbin_pycasbin_402",
+          "openenv_1252"
+        ],
+        [
+          "dbt_osmosis_322",
+          "rich_click_258",
+          "jcodemunch_mcp_981"
+        ]
+      ]
+    },
+    {
+      "stage": "models_prepared",
+      "t": 425.4,
+      "model": "full",
+      "dir": "/kaggle/input/models/google/gemma-4/other/gemma-4-31b-it-qat-w4a16-ct/2"
+    },
+    {
+      "stage": "models_prepared",
+      "t": 786.4,
+      "model": "c70",
+      "dir": "/tmp/model_c70",
+      "minutes": 6.0,
+      "cut": {
+        "shards": 5,
+        "bytes": 19642091640,
+        "gb": 18.29,
+        "layers": 60,
+        "ff_channels": 14848,
+        "dropped": [],
+        "format": "w4 g32, down_proj re-quantized",
+        "requant_rel_err": {
+          "mean": 0.06305,
+          "max": 0.07137
+        }
+      }
+    },
+    {
+      "stage": "models_prepared",
+      "t": 1289.1,
+      "model": "c70kd",
+      "dir": "/tmp/model_c70kd_merged",
+      "minutes": 8.4,
+      "cut": {
+        "shards": 5,
+        "bytes": 19642091640,
+        "gb": 18.29,
+        "layers": 60,
+        "ff_channels": 14848,
+        "dropped": [],
+        "format": "w4 g32, down_proj re-quantized",
+        "requant_rel_err": {
+          "mean": 0.06305,
+          "max": 0.07137
+        }
+      },
+      "adapter_slice": {
+        "tensors": 820,
+        "tensors_of_removed_layers": 0,
+        "removed_rows_lora_b_absmax": 0.0
+      },
+      "merge": {
+        "mode": "stochastic",
+        "seed": 0,
+        "matrices": 410,
+        "lora_scaling": 2.0,
+        "moved_share": 0.046093,
+        "mean_abs_delta_in_steps": 0.04721
+      }
+    },
+    {
+      "stage": "models_prepared",
+      "t": 1289.1,
+      "model": "full2",
+      "dir": "/kaggle/input/models/google/gemma-4/other/gemma-4-31b-it-qat-w4a16-ct/2"
+    },
+    {
+      "stage": "models_server_up",
+      "t": 1567.4,
+      "model": "full",
+      "startup_s": 278.4,
+      "model_id": "/kaggle/input/models/google/gemma-4/other/gemma-4-31b-it-qat-w4a16-ct/2"
+    },
+    {
+      "stage": "models_segment_start",
+      "t": 1567.4,
+      "segment": 0,
+      "block": 0,
+      "model": "full",
+      "budget_min": 76.2
+    },
+    {
+      "stage": "models_segment_done",
+      "t": 4966.2,
+      "segment": 0,
+      "block": 0,
+      "model": "full",
+      "minutes": 56.6,
+      "status": "complete",
+      "healthy": true,
+      "n_tasks": 56,
+      "n_finished": 56,
+      "n_resolved": 14,
+      "n_errors": 21,
+      "n_llm_calls": 1080,
+      "tool_calls_per_llm_call": 0.9
+    },
+    {
+      "stage": "models_server_up",
+      "t": 5189.4,
+      "model": "c70",
+      "startup_s": 197.2,
+      "model_id": "/tmp/model_c70"
+    },
+    {
+      "stage": "models_segment_start",
+      "t": 5189.4,
+      "segment": 1,
+      "block": 0,
+      "model": "c70",
+      "budget_min": 79.3
+    },
+    {
+      "stage": "models_segment_done",
+      "t": 8706.1,
+      "segment": 1,
+      "block": 0,
+      "model": "c70",
+      "minutes": 58.6,
+      "status": "complete",
+      "healthy": true,
+      "n_tasks": 56,
+      "n_finished": 56,
+      "n_resolved": 8,
+      "n_errors": 37,
+      "n_llm_calls": 1299,
+      "tool_calls_per_llm_call": 0.74
+    },
+    {
+      "stage": "models_server_up",
+      "t": 8937.3,
+      "model": "c70kd",
+      "startup_s": 205.3,
+      "model_id": "/tmp/model_c70kd_merged"
+    },
+    {
+      "stage": "models_segment_start",
+      "t": 8937.3,
+      "segment": 2,
+      "block": 0,
+      "model": "c70kd",
+      "budget_min": 83.3
+    },
+    {
+      "stage": "models_segment_done",
+      "t": 12201.0,
+      "segment": 2,
+      "block": 0,
+      "model": "c70kd",
+      "minutes": 54.4,
+      "status": "complete",
+      "healthy": true,
+      "n_tasks": 56,
+      "n_finished": 56,
+      "n_resolved": 14,
+      "n_errors": 17,
+      "n_llm_calls": 1197,
+      "tool_calls_per_llm_call": 0.84
+    },
+    {
+      "stage": "models_server_up",
+      "t": 12387.1,
+      "model": "full2",
+      "startup_s": 160.2,
+      "model_id": "/kaggle/input/models/google/gemma-4/other/gemma-4-31b-it-qat-w4a16-ct/2"
+    },
+    {
+      "stage": "models_segment_start",
+      "t": 12387.1,
+      "segment": 3,
+      "block": 0,
+      "model": "full2",
+      "budget_min": 85.0
+    },
+    {
+      "stage": "models_segment_done",
+      "t": 15732.4,
+      "segment": 3,
+      "block": 0,
+      "model": "full2",
+      "minutes": 55.8,
+      "status": "complete",
+      "healthy": true,
+      "n_tasks": 56,
+      "n_finished": 56,
+      "n_resolved": 15,
+      "n_errors": 23,
+      "n_llm_calls": 1135,
+      "tool_calls_per_llm_call": 0.88
+    },
+    {
+      "stage": "models_segment_start",
+      "t": 15732.4,
+      "segment": 4,
+      "block": 1,
+      "model": "full2",
+      "budget_min": 85.0
+    },
+    {
+      "stage": "models_segment_done",
+      "t": 19286.9,
+      "segment": 4,
+      "block": 1,
+      "model": "full2",
+      "minutes": 59.2,
+      "status": "complete",
+      "healthy": true,
+      "n_tasks": 56,
+      "n_finished": 56,
+      "n_resolved": 19,
+      "n_errors": 20,
+      "n_llm_calls": 957,
+      "tool_calls_per_llm_call": 0.87
+    },
+    {
+      "stage": "models_server_up",
+      "t": 19473.0,
+      "model": "c70kd",
+      "startup_s": 160.2,
+      "model_id": "/tmp/model_c70kd_merged"
+    },
+    {
+      "stage": "models_segment_start",
+      "t": 19473.0,
+      "segment": 5,
+      "block": 1,
+      "model": "c70kd",
+      "budget_min": 85.0
+    },
+    {
+      "stage": "models_segment_done",
+      "t": 22765.7,
+      "segment": 5,
+      "block": 1,
+      "model": "c70kd",
+      "minutes": 54.9,
+      "status": "complete",
+      "healthy": true,
+      "n_tasks": 56,
+      "n_finished": 56,
+      "n_resolved": 18,
+      "n_errors": 21,
+      "n_llm_calls": 1177,
+      "tool_calls_per_llm_call": 0.84
+    },
+    {
+      "stage": "models_server_up",
+      "t": 22953.8,
+      "model": "c70",
+      "startup_s": 162.2,
+      "model_id": "/tmp/model_c70"
+    },
+    {
+      "stage": "models_segment_start",
+      "t": 22953.8,
+      "segment": 6,
+      "block": 1,
+      "model": "c70",
+      "budget_min": 85.0
+    },
+    {
+      "stage": "models_segment_done",
+      "t": 26486.9,
+      "segment": 6,
+      "block": 1,
+      "model": "c70",
+      "minutes": 58.9,
+      "status": "complete",
+      "healthy": true,
+      "n_tasks": 56,
+      "n_finished": 56,
+      "n_resolved": 12,
+      "n_errors": 36,
+      "n_llm_calls": 1444,
+      "tool_calls_per_llm_call": 0.64
+    },
+    {
+      "stage": "models_server_up",
+      "t": 26674.0,
+      "model": "full",
+      "startup_s": 161.2,
+      "model_id": "/kaggle/input/models/google/gemma-4/other/gemma-4-31b-it-qat-w4a16-ct/2"
+    },
+    {
+      "stage": "models_segment_start",
+      "t": 26674.0,
+      "segment": 7,
+      "block": 1,
+      "model": "full",
+      "budget_min": 85.0
+    },
+    {
+      "stage": "models_segment_done",
+      "t": 30009.2,
+      "segment": 7,
+      "block": 1,
+      "model": "full",
+      "minutes": 55.6,
+      "status": "complete",
+      "healthy": true,
+      "n_tasks": 56,
+      "n_finished": 56,
+      "n_resolved": 18,
+      "n_errors": 23,
+      "n_llm_calls": 1008,
+      "tool_calls_per_llm_call": 0.89
+    },
+    {
+      "stage": "models_done",
+      "t": 30015.2,
+      "results": {
+        "full_b0": {
+          "status": "complete",
+          "healthy": true,
+          "n_tasks": 56,
+          "n_finished": 56,
+          "n_resolved": 14,
+          "n_errors": 21,
+          "n_llm_calls": 1080,
+          "tool_calls_per_llm_call": 0.9
+        },
+        "c70_b0": {
+          "status": "complete",
+          "healthy": true,
+          "n_tasks": 56,
+          "n_finished": 56,
+          "n_resolved": 8,
+          "n_errors": 37,
+          "n_llm_calls": 1299,
+          "tool_calls_per_llm_call": 0.74
+        },
+        "c70kd_b0": {
+          "status": "complete",
+          "healthy": true,
+          "n_tasks": 56,
+          "n_finished": 56,
+          "n_resolved": 14,
+          "n_errors": 17,
+          "n_llm_calls": 1197,
+          "tool_calls_per_llm_call": 0.84
+        },
+        "full2_b0": {
+          "status": "complete",
+          "healthy": true,
+          "n_tasks": 56,
+          "n_finished": 56,
+          "n_resolved": 15,
+          "n_errors": 23,
+          "n_llm_calls": 1135,
+          "tool_calls_per_llm_call": 0.88
+        },
+        "full2_b1": {
+          "status": "complete",
+          "healthy": true,
+          "n_tasks": 56,
+          "n_finished": 56,
+          "n_resolved": 19,
+          "n_errors": 20,
+          "n_llm_calls": 957,
+          "tool_calls_per_llm_call": 0.87
+        },
+        "c70kd_b1": {
+          "status": "complete",
+          "healthy": true,
+          "n_tasks": 56,
+          "n_finished": 56,
+          "n_resolved": 18,
+          "n_errors": 21,
+          "n_llm_calls": 1177,
+          "tool_calls_per_llm_call": 0.84
+        },
+        "c70_b1": {
+          "status": "complete",
+          "healthy": true,
+          "n_tasks": 56,
+          "n_finished": 56,
+          "n_resolved": 12,
+          "n_errors": 36,
+          "n_llm_calls": 1444,
+          "tool_calls_per_llm_call": 0.64
+        },
+        "full_b1": {
+          "status": "complete",
+          "healthy": true,
+          "n_tasks": 56,
+          "n_finished": 56,
+          "n_resolved": 18,
+          "n_errors": 23,
+          "n_llm_calls": 1008,
+          "tool_calls_per_llm_call": 0.89
+        }
+      }
+    },
+    {
+      "stage": "stopped",
+      "t": 30015.2,
+      "reason": "models: done"
+    }
+  ],
+  "total_min": 500.3
+}

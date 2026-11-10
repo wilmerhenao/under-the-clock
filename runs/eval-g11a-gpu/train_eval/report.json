@@ -1,0 +1,263 @@
+{
+  "machine": "gpu-4xL4",
+  "started": "2026-10-21 15:29:02",
+  "stages": [
+    {
+      "stage": "env",
+      "t": 0.1,
+      "python": "3.12.13",
+      "gpus": [
+        "NVIDIA L4, 23034 MiB",
+        "NVIDIA L4, 23034 MiB",
+        "NVIDIA L4, 23034 MiB",
+        "NVIDIA L4, 23034 MiB"
+      ],
+      "cpus": 48
+    },
+    {
+      "stage": "train_libs",
+      "t": 97.6,
+      "installed": {}
+    },
+    {
+      "stage": "libs",
+      "t": 107.4,
+      "versions": "2.10.0+cu128 5.13.1 0.19.1 0.46.1 1.13.0"
+    },
+    {
+      "stage": "vllm",
+      "t": 110.1,
+      "version": "0.19.1",
+      "chat_utils_mentions_reasoning_content": true,
+      "wheel_drops_past_thoughts": true,
+      "patched": false,
+      "reasoning_lines": [
+        "reasoning: str | None",
+        "\"\"\"The reasoning content for interleaved thinking.\"\"\"",
+        "reasoning: str | None",
+        "\"\"\"The reasoning content for interleaved thinking.\"\"\"",
+        "reasoning_content: str | None",
+        "\"\"\"Deprecated: The reasoning content for interleaved thinking.\"\"\"",
+        "reasoning = message.get(\"reasoning\")",
+        "# Include reasoning if present for interleaved thinking.",
+        "if reasoning is not None:",
+        "result_msg[\"reasoning\"] = cast(str, reasoning)",
+        "result_msg[\"reasoning_content\"] = cast(",
+        "str, reasoning"
+      ]
+    },
+    {
+      "stage": "inputs",
+      "t": 111.8,
+      "sft": "/kaggle/input/notebooks/verracodeguacas/g4dev-render-daily-cpu/render/sft.jsonl",
+      "qat_bf16": "/kaggle/input/models/google/gemma-4/transformers/gemma-4-31b-it-qat-q4_0-unquantized/2",
+      "serve": "/kaggle/input/models/google/gemma-4/other/gemma-4-31b-it-qat-w4a16-ct/2",
+      "env_args": [
+        "--extra-wheels",
+        "/kaggle/input/datasets/verracodeguacas/g4dev-sandbox313"
+      ]
+    },
+    {
+      "stage": "adapter_reused",
+      "t": 117.8,
+      "src": "/kaggle/input/notebooks/verracodeguacas/gemma-4-31b-agent-lora-short-thought-trainer/adapter_out",
+      "files": [
+        "adapter_config.json",
+        "adapter_model.safetensors"
+      ]
+    },
+    {
+      "stage": "train_done",
+      "t": 117.8,
+      "returncode": 0,
+      "minutes": 0.0,
+      "first": [],
+      "last": [],
+      "examples": 0,
+      "tok_per_s": null,
+      "loss_first": [],
+      "loss_last": [],
+      "oom_skips": 0,
+      "probe": [],
+      "nan_or_abort": [],
+      "steps": null,
+      "checkpoints": 0,
+      "val": []
+    },
+    {
+      "stage": "server_up",
+      "t": 565.4,
+      "startup_s": 420.5,
+      "served": [
+        "/kaggle/input/models/google/gemma-4/other/gemma-4-31b-it-qat-w4a16-ct/2",
+        "g4dev_random",
+        "g4dev_sft_v1"
+      ]
+    },
+    {
+      "stage": "lora_check",
+      "t": 570.1,
+      "base": "    \"\"\" own same same samethought",
+      "random_adapter": "thoughtthoughtthoughtthought",
+      "trained_adapter": "    \"\"\" own same same samethought",
+      "random_diff": 98.9215,
+      "trained_diff": 95.8547
+    },
+    {
+      "stage": "canary_start",
+      "t": 570.1,
+      "budget_min": 25.0,
+      "concurrency": 2
+    },
+    {
+      "stage": "canary_done",
+      "t": 1105.1,
+      "base": {
+        "status": "complete",
+        "healthy": true,
+        "n_tasks": 2,
+        "n_finished": 2,
+        "n_resolved": 2,
+        "n_errors": 0,
+        "n_llm_calls": 46,
+        "tool_calls_per_llm_call": 0.89,
+        "resolved_ids": [
+          "rich_2943",
+          "rich_3043"
+        ]
+      },
+      "adapter": {
+        "status": "complete",
+        "healthy": true,
+        "n_tasks": 2,
+        "n_finished": 2,
+        "n_resolved": 1,
+        "n_errors": 0,
+        "n_llm_calls": 51,
+        "tool_calls_per_llm_call": 0.8,
+        "resolved_ids": [
+          "rich_2943"
+        ]
+      }
+    },
+    {
+      "stage": "canary_behaviour",
+      "t": 1105.1,
+      "base": {
+        "steps": 48,
+        "text_p50": 302,
+        "text_p90": 2021,
+        "stale_repeat_share": 0.0,
+        "max_stale_chain": 1
+      },
+      "adapter": {
+        "steps": 52,
+        "text_p50": 211,
+        "text_p90": 1561,
+        "stale_repeat_share": 0.019,
+        "max_stale_chain": 2
+      }
+    },
+    {
+      "stage": "eval_gate",
+      "t": 1105.1,
+      "go": true,
+      "why": [],
+      "val": {},
+      "behaviour": {
+        "base": {
+          "steps": 48,
+          "text_p50": 302,
+          "text_p90": 2021,
+          "stale_repeat_share": 0.0,
+          "max_stale_chain": 1
+        },
+        "adapter": {
+          "steps": 52,
+          "text_p50": 211,
+          "text_p90": 1561,
+          "stale_repeat_share": 0.019,
+          "max_stale_chain": 2
+        }
+      }
+    },
+    {
+      "stage": "dev_p0_start",
+      "t": 1105.1,
+      "budget_min": 163.6,
+      "concurrency": 8
+    },
+    {
+      "stage": "dev_p0_done",
+      "t": 8872.6,
+      "base": {
+        "status": "complete",
+        "healthy": true,
+        "n_tasks": 71,
+        "n_finished": 71,
+        "n_resolved": 18,
+        "n_errors": 38,
+        "n_llm_calls": 1344,
+        "tool_calls_per_llm_call": 0.9,
+        "resolved_ids": [
+          "rich_3894",
+          "rich_3718",
+          "fastapi_14791",
+          "fastapi_14301",
+          "fastapi_14873",
+          "fastapi_14794",
+          "rich_3067",
+          "fastapi_14349",
+          "rich_3518",
+          "fastapi_14463",
+          "fastapi_5624",
+          "rich_2725",
+          "rich_4077",
+          "fastapi_14492",
+          "fastapi_14303",
+          "fastapi_9425",
+          "fastapi_5077",
+          "fastapi_9555"
+        ]
+      },
+      "adapter": {
+        "status": "complete",
+        "healthy": true,
+        "n_tasks": 71,
+        "n_finished": 71,
+        "n_resolved": 25,
+        "n_errors": 24,
+        "n_llm_calls": 1327,
+        "tool_calls_per_llm_call": 0.92,
+        "resolved_ids": [
+          "rich_3894",
+          "rich_3718",
+          "fastapi_14791",
+          "fastapi_14458",
+          "fastapi_14301",
+          "fastapi_12942",
+          "fastapi_14794",
+          "fastapi_14360",
+          "rich_3067",
+          "fastapi_14349",
+          "rich_3518",
+          "rich_2943",
+          "fastapi_14463",
+          "fastapi_5624",
+          "fastapi_9753",
+          "fastapi_14430",
+          "rich_2725",
+          "rich_3063",
+          "rich_3278",
+          "rich_4077",
+          "fastapi_14492",
+          "fastapi_14303",
+          "fastapi_9425",
+          "fastapi_5077",
+          "fastapi_9555"
+        ]
+      }
+    }
+  ],
+  "total_min": 148.0
+}

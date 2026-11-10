@@ -1,0 +1,609 @@
+{
+ "run": "score-v4",
+ "smoke": false,
+ "platform": "kaggle",
+ "model": "google/gemma-4/transformers/gemma-4-31b-it-qat-q4_0-unquantized/2",
+ "agent_data": "verracodeguacas/g4dev-g11-data",
+ "settings": {
+  "CAL_ROWS": 300,
+  "HELDOUT_ROWS": 40,
+  "MAX_TOKENS": 8192,
+  "WIKI_TOKENS": 300000,
+  "KEEP_FRACS": [
+   0.85,
+   0.7,
+   0.55
+  ],
+  "DROP_LAYERS": [
+   6,
+   12
+  ],
+  "LAYER_SWEEP_TOKENS": 32000,
+  "LAYER_SWEEP_OWN": 300,
+  "REUSE_AGENT": false,
+  "SEED": 0,
+  "ROLE_ONLY": true
+ },
+ "timings_min": {
+  "inputs": 1.1,
+  "load": 8.2,
+  "measure": 93.3,
+  "total": 105.3
+ },
+ "gpus": [
+  "NVIDIA L4 22.0 GB",
+  "NVIDIA L4 22.0 GB",
+  "NVIDIA L4 22.0 GB",
+  "NVIDIA L4 22.0 GB"
+ ],
+ "weights_per_gpu_gb": [
+  14.6,
+  15.4,
+  15.5,
+  12.8
+ ],
+ "model_shape": {
+  "layers": 60,
+  "ff_channels_per_layer": 21504,
+  "heads": 32,
+  "hidden": 5376,
+  "layer_types": [
+   "sliding_attention",
+   "sliding_attention",
+   "sliding_attention",
+   "sliding_attention",
+   "sliding_attention",
+   "full_attention",
+   "sliding_attention",
+   "sliding_attention",
+   "sliding_attention",
+   "sliding_attention",
+   "sliding_attention",
+   "full_attention",
+   "sliding_attention",
+   "sliding_attention",
+   "sliding_attention",
+   "sliding_attention",
+   "sliding_attention",
+   "full_attention",
+   "sliding_attention",
+   "sliding_attention",
+   "sliding_attention",
+   "sliding_attention",
+   "sliding_attention",
+   "full_attention",
+   "sliding_attention",
+   "sliding_attention",
+   "sliding_attention",
+   "sliding_attention",
+   "sliding_attention",
+   "full_attention",
+   "sliding_attention",
+   "sliding_attention",
+   "sliding_attention",
+   "sliding_attention",
+   "sliding_attention",
+   "full_attention",
+   "sliding_attention",
+   "sliding_attention",
+   "sliding_attention",
+   "sliding_attention",
+   "sliding_attention",
+   "full_attention",
+   "sliding_attention",
+   "sliding_attention",
+   "sliding_attention",
+   "sliding_attention",
+   "sliding_attention",
+   "full_attention",
+   "sliding_attention",
+   "sliding_attention",
+   "sliding_attention",
+   "sliding_attention",
+   "sliding_attention",
+   "full_attention",
+   "sliding_attention",
+   "sliding_attention",
+   "sliding_attention",
+   "sliding_attention",
+   "sliding_attention",
+   "full_attention"
+  ],
+  "vocab": 262144
+ },
+ "layer_scalar": [
+  0.0986,
+  0.0732,
+  0.9922,
+  0.9727,
+  0.9844,
+  0.8945,
+  0.9219,
+  0.8633,
+  0.8672,
+  0.8672,
+  0.9141,
+  0.8008,
+  0.6953,
+  0.9727,
+  0.9766,
+  0.8281,
+  0.9766,
+  0.832,
+  0.9688,
+  0.8945,
+  0.8945,
+  0.9492,
+  0.8945,
+  0.6914,
+  0.8125,
+  0.7734,
+  0.6523,
+  0.6289,
+  0.4551,
+  0.5625,
+  0.6992,
+  0.7617,
+  0.7734,
+  0.793,
+  0.7656,
+  0.6758,
+  0.7891,
+  0.8047,
+  0.793,
+  0.6875,
+  0.6328,
+  0.6641,
+  0.7734,
+  0.8164,
+  0.8477,
+  0.8711,
+  0.8906,
+  0.8828,
+  0.8789,
+  0.8438,
+  0.8672,
+  0.8789,
+  0.8281,
+  0.8555,
+  0.8984,
+  0.8789,
+  0.8594,
+  0.793,
+  0.6953,
+  0.0317
+ ],
+ "peak_gpu_memory_gb_at_max_tokens": [
+  17.7,
+  17.3,
+  17.4,
+  14.9
+ ],
+ "data": {
+  "agent_rows_total": 694,
+  "cal_rows": 300,
+  "cal_tokens": 2374829,
+  "cal_own_tokens": 170242,
+  "heldout_rows": 40,
+  "heldout_tasks_share": 0.095,
+  "heldout_own_tokens": 25896,
+  "wiki_cal_tokens": 0,
+  "wiki_heldout_chunks": 0,
+  "wiki_format": "article inside a chat turn (model answer)"
+ },
+ "preflight": {
+  "full_nats": 0.1816,
+  "random_cut_nats": 15.2799,
+  "s": 37.7
+ },
+ "roles": {
+  "from_run": "score-v3",
+  "from_dir": "/kaggle/input/notebooks/verracodeguacas/g4dev-prune-score3-gpu/prune/score-v3",
+  "same_examples": {
+   "CAL_ROWS": [
+    300,
+    300
+   ],
+   "HELDOUT_ROWS": [
+    40,
+    40
+   ],
+   "MAX_TOKENS": [
+    8192,
+    8192
+   ],
+   "SEED": [
+    0,
+    0
+   ],
+   "agent_rows_total": [
+    694,
+    694
+   ],
+   "cal_rows": [
+    300,
+    300
+   ],
+   "cal_tokens": [
+    2374829,
+    2374829
+   ],
+   "cal_own_tokens": [
+    170242,
+    170242
+   ],
+   "heldout_own_tokens": [
+    25896,
+    25896
+   ]
+  },
+  "same_examples_ok": true,
+  "positions_per_role": {
+   "read": 1912162,
+   "thought": 357836,
+   "args": 75872,
+   "syntax": 26946,
+   "close": 1968
+  },
+  "tagging_s": 7.6,
+  "preflight": {
+   "roles_used": [
+    "role_read",
+    "role_thought",
+    "role_args",
+    "role_syntax",
+    "role_close"
+   ],
+   "sanity": {
+    "agent_ff_rank_corr_min": 0.698765,
+    "agent_ff_rank_corr_mean": 0.940077,
+    "agent_own_ff_rank_corr_min": 0.563791,
+    "down_norm_max_rel_diff": 0.0,
+    "counts": {
+     "agent": [
+      8192,
+      2374829
+     ],
+     "agent_own": [
+      327,
+      170242
+     ]
+    },
+    "ok": false
+   },
+   "compare": {
+    "rank_corr_with_agent_ff_mean": {
+     "role_ff": 0.8184,
+     "role_read": 0.9355,
+     "role_thought": 0.7506,
+     "role_args": 0.7434,
+     "role_syntax": 0.6028,
+     "role_close": 0.4117
+    },
+    "keep_0.85": {
+     "k": 18432,
+     "kept_overlap_agent_ff_vs_role_ff": 0.9393,
+     "role_read_top5pct_kept": {
+      "agent_ff": 1.0,
+      "role_ff": 1.0
+     },
+     "role_thought_top5pct_kept": {
+      "agent_ff": 0.9993,
+      "role_ff": 1.0
+     },
+     "role_args_top5pct_kept": {
+      "agent_ff": 0.9993,
+      "role_ff": 1.0
+     },
+     "role_syntax_top5pct_kept": {
+      "agent_ff": 0.9992,
+      "role_ff": 1.0
+     },
+     "role_close_top5pct_kept": {
+      "agent_ff": 0.9927,
+      "role_ff": 1.0
+     }
+    },
+    "keep_0.7": {
+     "k": 14848,
+     "kept_overlap_agent_ff_vs_role_ff": 0.8794,
+     "role_read_top5pct_kept": {
+      "agent_ff": 0.9999,
+      "role_ff": 1.0
+     },
+     "role_thought_top5pct_kept": {
+      "agent_ff": 0.9964,
+      "role_ff": 1.0
+     },
+     "role_args_top5pct_kept": {
+      "agent_ff": 0.9968,
+      "role_ff": 1.0
+     },
+     "role_syntax_top5pct_kept": {
+      "agent_ff": 0.9937,
+      "role_ff": 1.0
+     },
+     "role_close_top5pct_kept": {
+      "agent_ff": 0.9674,
+      "role_ff": 1.0
+     }
+    },
+    "keep_0.55": {
+     "k": 11776,
+     "kept_overlap_agent_ff_vs_role_ff": 0.8343,
+     "role_read_top5pct_kept": {
+      "agent_ff": 0.9996,
+      "role_ff": 1.0
+     },
+     "role_thought_top5pct_kept": {
+      "agent_ff": 0.9901,
+      "role_ff": 1.0
+     },
+     "role_args_top5pct_kept": {
+      "agent_ff": 0.9906,
+      "role_ff": 1.0
+     },
+     "role_syntax_top5pct_kept": {
+      "agent_ff": 0.9804,
+      "role_ff": 1.0
+     },
+     "role_close_top5pct_kept": {
+      "agent_ff": 0.926,
+      "role_ff": 1.0
+     }
+    }
+   },
+   "s": 25.0
+  },
+  "roles_used": [
+   "role_read",
+   "role_thought",
+   "role_args",
+   "role_syntax",
+   "role_close"
+  ],
+  "counts": {
+   "agent": 2374829,
+   "agent_own": 170242,
+   "role_read": 1912162,
+   "role_thought": 357836,
+   "role_args": 75872,
+   "role_syntax": 26946,
+   "role_close": 1968
+  },
+  "sanity": {
+   "agent_ff_rank_corr_min": 1.0,
+   "agent_ff_rank_corr_mean": 1.0,
+   "agent_own_ff_rank_corr_min": 1.0,
+   "down_norm_max_rel_diff": 0.0,
+   "counts": {
+    "agent": [
+     2374829,
+     2374829
+    ],
+    "agent_own": [
+     170242,
+     170242
+    ]
+   },
+   "ok": true
+  },
+  "compare": {
+   "rank_corr_with_agent_ff_mean": {
+    "role_ff": 0.9068,
+    "role_read": 0.9923,
+    "role_thought": 0.8891,
+    "role_args": 0.887,
+    "role_syntax": 0.6714,
+    "role_close": 0.5988
+   },
+   "keep_0.85": {
+    "k": 18432,
+    "kept_overlap_agent_ff_vs_role_ff": 0.9567,
+    "role_read_top5pct_kept": {
+     "agent_ff": 1.0,
+     "role_ff": 1.0
+    },
+    "role_thought_top5pct_kept": {
+     "agent_ff": 1.0,
+     "role_ff": 1.0
+    },
+    "role_args_top5pct_kept": {
+     "agent_ff": 1.0,
+     "role_ff": 1.0
+    },
+    "role_syntax_top5pct_kept": {
+     "agent_ff": 0.9996,
+     "role_ff": 1.0
+    },
+    "role_close_top5pct_kept": {
+     "agent_ff": 0.9987,
+     "role_ff": 1.0
+    }
+   },
+   "keep_0.7": {
+    "k": 14848,
+    "kept_overlap_agent_ff_vs_role_ff": 0.9169,
+    "role_read_top5pct_kept": {
+     "agent_ff": 1.0,
+     "role_ff": 1.0
+    },
+    "role_thought_top5pct_kept": {
+     "agent_ff": 0.9999,
+     "role_ff": 1.0
+    },
+    "role_args_top5pct_kept": {
+     "agent_ff": 1.0,
+     "role_ff": 1.0
+    },
+    "role_syntax_top5pct_kept": {
+     "agent_ff": 0.9966,
+     "role_ff": 1.0
+    },
+    "role_close_top5pct_kept": {
+     "agent_ff": 0.9916,
+     "role_ff": 1.0
+    }
+   },
+   "keep_0.55": {
+    "k": 11776,
+    "kept_overlap_agent_ff_vs_role_ff": 0.8864,
+    "role_read_top5pct_kept": {
+     "agent_ff": 1.0,
+     "role_ff": 1.0
+    },
+    "role_thought_top5pct_kept": {
+     "agent_ff": 0.9993,
+     "role_ff": 1.0
+    },
+    "role_args_top5pct_kept": {
+     "agent_ff": 0.9996,
+     "role_ff": 1.0
+    },
+    "role_syntax_top5pct_kept": {
+     "agent_ff": 0.9879,
+     "role_ff": 1.0
+    },
+    "role_close_top5pct_kept": {
+     "agent_ff": 0.9755,
+     "role_ff": 1.0
+    }
+   }
+  }
+ },
+ "measure_tok_per_s": 424.1,
+ "peak_gpu_memory_gb": [
+  17.7,
+  17.3,
+  17.4,
+  14.9
+ ],
+ "layer_sweep": {
+  "rows": 7,
+  "tokens": 29660,
+  "own_tokens": 1887,
+  "base_nats": 0.2776,
+  "damage_by_layer": {
+   "1": 3.07602,
+   "2": 0.0115,
+   "3": 0.01515,
+   "4": 0.01704,
+   "5": 0.10509,
+   "6": 0.00139,
+   "7": 0.01994,
+   "8": 0.00913,
+   "9": 0.01802,
+   "10": 0.01257,
+   "11": 0.0107,
+   "12": 0.06642,
+   "13": 0.01683,
+   "14": 0.01045,
+   "15": 0.01681,
+   "16": 0.02811,
+   "17": 0.04759,
+   "18": 0.02745,
+   "19": 0.03576,
+   "20": 0.0244,
+   "21": 0.02136,
+   "22": 0.02799,
+   "23": 0.04947,
+   "24": 0.02938,
+   "25": 0.01418,
+   "26": 0.04473,
+   "27": 0.06575,
+   "28": 0.23011,
+   "29": 0.13369,
+   "30": 0.07521,
+   "31": 0.05775,
+   "32": 0.01634,
+   "33": 0.03362,
+   "34": 0.09111,
+   "35": 0.0803,
+   "36": 0.04824,
+   "37": 0.03499,
+   "38": 0.04452,
+   "39": 0.04543,
+   "40": 0.15309,
+   "41": 0.19877,
+   "42": 0.0362,
+   "43": 0.05653,
+   "44": 0.01201,
+   "45": 0.02744,
+   "46": 0.03012,
+   "47": 0.02954,
+   "48": 0.01707,
+   "49": 0.18871,
+   "50": 0.01992,
+   "51": 0.02209,
+   "52": 0.07245,
+   "53": 0.08162,
+   "54": 0.01628,
+   "55": 0.0166,
+   "56": 0.27081,
+   "57": 0.70568,
+   "58": 6.01924
+  },
+  "order_least_damage_first": [
+   6,
+   8,
+   14,
+   11,
+   2,
+   44,
+   10,
+   25,
+   3,
+   54,
+   32,
+   55,
+   15,
+   13,
+   4,
+   48,
+   9,
+   50,
+   7,
+   21,
+   51,
+   20,
+   45,
+   18,
+   22,
+   16,
+   24,
+   47,
+   46,
+   33,
+   37,
+   19,
+   42,
+   38,
+   26,
+   39,
+   17,
+   36,
+   23,
+   43,
+   31,
+   27,
+   12,
+   52,
+   30,
+   35,
+   53,
+   34,
+   5,
+   29,
+   40,
+   49,
+   41,
+   28,
+   56,
+   57,
+   1,
+   58
+  ],
+  "min": 57.7,
+  "reused_from": "score-v3"
+ }
+}

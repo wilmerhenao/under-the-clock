@@ -1,0 +1,36 @@
+{
+ "full": {
+  "sessions": 112,
+  "loop_sessions": 4,
+  "by_end": {
+   "timeout": 4
+  }
+ },
+ "full2": {
+  "sessions": 112,
+  "loop_sessions": 7,
+  "by_end": {
+   "timeout": 4,
+   "other": 2,
+   "resolved": 1
+  }
+ },
+ "c70": {
+  "sessions": 112,
+  "loop_sessions": 42,
+  "by_end": {
+   "timeout": 31,
+   "resolved": 4,
+   "other": 7
+  }
+ },
+ "c70kd": {
+  "sessions": 112,
+  "loop_sessions": 8,
+  "by_end": {
+   "timeout": 4,
+   "other": 2,
+   "resolved": 2
+  }
+ }
+}

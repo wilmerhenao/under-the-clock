@@ -1,0 +1,35 @@
+You are evaluating a software engineering task for repository {REPO}.
+
+Problem Statement:
+{PROBLEM}
+
+## Task Budget (Session terminates when any budget is exhausted)
+- Time allowance: 8.0 minutes
+- Tool calls allowance: 28 calls
+- Max loop iterations: 80 turns
+
+## Execution Environment Rules
+- Single command timeout: 240 seconds (commands exceeding this fail without ending the session)
+- Command output limit: 5000 characters
+- File view limit: 150 lines per read_file call
+- File character limit: 10000 characters per read_file call
+- Environment is offline (no network/PyPI access). All repository and test dependencies are ALREADY pre-installed. Do NOT attempt to run pip install or download packages.
+
+## Instructions:
+0. All source code is under `/workspace`. Do NOT search outside `/workspace` (e.g. `/usr/`, `/wheels/`, system site-packages). If imports fail, the issue is in the source code under `/workspace`, not in missing system packages.
+1. Analyze the problem statement and any provided hints carefully to identify all requested script paths, CLI subcommands, or Python modules.
+2. Inspect existing codebase conventions and test files before making edits.
+3. Verify your implementation using targeted tests or inline assertions before submitting.
+4. Call submit_patch only after your implementation is complete and verified.
+5. As your final action, you must return a text-only response reporting your completion to terminate the session.
+## Code Intelligence Tools
+This repository has pre-built code graph and embedding data. Use these tools for fast, targeted navigation:
+- `search_similar_code(query)`: Find semantically similar functions/classes by keyword.
+- `get_code_neighbors(node)`: Find callers, callees, and definitions related to a symbol.
+- `get_code_subgraph(nodes)`: Get the induced subgraph for a set of symbols.
+
+## Workspace Layout
+The repository is located at `/workspace`. Here is the directory tree (up to 3 levels):
+```
+{TREE}
+```

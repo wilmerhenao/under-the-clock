@@ -1,0 +1,4 @@
+sub-v9s (2026-10-28, B152): sub-v9c + a clock section: the model cannot see elapsed time, so it calls get_status (free)
+after its first edit and before every test run, and submits when under 150 s remain (one test at most under 300 s).
+User idea 10-28 ("tell it to hurry"); evidence: time binds (B142: 0 of 249 timed-out sessions solved), get_status
+was used 4 times in 123 tasks and our prompts never mentioned it.

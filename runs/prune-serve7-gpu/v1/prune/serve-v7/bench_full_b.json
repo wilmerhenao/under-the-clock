@@ -1,0 +1,12 @@
+{
+ "model": "/kaggle/input/models/google/gemma-4/other/gemma-4-31b-it-qat-w4a16-ct/2",
+ "adapter": null,
+ "engine": {
+  "max_num_batched_tokens": 1024,
+  "gpu_memory_utilization": 0.8,
+  "speculative_config": {
+   "method": "ngram",
+   "num_speculative_tokens": 4,
+   "prompt_lookup_min": 2,
+   "prompt_lookup_max": 4,
+   "target_model_config": 

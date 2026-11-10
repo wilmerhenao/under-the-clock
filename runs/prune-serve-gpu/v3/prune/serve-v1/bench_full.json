@@ -1,0 +1,30 @@
+{
+ "model": "/kaggle/input/models/google/gemma-4/other/gemma-4-31b-it-qat-w4a16-ct/2",
+ "load_s": 348.4,
+ "speed": {
+  "p2k": {
+   "prompt_tokens": 2000,
+   "prefill_s": 1.282,
+   "prefill_tok_s": 1559.5,
+   "decode_tok_s": 38.88
+  },
+  "p16k": {
+   "prompt_tokens": 16000,
+   "prefill_s": 11.098,
+   "prefill_tok_s": 1441.6,
+   "decode_tok_s": 34.52
+  },
+  "streams8": {
+   "n": 8,
+   "prompt_tokens_each": 2000,
+   "decode_tok_s_total": 210.04
+  }
+ },
+ "quality": {
+  "agent_own_nats": 0.2623,
+  "agent_own_tokens": 25896,
+  "rows": 40,
+  "s": 258.2
+ },
+ "sanity": "```python\ndef is_prime(n):\n    \"\"\"\n    Checks if a given integer n is a prime number.\n    \n    Args:\n        n (int): The number to check.\n        \n    Returns:\n        bool: True if n is prime, False otherwise.\n    \"\"\"\n    if n <= 1:\n        return False\n    if n <= 3:\n        return True\n    if n % 2 == 0 or n % 3 == 0:\n        return False\n    \n    i = 5"
+}

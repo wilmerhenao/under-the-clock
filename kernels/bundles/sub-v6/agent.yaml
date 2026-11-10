@@ -1,0 +1,6 @@
+name: swe_workflow
+agent_class: SequentialAgent
+description: Read-only localization and concrete plan, followed by one coder that edits, verifies, and submits.
+sub_agents:
+  - config_path: sub_agents/explore.yaml
+  - config_path: sub_agents/coder.yaml

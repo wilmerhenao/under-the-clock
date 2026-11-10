@@ -1,0 +1,195 @@
+{
+ "mode": "train",
+ "rc": 0,
+ "total_min": 168.0,
+ "steps": 986,
+ "steps_applied": 986,
+ "first_loss": 0.0586,
+ "last_loss": 0.0114,
+ "loss_by_epoch": {
+  "a:ep0": 0.0367,
+  "a:ep1": 0.0111,
+  "b:ep0": 0.036,
+  "b:ep1": 0.0128
+ },
+ "step_s_median_by_len": {
+  "8192": 4.8,
+  "12288": 7.03,
+  "16384": 9.33,
+  "20480": 12.06
+ },
+ "tok_s_median": 2985.8,
+ "compile_s": [
+  [
+   20480,
+   "flash512",
+   224.82
+  ],
+  [
+   12288,
+   "flash512",
+   218.23
+  ],
+  [
+   16384,
+   "flash512",
+   227.62
+  ],
+  [
+   8192,
+   "flash512",
+   257.89
+  ]
+ ],
+ "peak_hbm_gb": 7.84,
+ "exports": [
+  {
+   "tag": "a:step24",
+   "dir": "/kaggle/working/adapter_out",
+   "match": true,
+   "bytes": 489840784,
+   "b_absmax": 0.00038131503970362246,
+   "t_min": 30.38
+  },
+  {
+   "tag": "a:step164",
+   "dir": "/kaggle/working/adapter_out",
+   "match": true,
+   "bytes": 489840784,
+   "b_absmax": 0.0031517050229012966,
+   "t_min": 50.55
+  },
+  {
+   "tag": "a:step299",
+   "dir": "/kaggle/working/adapter_out",
+   "match": true,
+   "bytes": 489840784,
+   "b_absmax": 0.0040290807373821735,
+   "t_min": 70.7
+  },
+  {
+   "tag": "a:ep0",
+   "dir": "/kaggle/working/adapters/ep0",
+   "match": true,
+   "bytes": 489840784,
+   "b_absmax": 0.004434574861079454,
+   "t_min": 77.92
+  },
+  {
+   "tag": "a:step488",
+   "dir": "/kaggle/working/adapter_out",
+   "match": true,
+   "bytes": 489840784,
+   "b_absmax": 0.004601506981998682,
+   "t_min": 98.08
+  },
+  {
+   "tag": "a:step624",
+   "dir": "/kaggle/working/adapter_out",
+   "match": true,
+   "bytes": 489840784,
+   "b_absmax": 0.004608847666531801,
+   "t_min": 118.27
+  },
+  {
+   "tag": "a:final",
+   "dir": "/kaggle/working/adapter_out",
+   "match": true,
+   "bytes": 489840784,
+   "b_absmax": 0.004631015472114086,
+   "t_min": 128.94
+  },
+  {
+   "tag": "b:ep0",
+   "dir": "/kaggle/working/adapters_b/ep0",
+   "match": true,
+   "bytes": 489840784,
+   "b_absmax": 0.002631496638059616,
+   "t_min": 148.32
+  },
+  {
+   "tag": "b:final",
+   "dir": "/kaggle/working/adapter_out_b",
+   "match": true,
+   "bytes": 489840784,
+   "b_absmax": 0.002952276263386011,
+   "t_min": 167.62
+  }
+ ],
+ "events": [
+  {
+   "stage": "step_error",
+   "t_min": 30.14,
+   "phase": "a",
+   "k": 23,
+   "bucket": 24576,
+   "as_len": 24576,
+   "rung": "flash512",
+   "kind": "memory",
+   "error": "JaxRuntimeError: RESOURCE_EXHAUSTED: E1000: CompileTimeHbmOom: XLA:TPU compile permanent error. Ran out of memory in memory space hbm. Used 15.77G of 15.75G hbm. Exceeded hbm capacity by 28.00M.\n\nTotal hbm usage >= 16.03G:\n    reserved        258.00M \n    program           8.21G \n    arguments         7.56G \n\nOutput size 7.56G; shares 7.56G with arguments.\n\nProgram hbm requirement 8.21G:\n    global           33.16M\n    scoped            3.12M\n    HLO temp          8.17G (100.0% utilization: Unpadded (6.62G) Padded (6.62G), 19.0% fragmentation (1.56G))\n\n  Largest program allocations in hbm:\n\n  1. Size: 384.00M\n     Operator: op_name=\"jit(step)/transpose(jvp(jvp()))/checkpoint/convert_element_type\"\n     Shape: f32[1,24576,8,512]{3,1,2,0:T(8,128)}\n     Unpadded size: 384.00M\n     XLA label: convert_bitcast_fusion.6.remat2 = fusion(get-tuple-element.13594), kind=kLoop, calls=fused_computation.53713\n     Allocation type: HLO temp\n     ==========================\n\n  2. Size: 252.00M\n     Operator: op_name=\"jit(step)/transpose(jvp(jvp()))/checkpoint/rematted_computation/dot_general\"\n     Shape: bf16[1,24576,5376]{2,1,0:T(8,128)(2,1)}\n     Unpadded size: 252.00M\n     XLA label: bitcast_multiply_fusion.268 = fusion(fusion.2992, convolution_multiply_fusion.82, all-gather.13678, async-collective-done.321), kind=kOutput, calls=fused_computation.3430\n     Allocation type: HLO temp\n     ==========================\n\n  3. Size: 252.00M\n     Operator: op_name=\"jit(step)/transpose(jvp(jvp()))/checkpoint/dot_gene",
+   "peak_gb": 7.84,
+   "limit_gb": 15.75
+  },
+  {
+   "stage": "demote",
+   "t_min": 30.14,
+   "length": 24576,
+   "to": 20480
+  },
+  {
+   "stage": "phase2_start",
+   "t_min": 129.06,
+   "lr": 5e-05,
+   "epochs": 2,
+   "source_contains": "/fast",
+   "rows": 289,
+   "left_min": 236.5,
+   "b_absmax_after_reset": 0.0,
+   "opt_absmax_after_reset": 0.0
+  }
+ ],
+ "done": [
+  {
+   "stage": "done",
+   "t_min": 128.94,
+   "phase": "a",
+   "stop": "plan_done",
+   "steps_ok": 696,
+   "planned": 696,
+   "tokens": 18358103,
+   "step_errors": 1,
+   "rung": "flash512",
+   "demoted": [
+    24576
+   ],
+   "truncated_label_frac_kept": 0.971,
+   "min": 123.4,
+   "adapter_matches_ref": true
+  },
+  {
+   "stage": "done",
+   "t_min": 167.62,
+   "phase": "b",
+   "stop": "plan_done",
+   "steps_ok": 290,
+   "planned": 290,
+   "tokens": 6741489,
+   "step_errors": 1,
+   "rung": "flash512",
+   "demoted": [
+    24576
+   ],
+   "truncated_label_frac_kept": 1.0,
+   "min": 162.1,
+   "adapter_matches_ref": true
+  }
+ ],
+ "adapters": {
+  "adapter_out_b": 489840784,
+  "adapter_out": 489840784,
+  "adapters_b/ep1": 489840784,
+  "adapters_b/ep0": 489840784,
+  "adapters/ep1": 489840784,
+  "adapters/ep0": 489840784
+ }
+}

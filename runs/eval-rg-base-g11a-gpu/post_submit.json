@@ -1,0 +1,90 @@
+{
+ "base": {
+  "sessions": 63,
+  "submitted": 44,
+  "resolved": 19,
+  "timeouts": 21,
+  "timeouts_after_submit": 4,
+  "submit_calls_mean_max": [
+   0.95,
+   3
+  ],
+  "first_submit_s_p50_p90": [
+   802,
+   1187
+  ],
+  "session_s_total": 62293,
+  "post_submit_s_total": 5126,
+  "post_submit_share_of_session_time": 0.082,
+  "post_submit_s_p50_p90": [
+   103,
+   225
+  ],
+  "responses_after_submit_p50_p90": [
+   1,
+   5
+  ],
+  "sessions_editing_after_submit": 0,
+  "sessions_patch_changed_after_first_submit": 13,
+  "resolved_with_patch_changed_after_first_submit": 9,
+  "responses_after_submit": {
+   "responses_after_submit": 90,
+   "after_submit_text_and_call": 0,
+   "after_submit_call_only": 50,
+   "after_submit_no_call": 40
+  },
+  "silent_tail_s_p50_p90_submitted": [
+   61,
+   179
+  ],
+  "silent_tail_s_p50_p90_not_submitted": [
+   313,
+   570
+  ],
+  "max_completion_tokens_after_submit": 538
+ },
+ "adapter": {
+  "sessions": 70,
+  "submitted": 50,
+  "resolved": 19,
+  "timeouts": 21,
+  "timeouts_after_submit": 2,
+  "submit_calls_mean_max": [
+   0.9,
+   2
+  ],
+  "first_submit_s_p50_p90": [
+   677,
+   1088
+  ],
+  "session_s_total": 66786,
+  "post_submit_s_total": 7005,
+  "post_submit_share_of_session_time": 0.105,
+  "post_submit_s_p50_p90": [
+   93,
+   338
+  ],
+  "responses_after_submit_p50_p90": [
+   1,
+   4
+  ],
+  "sessions_editing_after_submit": 0,
+  "sessions_patch_changed_after_first_submit": 13,
+  "resolved_with_patch_changed_after_first_submit": 8,
+  "responses_after_submit": {
+   "responses_after_submit": 83,
+   "after_submit_text_and_call": 0,
+   "after_submit_call_only": 35,
+   "after_submit_no_call": 48
+  },
+  "silent_tail_s_p50_p90_submitted": [
+   30,
+   294
+  ],
+  "silent_tail_s_p50_p90_not_submitted": [
+   284,
+   751
+  ],
+  "max_completion_tokens_after_submit": 409
+ }
+}

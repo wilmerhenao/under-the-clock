@@ -1,0 +1,123 @@
+{
+ "g11a": {
+  "sessions": 77,
+  "tool_calls_mean_max": [
+   16.4,
+   27
+  ],
+  "session_ends": {
+   "ended_unresolved": 27,
+   "resolved": 22,
+   "timeout": 26,
+   "other_error": 2
+  },
+  "loop_sessions": 0,
+  "real_loop_sessions": 0,
+  "loop_sessions_by_tool": {},
+  "loop_sessions_by_end": {},
+  "repeated_calls_by_tool": {
+   "run_command": 71,
+   "read_file": 43,
+   "submit_patch": 13,
+   "edit_file": 4,
+   "write_file": 0
+  },
+  "longest_runs": []
+ },
+ "g17v2a": {
+  "sessions": 70,
+  "tool_calls_mean_max": [
+   14.9,
+   30
+  ],
+  "session_ends": {
+   "resolved": 20,
+   "timeout": 43,
+   "ended_unresolved": 7
+  },
+  "loop_sessions": 28,
+  "real_loop_sessions": 6,
+  "loop_sessions_by_tool": {
+   "submit_patch{}": 22,
+   "run_command": 3,
+   "read_file": 2,
+   "edit_file": 1
+  },
+  "loop_sessions_by_end": {
+   "submit_patch{}:resolved": 8,
+   "submit_patch{}:timeout": 13,
+   "real:timeout": 5,
+   "real:ended_unresolved": 1,
+   "submit_patch{}:ended_unresolved": 1
+  },
+  "repeated_calls_by_tool": {
+   "submit_patch": 84,
+   "run_command": 65,
+   "read_file": 24,
+   "edit_file": 18,
+   "write_file": 0
+  },
+  "longest_runs": [
+   [
+    19,
+    "timeout",
+    "run_command{\"command\": \"git grep -n \\\"parse_cams_detailed\\\" casparser/\"}"
+   ],
+   [
+    14,
+    "ended_unresolved",
+    "run_command{\"command\": \"git grep -n \\\"zones\\\" src/lexicon/providers/\"}"
+   ],
+   [
+    10,
+    "ended_unresolved",
+    "submit_patch{}"
+   ],
+   [
+    6,
+    "timeout",
+    "edit_file{\"filepath\": \"casbin/util/builtin_operators.py\", \"new_string\": \"        if c == '*':\\n     "
+   ],
+   [
+    5,
+    "timeout",
+    "submit_patch{}"
+   ],
+   [
+    5,
+    "timeout",
+    "run_command{\"command\": \"git grep -l \\\"capacity\\\" docs_src/\"}"
+   ],
+   [
+    5,
+    "timeout",
+    "read_file{\"end_line\": 260, \"filepath\": \"evalview/commands/check_cmd.py\", \"start_line\": 230}"
+   ],
+   [
+    4,
+    "timeout",
+    "submit_patch{}"
+   ],
+   [
+    4,
+    "timeout",
+    "submit_patch{}"
+   ],
+   [
+    4,
+    "timeout",
+    "submit_patch{}"
+   ],
+   [
+    4,
+    "timeout",
+    "submit_patch{}"
+   ],
+   [
+    4,
+    "resolved",
+    "submit_patch{}"
+   ]
+  ]
+ }
+}

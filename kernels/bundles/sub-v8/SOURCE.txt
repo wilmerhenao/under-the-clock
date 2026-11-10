@@ -1,0 +1,1 @@
+sub-v5b with the budget raised to 10 min / 40 tool calls (eval_config and the two budget lines of the prompt); everything else identical. 2026-10-06, after sub-v7 (8 min / 28 calls) was scored past 12 h elapsed.

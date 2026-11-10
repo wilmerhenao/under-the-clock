@@ -1,0 +1,68 @@
+{
+ "full@A": {
+  "sessions": 63,
+  "tool_calls": 1197,
+  "swallowed_calls": 9,
+  "share": 0.0075,
+  "sessions_with_one": 3,
+  "by_tool": {
+   "edit_file": 8,
+   "write_file": 1
+  }
+ },
+ "G11a@A": {
+  "sessions": 70,
+  "tool_calls": 1212,
+  "swallowed_calls": 0,
+  "share": 0.0,
+  "sessions_with_one": 0,
+  "by_tool": {}
+ },
+ "full@AA1": {
+  "sessions": 82,
+  "tool_calls": 1415,
+  "swallowed_calls": 25,
+  "share": 0.0177,
+  "sessions_with_one": 5,
+  "by_tool": {
+   "read_file": 8,
+   "edit_file": 6,
+   "write_file": 11
+  }
+ },
+ "full@AA2": {
+  "sessions": 83,
+  "tool_calls": 1494,
+  "swallowed_calls": 57,
+  "share": 0.0382,
+  "sessions_with_one": 11,
+  "by_tool": {
+   "write_file": 14,
+   "edit_file": 30,
+   "read_file": 13
+  }
+ },
+ "c70@B": {
+  "sessions": 70,
+  "tool_calls": 1441,
+  "swallowed_calls": 275,
+  "share": 0.1908,
+  "sessions_with_one": 49,
+  "by_tool": {
+   "read_file": 84,
+   "edit_file": 180,
+   "write_file": 11
+  }
+ },
+ "c70kd@B": {
+  "sessions": 78,
+  "tool_calls": 1424,
+  "swallowed_calls": 52,
+  "share": 0.0365,
+  "sessions_with_one": 16,
+  "by_tool": {
+   "edit_file": 18,
+   "read_file": 34
+  }
+ }
+}

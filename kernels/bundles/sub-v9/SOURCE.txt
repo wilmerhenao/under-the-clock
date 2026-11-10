@@ -1,0 +1,1 @@
+sub-v8 (10 min / 40 calls) + one prompt line: after compaction, run git diff once to recover the edits already made (2026-10-06; after compaction 24% of Gemma calls repeat an earlier one).

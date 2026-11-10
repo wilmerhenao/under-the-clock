@@ -1,0 +1,49 @@
+{
+ "full": {
+  "sessions": 112,
+  "tool_calls": 2024,
+  "swallowed_calls": 47,
+  "share": 0.0232,
+  "sessions_with_one": 11,
+  "by_tool": {
+   "edit_file": 24,
+   "read_file": 17,
+   "write_file": 6
+  }
+ },
+ "full2": {
+  "sessions": 112,
+  "tool_calls": 2030,
+  "swallowed_calls": 66,
+  "share": 0.0325,
+  "sessions_with_one": 11,
+  "by_tool": {
+   "write_file": 13,
+   "edit_file": 53
+  }
+ },
+ "c70": {
+  "sessions": 112,
+  "tool_calls": 2685,
+  "swallowed_calls": 651,
+  "share": 0.2425,
+  "sessions_with_one": 79,
+  "by_tool": {
+   "read_file": 163,
+   "edit_file": 466,
+   "write_file": 22
+  }
+ },
+ "c70kd": {
+  "sessions": 112,
+  "tool_calls": 2304,
+  "swallowed_calls": 70,
+  "share": 0.0304,
+  "sessions_with_one": 14,
+  "by_tool": {
+   "edit_file": 22,
+   "read_file": 39,
+   "write_file": 9
+  }
+ }
+}

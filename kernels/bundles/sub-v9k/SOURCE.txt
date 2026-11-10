@@ -1,0 +1,1 @@
+sub-v9c with max_tool_calls 36 (was 24); the prompt states 36 calls and no new exploration after the 30th; edit-by-12 unchanged. Call-cap test with the adapter in both arms (B118).

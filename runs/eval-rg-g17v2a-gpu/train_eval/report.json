@@ -1,0 +1,291 @@
+{
+  "machine": "gpu-4xL4",
+  "started": "2026-11-04 07:04:48",
+  "stages": [
+    {
+      "stage": "env",
+      "t": 0.0,
+      "python": "3.12.13",
+      "gpus": [
+        "NVIDIA L4, 23034 MiB",
+        "NVIDIA L4, 23034 MiB",
+        "NVIDIA L4, 23034 MiB",
+        "NVIDIA L4, 23034 MiB"
+      ],
+      "cpus": 48
+    },
+    {
+      "stage": "train_libs",
+      "t": 127.5,
+      "installed": {}
+    },
+    {
+      "stage": "libs",
+      "t": 137.3,
+      "versions": "2.10.0+cu128 5.13.1 0.19.1 0.46.1 1.13.0"
+    },
+    {
+      "stage": "vllm",
+      "t": 140.0,
+      "version": "0.19.1",
+      "chat_utils_mentions_reasoning_content": true,
+      "wheel_drops_past_thoughts": true,
+      "patched": false,
+      "reasoning_lines": [
+        "reasoning: str | None",
+        "\"\"\"The reasoning content for interleaved thinking.\"\"\"",
+        "reasoning: str | None",
+        "\"\"\"The reasoning content for interleaved thinking.\"\"\"",
+        "reasoning_content: str | None",
+        "\"\"\"Deprecated: The reasoning content for interleaved thinking.\"\"\"",
+        "reasoning = message.get(\"reasoning\")",
+        "# Include reasoning if present for interleaved thinking.",
+        "if reasoning is not None:",
+        "result_msg[\"reasoning\"] = cast(str, reasoning)",
+        "result_msg[\"reasoning_content\"] = cast(",
+        "str, reasoning"
+      ]
+    },
+    {
+      "stage": "repograph_data",
+      "t": 670.5,
+      "split": "priv_eval",
+      "tasks": 221,
+      "trusted": 215,
+      "eval_ids": 150,
+      "excluded_repos": 10,
+      "graphs": 220,
+      "embeddings": 220,
+      "controls": [
+        "/kaggle/input/notebooks/verracodeguacas/g4dev-repograph-controls-cpu/controls/controls.csv",
+        "/kaggle/input/notebooks/verracodeguacas/g4dev-repograph-controls2-cpu/controls/controls.csv"
+      ]
+    },
+    {
+      "stage": "inputs",
+      "t": 670.5,
+      "sft": "/kaggle/input/notebooks/verracodeguacas/g4dev-render-daily-cpu/render/sft.jsonl",
+      "qat_bf16": "/kaggle/input/models/google/gemma-4/transformers/gemma-4-31b-it-qat-q4_0-unquantized/2",
+      "serve": "/kaggle/input/models/google/gemma-4/other/gemma-4-31b-it-qat-w4a16-ct/2",
+      "env_args": [
+        "--py313-kit",
+        "/kaggle/input/datasets/verracodeguacas/g4dev-sandbox313",
+        "--find-links",
+        "/kaggle/input/datasets/verracodeguacas/g4dev-py313-wheels",
+        "--official-env",
+        "--repo-wheels",
+        "/kaggle/input/datasets/debmalya84/repograph-verified-swe-tasks-wheels"
+      ],
+      "eval_data": "/kaggle/working/rgdata"
+    },
+    {
+      "stage": "adapter_reused",
+      "t": 714.1,
+      "src": "/kaggle/input/notebooks/verracodeguacas/gemma-4-31b-agent-lora-short-thought-trainer/adapter_out",
+      "files": [
+        "adapter_config.json",
+        "adapter_model.safetensors"
+      ]
+    },
+    {
+      "stage": "train_done",
+      "t": 714.1,
+      "returncode": 0,
+      "minutes": 0.0,
+      "first": [],
+      "last": [],
+      "examples": 0,
+      "tok_per_s": null,
+      "loss_first": [],
+      "loss_last": [],
+      "oom_skips": 0,
+      "probe": [],
+      "nan_or_abort": [],
+      "steps": null,
+      "checkpoints": 0,
+      "val": []
+    },
+    {
+      "stage": "adapter_b",
+      "t": 756.2,
+      "src": "/kaggle/input/notebooks/verracodeguacas/gemma-4-31b-agent-in-step-teacher-preferences/adapter_out",
+      "files": [
+        "adapter_config.json",
+        "adapter_model.safetensors"
+      ]
+    },
+    {
+      "stage": "server_up",
+      "t": 1216.5,
+      "startup_s": 429.5,
+      "served": [
+        "/kaggle/input/models/google/gemma-4/other/gemma-4-31b-it-qat-w4a16-ct/2",
+        "g4dev_random",
+        "g4dev_sft_b",
+        "g4dev_sft_v1"
+      ]
+    },
+    {
+      "stage": "lora_check",
+      "t": 1221.2,
+      "base": "    \"\"\" own same same samethought",
+      "random_adapter": "thoughtthoughtthoughtthought",
+      "trained_adapter": "    \"\"\" own same same samethought",
+      "random_diff": 98.9261,
+      "trained_diff": 0.867
+    },
+    {
+      "stage": "canary_start",
+      "t": 1221.2,
+      "budget_min": 25.0,
+      "concurrency": 2
+    },
+    {
+      "stage": "canary_done",
+      "t": 1659.5,
+      "base": {
+        "status": null,
+        "healthy": null,
+        "n_tasks": null,
+        "n_finished": null,
+        "n_resolved": null,
+        "n_errors": null,
+        "n_llm_calls": null,
+        "tool_calls_per_llm_call": null,
+        "resolved_ids": null
+      },
+      "adapter": {
+        "status": "complete",
+        "healthy": true,
+        "n_tasks": 2,
+        "n_finished": 2,
+        "n_resolved": 2,
+        "n_errors": 0,
+        "n_llm_calls": 26,
+        "tool_calls_per_llm_call": 0.69,
+        "resolved_ids": [
+          "rich_2943",
+          "rich_3043"
+        ]
+      }
+    },
+    {
+      "stage": "canary_behaviour",
+      "t": 1659.5,
+      "base": {
+        "steps": 0,
+        "text_p50": null,
+        "text_p90": null,
+        "stale_repeat_share": null,
+        "max_stale_chain": 0
+      },
+      "adapter": {
+        "steps": 31,
+        "text_p50": 232,
+        "text_p90": 299,
+        "stale_repeat_share": 0.111,
+        "max_stale_chain": 5
+      }
+    },
+    {
+      "stage": "eval_gate",
+      "t": 1659.5,
+      "go": true,
+      "why": [],
+      "val": {},
+      "behaviour": {
+        "base": {
+          "steps": 0,
+          "text_p50": null,
+          "text_p90": null,
+          "stale_repeat_share": null,
+          "max_stale_chain": 0
+        },
+        "adapter": {
+          "steps": 31,
+          "text_p50": 232,
+          "text_p90": 299,
+          "stale_repeat_share": 0.111,
+          "max_stale_chain": 5
+        }
+      }
+    },
+    {
+      "stage": "repograph_p0_start",
+      "t": 1659.5,
+      "budget_min": 142.3,
+      "concurrency": 8
+    },
+    {
+      "stage": "repograph_p0_done",
+      "t": 10214.9,
+      "base": {
+        "status": "budget_exhausted",
+        "healthy": true,
+        "n_tasks": 150,
+        "n_finished": 77,
+        "n_resolved": 22,
+        "n_errors": 28,
+        "n_llm_calls": 1316,
+        "tool_calls_per_llm_call": 0.91,
+        "resolved_ids": [
+          "yamale_278",
+          "numbers_parser_259",
+          "openenv_1252",
+          "graphtage_163",
+          "flytekit_3349",
+          "python_nameparser_683",
+          "apiflask_759",
+          "pymovements_1727",
+          "blackjax_1041",
+          "felupe_1101",
+          "datacompy_526",
+          "blackjax_1030",
+          "powertools_lambda_python_8518",
+          "pymc_marketing_3005",
+          "blackjax_1042",
+          "powertools_lambda_python_8453",
+          "fakesnow_386",
+          "graphtage_130",
+          "flytekit_3343",
+          "drawpyo_133",
+          "fakesnow_390",
+          "apiflask_749"
+        ]
+      },
+      "adapter": {
+        "status": "budget_exhausted",
+        "healthy": true,
+        "n_tasks": 150,
+        "n_finished": 70,
+        "n_resolved": 20,
+        "n_errors": 43,
+        "n_llm_calls": 1055,
+        "tool_calls_per_llm_call": 0.84,
+        "resolved_ids": [
+          "pymovements_1600",
+          "openenv_1252",
+          "mnemosyne_1085",
+          "numbers_parser_259",
+          "yamale_278",
+          "graphtage_163",
+          "python_nameparser_683",
+          "datacompy_563",
+          "apiflask_759",
+          "pymovements_1727",
+          "blackjax_1041",
+          "agentica_37",
+          "felupe_1101",
+          "pymc_marketing_3005",
+          "blackjax_1030",
+          "powertools_lambda_python_8518",
+          "casbin_pycasbin_412",
+          "blackjax_1042",
+          "flytekit_3343",
+          "powertools_lambda_python_8453"
+        ]
+      }
+    }
+  ],
+  "total_min": 170.3
+}

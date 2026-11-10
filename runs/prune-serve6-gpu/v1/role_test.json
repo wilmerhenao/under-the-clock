@@ -1,0 +1,105 @@
+{
+ "states": 141,
+ "rows": 54,
+ "primary": {
+  "c55": [
+   20,
+   122,
+   0.1639
+  ],
+  "c55role": [
+   12,
+   112,
+   0.1071
+  ],
+  "fisher_one_sided_p": 0.141605,
+  "half_or_less": false,
+  "pass": false,
+  "run2": false
+ },
+ "secondary": {
+  "recorded_agreement": {
+   "full": 0.426,
+   "c55": 0.213,
+   "c55role": 0.241
+  },
+  "recorded_agreement_pass": false,
+  "agent_own_nats": {
+   "full": 0.2621,
+   "c55": 0.4502,
+   "c55role": 0.4375
+  },
+  "served_damage_pass": true
+ },
+ "descriptive": {
+  "paired_states_both_called": 103,
+  "c55_only_malformed": 9,
+  "c55role_only_malformed": 1,
+  "mcnemar_exact_p": 0.021484,
+  "no_call_states": {
+   "full": 10,
+   "c55": 19,
+   "c55role": 29
+  },
+  "malformed_full": [
+   2,
+   131
+  ],
+  "vs_full_parsed": {
+   "c55": {
+    "share": 0.252,
+    "ci95": [
+     0.184,
+     0.321
+    ],
+    "states": 131,
+    "rows": 53
+   },
+   "c55role": {
+    "share": 0.267,
+    "ci95": [
+     0.195,
+     0.336
+    ],
+    "states": 131,
+    "rows": 53
+   }
+  },
+  "role_nats": {
+   "full": {
+    "read": 3.0974,
+    "thought": 0.2617,
+    "args": 0.0765,
+    "syntax": 0.3482,
+    "close": 0.0541
+   },
+   "c55": {
+    "read": 3.3626,
+    "thought": 0.4388,
+    "args": 0.1779,
+    "syntax": 0.411,
+    "close": 0.5553
+   },
+   "c55role": {
+    "read": 3.5119,
+    "thought": 0.4294,
+    "args": 0.1684,
+    "syntax": 0.4224,
+    "close": 0.3087
+   }
+  },
+  "role_tokens": {
+   "read": 265124,
+   "thought": 44916,
+   "args": 6846,
+   "syntax": 3434,
+   "close": 251
+  },
+  "vs_serve_v5": {
+   "shared_states": 109,
+   "same_prompt_lengths": true,
+   "c55_identical_text": 61,
+   "full_identical_text": 71
+  }
+ }
+}

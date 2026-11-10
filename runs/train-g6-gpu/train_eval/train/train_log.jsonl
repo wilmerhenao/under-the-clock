@@ -1,0 +1,119 @@
+{"event": "kinds", "skipped": 0, "skip_kinds": [], "train_on": "all", "t_min": 0.16}
+{"event": "mistakes", "calls": 0, "masked": 0, "mask_mistakes": false, "t_min": 0.3}
+{"event": "data", "examples": 362, "tokens": 3760163, "trainable": 837149, "skipped_no_trainable": 0, "t_min": 0.3}
+{"event": "model_loaded", "gpus": 4, "load_min": 9.0, "mem_gb": [3.6, 4.5, 4.5, 4.5], "t_min": 8.98}
+{"event": "device_map", "layers_per_device": {"0": 3, "1": 19, "2": 19, "3": 19}, "layer_ranges": {"0": [0, 2], "1": [3, 21], "2": [22, 40], "3": [41, 59]}, "other": {"model.vision_tower": "0", "model.language_model.embed_tokens": "0", "lm_head": "0", "model.language_model.norm": "3", "model.language_model.rotary_emb": "3", "model.embed_vision": "3"}, "t_min": 8.98}
+{"event": "lora", "trainable_params": 122429440, "t_min": 9.01}
+{"event": "sdpa_backends", "flash_d256": "ok", "efficient_d256": "ok", "math_d256": "ok", "flash_d512": "RuntimeError: No available kernel. Aborting execution.", "efficient_d512": "ok", "math_d512": "ok", "t_min": 9.02}
+{"event": "probe", "tokens": 12288, "trainable": 3072, "attn": "chunked", "training": true, "peak_gb": [13.3, 16.5, 16.4, 18.6], "fwd_peak_gb": [7.5, 10.3, 10.3, 10.6], "after_gb": [3.7, 4.6, 4.6, 4.6], "kind": "synthetic", "trained_fraction": 0.25, "ok": true, "loss": 0.6312, "seconds": 130.6, "t_min": 11.23}
+{"event": "probe", "tokens": 12284, "trainable": 2867, "attn": "chunked", "training": true, "peak_gb": [13.3, 16.5, 16.4, 18.6], "fwd_peak_gb": [7.5, 10.3, 10.3, 10.6], "after_gb": [3.7, 4.6, 4.6, 4.6], "kind": "real", "limit": 12288, "instance_id": "proxmoxer__proxmoxer-189", "source": "gemma-onpolicy/fresh", "ok": true, "loss": 0.2968, "seconds": 130.8, "t_min": 13.43}
+{"event": "probe_gate", "verdict": "training only up to 12288 tokens", "all_fit": true, "dropped": 0, "val_dropped": 0, "t_min": 13.43}
+{"event": "example", "epoch": 0, "instance_id": "TDAmeritrade__stumpy-1015", "source": "gemma-onpolicy/fresh", "tokens": 7592, "trainable": 672, "loss": 0.2204, "tok_per_s": 101.8, "t_min": 14.68}
+{"event": "example", "epoch": 0, "instance_id": "mathause__mplotutils-136", "source": "gemma-onpolicy/fresh", "tokens": 11083, "trainable": 2503, "loss": 0.1862, "tok_per_s": 97.8, "t_min": 16.61}
+{"event": "example", "epoch": 0, "instance_id": "idaholab__MontePy-553", "source": "gemma-onpolicy/fresh", "tokens": 9277, "trainable": 742, "loss": 0.1695, "tok_per_s": 98.1, "t_min": 18.18}
+{"event": "example", "epoch": 0, "instance_id": "narwhals-dev__narwhals-1280", "source": "gemma-onpolicy/g4dev-onpolicy-thoughts", "tokens": 10285, "trainable": 2359, "loss": 0.3936, "tok_per_s": 97.4, "t_min": 19.97}
+{"event": "step", "step": 1, "lr": 9.953033637407649e-05, "t_min": 19.98}
+{"event": "example", "epoch": 0, "instance_id": "joke2k__faker-1368", "source": "gemma-onpolicy/g4dev-onpolicy-thoughts", "tokens": 12266, "trainable": 2017, "loss": 0.2718, "tok_per_s": 96.2, "t_min": 22.19}
+{"event": "example", "epoch": 0, "instance_id": "getsentry__sentry-python-3942", "source": "gemma-onpolicy/fresh", "tokens": 10924, "trainable": 1437, "loss": 0.1424, "tok_per_s": 95.9, "t_min": 24.11}
+{"event": "example", "epoch": 0, "instance_id": "instructlab__sdg-493", "source": "gemma-onpolicy/fresh", "tokens": 10991, "trainable": 1687, "loss": 0.2123, "tok_per_s": 95.7, "t_min": 26.04}
+{"event": "example", "epoch": 0, "instance_id": "bsatrom__py-conway-24", "source": "gemma-onpolicy/g4dev-onpolicy-thoughts", "tokens": 9853, "trainable": 2274, "loss": 0.2595, "tok_per_s": 95.8, "t_min": 27.75}
+{"event": "step", "step": 2, "lr": 9.776993549180085e-05, "t_min": 27.75}
+{"event": "example", "epoch": 0, "instance_id": "MAIF__arta-32", "source": "gemma-onpolicy/fresh", "tokens": 10862, "trainable": 2586, "loss": 0.1913, "tok_per_s": 95.6, "t_min": 29.66}
+{"event": "example", "epoch": 0, "instance_id": "hynek__structlog-586", "source": "gemma-onpolicy/g4dev-onpolicy-thoughts", "tokens": 8615, "trainable": 2177, "loss": 0.1546, "tok_per_s": 95.8, "t_min": 31.13}
+{"event": "example", "epoch": 0, "instance_id": "ipython__ipykernel-1076", "source": "gemma-onpolicy/g4dev-onpolicy-thoughts", "tokens": 11653, "trainable": 2460, "loss": 0.182, "tok_per_s": 95.5, "t_min": 33.23}
+{"event": "example", "epoch": 0, "instance_id": "biolink__biolink-model-toolkit-43", "source": "gemma-onpolicy/fresh", "tokens": 7692, "trainable": 1968, "loss": 0.2608, "tok_per_s": 95.7, "t_min": 34.53}
+{"event": "step", "step": 3, "lr": 9.519829843358709e-05, "t_min": 34.53}
+{"event": "checkpoint", "dir": "/kaggle/working/train_eval/train/adapter", "files": {"adapter_model.safetensors": 489840816, "adapter_config.json": 1113, "README.md": 5326}, "steps": 3, "examples_seen": 12, "t_min": 35.08}
+{"event": "example", "epoch": 0, "instance_id": "joke2k__faker-1453", "source": "gemma-onpolicy/fresh", "tokens": 9506, "trainable": 2439, "loss": 0.1418, "tok_per_s": 93.4, "t_min": 36.73}
+{"event": "example", "epoch": 0, "instance_id": "asdf-format__asdf-1803", "source": "gemma-onpolicy/fresh", "tokens": 12033, "trainable": 1069, "loss": 0.1945, "tok_per_s": 93.6, "t_min": 38.84}
+{"event": "example", "epoch": 0, "instance_id": "beartype__plum-106", "source": "gemma-onpolicy/fresh", "tokens": 10441, "trainable": 4150, "loss": 0.1471, "tok_per_s": 93.6, "t_min": 40.69}
+{"event": "example", "epoch": 0, "instance_id": "PyCQA__flake8-bugbear-424", "source": "gemma-onpolicy/fresh", "tokens": 11959, "trainable": 6661, "loss": 0.1123, "tok_per_s": 93.4, "t_min": 42.87}
+{"event": "step", "step": 4, "lr": 9.079408128953028e-05, "t_min": 42.87}
+{"event": "example", "epoch": 0, "instance_id": "aws__aws-sam-cli-7533", "source": "gemma-onpolicy/fresh", "tokens": 11836, "trainable": 1961, "loss": 0.1241, "tok_per_s": 93.4, "t_min": 45.0}
+{"event": "example", "epoch": 0, "instance_id": "Nicoretti__crc-153", "source": "gemma-onpolicy/fresh", "tokens": 6538, "trainable": 2046, "loss": 0.1648, "tok_per_s": 93.6, "t_min": 46.09}
+{"event": "example", "epoch": 0, "instance_id": "Delgan__loguru-960", "source": "gemma-onpolicy/fresh", "tokens": 9860, "trainable": 3479, "loss": 0.1483, "tok_per_s": 93.6, "t_min": 47.83}
+{"event": "example", "epoch": 0, "instance_id": "weaveworks__grafanalib-584", "source": "gemma-onpolicy/fresh", "tokens": 10486, "trainable": 3444, "loss": 0.1733, "tok_per_s": 93.7, "t_min": 49.68}
+{"event": "step", "step": 5, "lr": 8.627033064332123e-05, "t_min": 49.68}
+{"event": "example", "epoch": 0, "instance_id": "pystorm__pystorm-31", "source": "gemma-onpolicy/fresh", "tokens": 10704, "trainable": 1302, "loss": 0.1548, "tok_per_s": 93.7, "t_min": 51.57}
+{"event": "example", "epoch": 0, "instance_id": "mkdocs__mkdocs-3367", "source": "gemma-onpolicy/fresh", "tokens": 9821, "trainable": 1927, "loss": 0.1473, "tok_per_s": 93.8, "t_min": 53.29}
+{"event": "example", "epoch": 0, "instance_id": "nilearn__nilearn-3924", "source": "gemma-onpolicy/fresh", "tokens": 11922, "trainable": 2479, "loss": 0.129, "tok_per_s": 93.7, "t_min": 55.44}
+{"event": "example", "epoch": 0, "instance_id": "fsspec__filesystem_spec-1594", "source": "gemma-onpolicy/g4dev-onpolicy-thoughts", "tokens": 7775, "trainable": 1113, "loss": 0.2057, "tok_per_s": 93.9, "t_min": 56.74}
+{"event": "step", "step": 6, "lr": 8.080496659584031e-05, "t_min": 56.74}
+{"event": "checkpoint", "dir": "/kaggle/working/train_eval/train/adapter", "files": {"adapter_model.safetensors": 489840816, "adapter_config.json": 1113, "README.md": 5326}, "steps": 6, "examples_seen": 24, "t_min": 57.29}
+{"event": "example", "epoch": 0, "instance_id": "janehmueller__python-json-config-20", "source": "gemma-onpolicy/fresh", "tokens": 12266, "trainable": 2647, "loss": 0.1407, "tok_per_s": 92.7, "t_min": 59.49}
+{"event": "example", "epoch": 0, "instance_id": "fjosw__pyerrors-45", "source": "gemma-onpolicy/fresh", "tokens": 11204, "trainable": 4822, "loss": 0.1338, "tok_per_s": 92.7, "t_min": 61.5}
+{"event": "example", "epoch": 0, "instance_id": "broadinstitute__cromshell-203", "source": "gemma-onpolicy/fresh", "tokens": 12015, "trainable": 1978, "loss": 0.1297, "tok_per_s": 92.7, "t_min": 63.67}
+{"event": "example", "epoch": 0, "instance_id": "asdf-format__asdf-1716", "source": "gemma-onpolicy/fresh", "tokens": 9726, "trainable": 1597, "loss": 0.1187, "tok_per_s": 92.8, "t_min": 65.36}
+{"event": "step", "step": 7, "lr": 7.323549433726883e-05, "t_min": 65.36}
+{"event": "example", "epoch": 0, "instance_id": "janehmueller__python-json-config-3", "source": "gemma-onpolicy/fresh", "tokens": 6749, "trainable": 2015, "loss": 0.2088, "tok_per_s": 93.0, "t_min": 66.48}
+{"event": "example", "epoch": 0, "instance_id": "joke2k__faker-2155", "source": "gemma-onpolicy/fresh", "tokens": 10419, "trainable": 2280, "loss": 0.1214, "tok_per_s": 93.0, "t_min": 68.31}
+{"event": "example", "epoch": 0, "instance_id": "dgilland__pydash-164", "source": "gemma-onpolicy/g4dev-onpolicy-thoughts", "tokens": 7480, "trainable": 1515, "loss": 0.1406, "tok_per_s": 93.2, "t_min": 69.57}
+{"event": "example", "epoch": 0, "instance_id": "spatial-image__spatial-image-20", "source": "gemma-onpolicy/fresh", "tokens": 11389, "trainable": 2217, "loss": 0.1433, "tok_per_s": 93.2, "t_min": 71.61}
+{"event": "step", "step": 8, "lr": 6.725464843425687e-05, "t_min": 71.61}
+{"event": "example", "epoch": 0, "instance_id": "idaholab__MontePy-538", "source": "gemma-onpolicy/fresh", "tokens": 9917, "trainable": 333, "loss": 0.191, "tok_per_s": 93.3, "t_min": 73.3}
+{"event": "example", "epoch": 0, "instance_id": "nipype__pydra-261", "source": "gemma-onpolicy/fresh", "tokens": 11046, "trainable": 2131, "loss": 0.1495, "tok_per_s": 93.3, "t_min": 75.25}
+{"event": "example", "epoch": 0, "instance_id": "jubatus__jubatus-python-client-69", "source": "gemma-onpolicy/fresh", "tokens": 9554, "trainable": 2933, "loss": 0.314, "tok_per_s": 93.4, "t_min": 76.92}
+{"event": "example", "epoch": 0, "instance_id": "konradhalas__dacite-274", "source": "gemma-onpolicy/fresh", "tokens": 8037, "trainable": 2710, "loss": 0.2034, "tok_per_s": 93.5, "t_min": 78.29}
+{"event": "step", "step": 9, "lr": 6.053997708037596e-05, "t_min": 78.29}
+{"event": "checkpoint", "dir": "/kaggle/working/train_eval/train/adapter", "files": {"adapter_model.safetensors": 489840816, "adapter_config.json": 1113, "README.md": 5326}, "steps": 9, "examples_seen": 36, "t_min": 78.84}
+{"event": "example", "epoch": 0, "instance_id": "dask__dask-11541", "source": "gemma-onpolicy/fresh", "tokens": 11751, "trainable": 471, "loss": 0.1315, "tok_per_s": 92.8, "t_min": 80.9}
+{"event": "example", "epoch": 0, "instance_id": "pre-commit__pre-commit-933", "source": "gemma-onpolicy/fresh", "tokens": 8397, "trainable": 2042, "loss": 0.1345, "tok_per_s": 92.9, "t_min": 82.33}
+{"event": "example", "epoch": 0, "instance_id": "aio-libs__aiosmtpd-143", "source": "gemma-onpolicy/fresh", "tokens": 9387, "trainable": 1838, "loss": 0.1433, "tok_per_s": 92.9, "t_min": 83.97}
+{"event": "example", "epoch": 0, "instance_id": "narwhals-dev__narwhals-143", "source": "gemma-onpolicy/fresh", "tokens": 9834, "trainable": 2891, "loss": 0.2312, "tok_per_s": 93.0, "t_min": 85.69}
+{"event": "step", "step": 10, "lr": 5.287187995908137e-05, "t_min": 85.69}
+{"event": "example", "epoch": 0, "instance_id": "ibis-project__ibis-4728", "source": "gemma-onpolicy/fresh", "tokens": 12223, "trainable": 1761, "loss": 0.0681, "tok_per_s": 93.0, "t_min": 87.89}
+{"event": "example", "epoch": 0, "instance_id": "PyCQA__flake8-1726", "source": "gemma-onpolicy/fresh", "tokens": 11472, "trainable": 1874, "loss": 0.1081, "tok_per_s": 93.0, "t_min": 89.95}
+{"event": "example", "epoch": 0, "instance_id": "automl__DEHB-57", "source": "gemma-onpolicy/fresh", "tokens": 10768, "trainable": 3062, "loss": 0.1412, "tok_per_s": 93.0, "t_min": 91.87}
+{"event": "example", "epoch": 0, "instance_id": "Dorthu__openapi3-83", "source": "gemma-onpolicy/fresh", "tokens": 11103, "trainable": 641, "loss": 0.1253, "tok_per_s": 93.1, "t_min": 93.8}
+{"event": "step", "step": 11, "lr": 4.439391530155102e-05, "t_min": 93.8}
+{"event": "example", "epoch": 0, "instance_id": "pdm-project__pdm-3191", "source": "gemma-onpolicy/fresh", "tokens": 11604, "trainable": 3857, "loss": 0.1754, "tok_per_s": 93.0, "t_min": 95.89}
+{"event": "example", "epoch": 0, "instance_id": "joke2k__faker-956", "source": "gemma-onpolicy/fresh", "tokens": 10628, "trainable": 4909, "loss": 0.1656, "tok_per_s": 93.0, "t_min": 97.79}
+{"event": "example", "epoch": 0, "instance_id": "marcosschroh__dataclasses-avroschema-172", "source": "gemma-onpolicy/fresh", "tokens": 11292, "trainable": 562, "loss": 0.1684, "tok_per_s": 93.1, "t_min": 99.76}
+{"event": "example", "epoch": 0, "instance_id": "fox-it__dissect.cstruct-66", "source": "gemma-onpolicy/fresh", "tokens": 11427, "trainable": 2602, "loss": 0.1507, "tok_per_s": 93.1, "t_min": 101.81}
+{"event": "step", "step": 12, "lr": 3.616822692407415e-05, "t_min": 101.82}
+{"event": "checkpoint", "dir": "/kaggle/working/train_eval/train/adapter", "files": {"adapter_model.safetensors": 489840816, "adapter_config.json": 1113, "README.md": 5326}, "steps": 12, "examples_seen": 48, "t_min": 102.36}
+{"event": "example", "epoch": 0, "instance_id": "asdf-format__asdf-1575", "source": "gemma-onpolicy/fresh", "tokens": 8412, "trainable": 1763, "loss": 0.1329, "tok_per_s": 92.6, "t_min": 103.81}
+{"event": "example", "epoch": 0, "instance_id": "scipp__scippnexus-94", "source": "gemma-onpolicy/fresh", "tokens": 12219, "trainable": 2255, "loss": 0.1604, "tok_per_s": 92.6, "t_min": 106.02}
+{"event": "example", "epoch": 0, "instance_id": "hynek__structlog-675", "source": "gemma-onpolicy/fresh", "tokens": 9959, "trainable": 3458, "loss": 0.0761, "tok_per_s": 92.6, "t_min": 107.76}
+{"event": "example", "epoch": 0, "instance_id": "django__asgiref-478", "source": "gemma-onpolicy/fresh", "tokens": 10080, "trainable": 3056, "loss": 0.156, "tok_per_s": 92.7, "t_min": 109.52}
+{"event": "step", "step": 13, "lr": 2.8623805482769656e-05, "t_min": 109.52}
+{"event": "example", "epoch": 0, "instance_id": "vitalik__django-ninja-434", "source": "gemma-onpolicy/fresh", "tokens": 10872, "trainable": 2081, "loss": 0.1357, "tok_per_s": 92.7, "t_min": 111.45}
+{"event": "example", "epoch": 0, "instance_id": "googleapis__python-storage-1275", "source": "gemma-onpolicy/fresh", "tokens": 12275, "trainable": 1375, "loss": 0.0763, "tok_per_s": 92.7, "t_min": 113.64}
+{"event": "example", "epoch": 0, "instance_id": "rigetti__pyquil-1694", "source": "gemma-onpolicy/fresh", "tokens": 11645, "trainable": 3884, "loss": 0.1376, "tok_per_s": 92.7, "t_min": 115.74}
+{"event": "example", "epoch": 0, "instance_id": "mitmproxy__pdoc-787", "source": "gemma-onpolicy/fresh", "tokens": 12173, "trainable": 3504, "loss": 0.1526, "tok_per_s": 92.7, "t_min": 117.95}
+{"event": "step", "step": 14, "lr": 2.1023080038295627e-05, "t_min": 117.95}
+{"event": "checkpoint", "dir": "/kaggle/working/train_eval/train/adapter", "files": {"adapter_model.safetensors": 489840816, "adapter_config.json": 1113, "README.md": 5326}, "steps": 14, "examples_seen": 56, "t_min": 118.5}
+{"event": "example", "epoch": 0, "instance_id": "HallLab__clarite-python-42", "source": "gemma-onpolicy/g4dev-onpolicy-thoughts", "tokens": 12058, "trainable": 3920, "loss": 0.157, "tok_per_s": 92.2, "t_min": 120.69}
+{"event": "example", "epoch": 0, "instance_id": "pre-commit__pre-commit-hooks-850", "source": "gemma-onpolicy/fresh", "tokens": 9965, "trainable": 1574, "loss": 0.1107, "tok_per_s": 92.3, "t_min": 122.42}
+{"event": "example", "epoch": 0, "instance_id": "scrapy__w3lib-77", "source": "gemma-onpolicy/fresh", "tokens": 11052, "trainable": 3186, "loss": 0.0933, "tok_per_s": 92.3, "t_min": 124.39}
+{"event": "example", "epoch": 0, "instance_id": "Fatal1ty__mashumaro-220", "source": "gemma-onpolicy/fresh", "tokens": 10909, "trainable": 2347, "loss": 0.1699, "tok_per_s": 92.3, "t_min": 126.33}
+{"event": "step", "step": 15, "lr": 1.4353668439588392e-05, "t_min": 126.33}
+{"event": "example", "epoch": 0, "instance_id": "kaste__mockito-python-54", "source": "gemma-onpolicy/fresh", "tokens": 9996, "trainable": 3236, "loss": 0.1695, "tok_per_s": 92.3, "t_min": 128.09}
+{"event": "example", "epoch": 0, "instance_id": "geomet__geomet-101", "source": "gemma-onpolicy/fresh", "tokens": 9736, "trainable": 2359, "loss": 0.1234, "tok_per_s": 92.4, "t_min": 129.79}
+{"event": "example", "epoch": 0, "instance_id": "KIT-IAI__pyWATTS-194", "source": "gemma-onpolicy/fresh", "tokens": 12254, "trainable": 2624, "loss": 0.2, "tok_per_s": 92.4, "t_min": 131.99}
+{"event": "example", "epoch": 0, "instance_id": "iris-hep__func_adl-151", "source": "gemma-onpolicy/g4dev-onpolicy-thoughts", "tokens": 12187, "trainable": 2620, "loss": 0.1516, "tok_per_s": 92.4, "t_min": 134.19}
+{"event": "step", "step": 16, "lr": 9.085007988461658e-06, "t_min": 134.19}
+{"event": "checkpoint", "dir": "/kaggle/working/train_eval/train/adapter", "files": {"adapter_model.safetensors": 489840816, "adapter_config.json": 1113, "README.md": 5326}, "steps": 16, "examples_seen": 64, "t_min": 134.74}
+{"event": "example", "epoch": 0, "instance_id": "idaholab__MontePy-723", "source": "gemma-onpolicy/g4dev-onpolicy-thoughts", "tokens": 11577, "trainable": 1892, "loss": 0.1742, "tok_per_s": 92.0, "t_min": 136.81}
+{"event": "example", "epoch": 0, "instance_id": "kytos__python-openflow-225", "source": "gemma-onpolicy/fresh", "tokens": 11992, "trainable": 2009, "loss": 0.1751, "tok_per_s": 92.0, "t_min": 138.97}
+{"event": "example", "epoch": 0, "instance_id": "beeware__briefcase-2085", "source": "gemma-onpolicy/fresh", "tokens": 11475, "trainable": 3845, "loss": 0.1805, "tok_per_s": 92.0, "t_min": 141.03}
+{"event": "example", "epoch": 0, "instance_id": "Shopify__shopify_python_api-129", "source": "gemma-onpolicy/g4dev-onpolicy-thoughts", "tokens": 6354, "trainable": 913, "loss": 0.2457, "tok_per_s": 92.1, "t_min": 142.07}
+{"event": "step", "step": 17, "lr": 4.919213452273158e-06, "t_min": 142.08}
+{"event": "example", "epoch": 0, "instance_id": "marshmallow-code__marshmallow-1164", "source": "gemma-onpolicy/fresh", "tokens": 12120, "trainable": 3104, "loss": 0.0963, "tok_per_s": 92.1, "t_min": 144.27}
+{"event": "example", "epoch": 0, "instance_id": "deppen8__pandas-vet-127", "source": "gemma-onpolicy/fresh", "tokens": 5396, "trainable": 1037, "loss": 0.1441, "tok_per_s": 92.2, "t_min": 145.15}
+{"event": "example", "epoch": 0, "instance_id": "Delgan__loguru-1304", "source": "gemma-onpolicy/fresh", "tokens": 12098, "trainable": 2202, "loss": 0.1222, "tok_per_s": 92.2, "t_min": 147.33}
+{"event": "example", "epoch": 0, "instance_id": "devsnd__tinytag-171", "source": "gemma-onpolicy/fresh", "tokens": 9533, "trainable": 1294, "loss": 0.1693, "tok_per_s": 92.2, "t_min": 148.98}
+{"event": "step", "step": 18, "lr": 2.272207182164665e-06, "t_min": 148.98}
+{"event": "example", "epoch": 0, "instance_id": "agronholm__sqlacodegen-370", "source": "gemma-onpolicy/fresh", "tokens": 12272, "trainable": 669, "loss": 0.1092, "tok_per_s": 92.2, "t_min": 151.19}
+{"event": "example", "epoch": 0, "instance_id": "Peter-van-Tol__pydantic-shapely-11", "source": "gemma-onpolicy/fresh", "tokens": 12008, "trainable": 4918, "loss": 0.1189, "tok_per_s": 92.2, "t_min": 153.37}
+{"event": "example", "epoch": 0, "instance_id": "PyCQA__flake8-bugbear-161", "source": "gemma-onpolicy/fresh", "tokens": 8813, "trainable": 2209, "loss": 0.2109, "tok_per_s": 92.3, "t_min": 154.89}
+{"event": "example", "epoch": 0, "instance_id": "pypa__twine-1225", "source": "gemma-onpolicy/fresh", "tokens": 7688, "trainable": 810, "loss": 0.2839, "tok_per_s": 92.3, "t_min": 156.17}
+{"event": "step", "step": 19, "lr": 5.772840035873306e-07, "t_min": 156.17}
+{"event": "checkpoint", "dir": "/kaggle/working/train_eval/train/adapter", "files": {"adapter_model.safetensors": 489840816, "adapter_config.json": 1113, "README.md": 5326}, "steps": 19, "examples_seen": 76, "t_min": 156.72}
+{"event": "example", "epoch": 0, "instance_id": "redis__redis-py-3264", "source": "gemma-onpolicy/fresh", "tokens": 10542, "trainable": 4202, "loss": 0.1284, "tok_per_s": 92.0, "t_min": 158.6}
+{"event": "example", "epoch": 0, "instance_id": "benmoran56__esper-81", "source": "gemma-onpolicy/fresh", "tokens": 11928, "trainable": 3056, "loss": 0.0926, "tok_per_s": 92.0, "t_min": 160.76}
+{"event": "example", "epoch": 0, "instance_id": "wimglenn__advent-of-code-data-154", "source": "gemma-onpolicy/fresh", "tokens": 4574, "trainable": 623, "loss": 0.1074, "tok_per_s": 92.1, "t_min": 161.5}
+{"event": "example", "epoch": 0, "instance_id": "developmentseed__titiler-937", "source": "gemma-onpolicy/fresh", "tokens": 10103, "trainable": 1762, "loss": 0.1759, "tok_per_s": 92.1, "t_min": 163.27}
+{"event": "step", "step": 20, "lr": 2.972802937206698e-10, "t_min": 163.27}
+{"event": "example", "epoch": 0, "instance_id": "tenable__pyTenable-664", "source": "gemma-onpolicy/fresh", "tokens": 8504, "trainable": 1803, "loss": 0.1271, "tok_per_s": 92.1, "t_min": 164.72}
+{"event": "saved", "dir": "/kaggle/working/train_eval/train/adapter", "files": {"adapter_model.safetensors": 489840816, "adapter_config.json": 1113, "README.md": 5326}, "steps": 21, "examples_seen": 81, "stopped_by_time": true, "t_min": 165.27}

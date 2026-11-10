@@ -1,0 +1,2 @@
+sub-v9 (prompt with the post-compaction git-diff line) with sub-v5b budgets: 8 min / 28 calls.
+Fallback if sub-v9 (10 min / 40 calls; projected 12.6 h, B34) errors on the 12 h cap.

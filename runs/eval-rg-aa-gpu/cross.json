@@ -1,0 +1,327 @@
+{
+ "tasks_common": 64,
+ "tasks_per_arm": {
+  "aa_base": 82,
+  "aa_base2": 84,
+  "sessA_base": 64,
+  "sessA_g11a": 70,
+  "sessB_c70": 71,
+  "sessB_c70heal": 78
+ },
+ "arms": {
+  "aa_base": {
+   "finished": 64,
+   "resolved": 17,
+   "timeouts": 30,
+   "task_s_mean_median": [
+    865,
+    971
+   ],
+   "tool_calls_mean": 16.8,
+   "other_errors": {}
+  },
+  "aa_base2": {
+   "finished": 64,
+   "resolved": 19,
+   "timeouts": 25,
+   "task_s_mean_median": [
+    835,
+    964
+   ],
+   "tool_calls_mean": 17.0,
+   "other_errors": {
+    "Evaluation error: pytest missing in official-env task venv": 1
+   }
+  },
+  "sessA_base": {
+   "finished": 64,
+   "resolved": 19,
+   "timeouts": 21,
+   "task_s_mean_median": [
+    997,
+    1001
+   ],
+   "tool_calls_mean": 17.7,
+   "other_errors": {
+    "Evaluation error: pytest missing in official-env task venv": 1
+   }
+  },
+  "sessA_g11a": {
+   "finished": 64,
+   "resolved": 17,
+   "timeouts": 21,
+   "task_s_mean_median": [
+    986,
+    1009
+   ],
+   "tool_calls_mean": 16.5,
+   "other_errors": {}
+  },
+  "sessB_c70": {
+   "finished": 64,
+   "resolved": 12,
+   "timeouts": 43,
+   "task_s_mean_median": [
+    918,
+    970
+   ],
+   "tool_calls_mean": 18.0,
+   "other_errors": {
+    "Evaluation error: pytest missing in official-env task venv": 1
+   }
+  },
+  "sessB_c70heal": {
+   "finished": 64,
+   "resolved": 14,
+   "timeouts": 33,
+   "task_s_mean_median": [
+    868,
+    979
+   ],
+   "tool_calls_mean": 17.4,
+   "other_errors": {
+    "Sandbox execution error: [Errno 2] No such file or directory": 1
+   }
+  }
+ },
+ "pairs": {
+  "aa_base vs aa_base2": {
+   "aa_base_only": 2,
+   "aa_base2_only": 4,
+   "mcnemar_exact_p": 0.688,
+   "aa_base_only_ids": [
+    "agentica_37",
+    "casbin_pycasbin_412"
+   ],
+   "aa_base2_only_ids": [
+    "blackjax_1041",
+    "datacompy_526",
+    "flytekit_3349",
+    "justhtml_46"
+   ]
+  },
+  "aa_base vs sessA_base": {
+   "aa_base_only": 2,
+   "sessA_base_only": 4,
+   "mcnemar_exact_p": 0.688,
+   "aa_base_only_ids": [
+    "apiflask_759",
+    "casbin_pycasbin_412"
+   ],
+   "sessA_base_only_ids": [
+    "blackjax_1041",
+    "flytekit_3349",
+    "httptap_310",
+    "it2_2"
+   ]
+  },
+  "aa_base vs sessA_g11a": {
+   "aa_base_only": 3,
+   "sessA_g11a_only": 3,
+   "mcnemar_exact_p": 1.0,
+   "aa_base_only_ids": [
+    "agentica_37",
+    "casbin_pycasbin_412",
+    "pymovements_1600"
+   ],
+   "sessA_g11a_only_ids": [
+    "blackjax_1041",
+    "flytekit_3349",
+    "transparenttorproxy_72"
+   ]
+  },
+  "aa_base vs sessB_c70": {
+   "aa_base_only": 6,
+   "sessB_c70_only": 1,
+   "mcnemar_exact_p": 0.125,
+   "aa_base_only_ids": [
+    "agentica_37",
+    "blackjax_1042",
+    "casbin_pycasbin_412",
+    "mnemosyne_1085",
+    "pymovements_1727",
+    "yamale_278"
+   ],
+   "sessB_c70_only_ids": [
+    "httptap_310"
+   ]
+  },
+  "aa_base vs sessB_c70heal": {
+   "aa_base_only": 3,
+   "sessB_c70heal_only": 0,
+   "mcnemar_exact_p": 0.25,
+   "aa_base_only_ids": [
+    "apiflask_759",
+    "mnemosyne_1085",
+    "python_nameparser_683"
+   ],
+   "sessB_c70heal_only_ids": []
+  },
+  "aa_base2 vs sessA_base": {
+   "aa_base2_only": 3,
+   "sessA_base_only": 3,
+   "mcnemar_exact_p": 1.0,
+   "aa_base2_only_ids": [
+    "apiflask_759",
+    "datacompy_526",
+    "justhtml_46"
+   ],
+   "sessA_base_only_ids": [
+    "agentica_37",
+    "httptap_310",
+    "it2_2"
+   ]
+  },
+  "aa_base2 vs sessA_g11a": {
+   "aa_base2_only": 3,
+   "sessA_g11a_only": 1,
+   "mcnemar_exact_p": 0.625,
+   "aa_base2_only_ids": [
+    "datacompy_526",
+    "justhtml_46",
+    "pymovements_1600"
+   ],
+   "sessA_g11a_only_ids": [
+    "transparenttorproxy_72"
+   ]
+  },
+  "aa_base2 vs sessB_c70": {
+   "aa_base2_only": 8,
+   "sessB_c70_only": 1,
+   "mcnemar_exact_p": 0.039,
+   "aa_base2_only_ids": [
+    "blackjax_1041",
+    "blackjax_1042",
+    "datacompy_526",
+    "flytekit_3349",
+    "justhtml_46",
+    "mnemosyne_1085",
+    "pymovements_1727",
+    "yamale_278"
+   ],
+   "sessB_c70_only_ids": [
+    "httptap_310"
+   ]
+  },
+  "aa_base2 vs sessB_c70heal": {
+   "aa_base2_only": 7,
+   "sessB_c70heal_only": 2,
+   "mcnemar_exact_p": 0.18,
+   "aa_base2_only_ids": [
+    "apiflask_759",
+    "blackjax_1041",
+    "datacompy_526",
+    "flytekit_3349",
+    "justhtml_46",
+    "mnemosyne_1085",
+    "python_nameparser_683"
+   ],
+   "sessB_c70heal_only_ids": [
+    "agentica_37",
+    "casbin_pycasbin_412"
+   ]
+  },
+  "sessA_base vs sessA_g11a": {
+   "sessA_base_only": 4,
+   "sessA_g11a_only": 2,
+   "mcnemar_exact_p": 0.688,
+   "sessA_base_only_ids": [
+    "agentica_37",
+    "httptap_310",
+    "it2_2",
+    "pymovements_1600"
+   ],
+   "sessA_g11a_only_ids": [
+    "apiflask_759",
+    "transparenttorproxy_72"
+   ]
+  },
+  "sessA_base vs sessB_c70": {
+   "sessA_base_only": 8,
+   "sessB_c70_only": 1,
+   "mcnemar_exact_p": 0.039,
+   "sessA_base_only_ids": [
+    "agentica_37",
+    "blackjax_1041",
+    "blackjax_1042",
+    "flytekit_3349",
+    "it2_2",
+    "mnemosyne_1085",
+    "pymovements_1727",
+    "yamale_278"
+   ],
+   "sessB_c70_only_ids": [
+    "apiflask_759"
+   ]
+  },
+  "sessA_base vs sessB_c70heal": {
+   "sessA_base_only": 6,
+   "sessB_c70heal_only": 1,
+   "mcnemar_exact_p": 0.125,
+   "sessA_base_only_ids": [
+    "blackjax_1041",
+    "flytekit_3349",
+    "httptap_310",
+    "it2_2",
+    "mnemosyne_1085",
+    "python_nameparser_683"
+   ],
+   "sessB_c70heal_only_ids": [
+    "casbin_pycasbin_412"
+   ]
+  },
+  "sessA_g11a vs sessB_c70": {
+   "sessA_g11a_only": 7,
+   "sessB_c70_only": 2,
+   "mcnemar_exact_p": 0.18,
+   "sessA_g11a_only_ids": [
+    "blackjax_1041",
+    "blackjax_1042",
+    "flytekit_3349",
+    "mnemosyne_1085",
+    "pymovements_1727",
+    "transparenttorproxy_72",
+    "yamale_278"
+   ],
+   "sessB_c70_only_ids": [
+    "httptap_310",
+    "pymovements_1600"
+   ]
+  },
+  "sessA_g11a vs sessB_c70heal": {
+   "sessA_g11a_only": 6,
+   "sessB_c70heal_only": 3,
+   "mcnemar_exact_p": 0.508,
+   "sessA_g11a_only_ids": [
+    "apiflask_759",
+    "blackjax_1041",
+    "flytekit_3349",
+    "mnemosyne_1085",
+    "python_nameparser_683",
+    "transparenttorproxy_72"
+   ],
+   "sessB_c70heal_only_ids": [
+    "agentica_37",
+    "casbin_pycasbin_412",
+    "pymovements_1600"
+   ]
+  },
+  "sessB_c70 vs sessB_c70heal": {
+   "sessB_c70_only": 3,
+   "sessB_c70heal_only": 5,
+   "mcnemar_exact_p": 0.727,
+   "sessB_c70_only_ids": [
+    "apiflask_759",
+    "httptap_310",
+    "python_nameparser_683"
+   ],
+   "sessB_c70heal_only_ids": [
+    "agentica_37",
+    "blackjax_1042",
+    "casbin_pycasbin_412",
+    "pymovements_1727",
+    "yamale_278"
+   ]
+  }
+ }
+}

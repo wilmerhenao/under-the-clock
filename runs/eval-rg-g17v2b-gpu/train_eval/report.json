@@ -1,0 +1,297 @@
+{
+  "machine": "gpu-4xL4",
+  "started": "2026-11-04 17:26:49",
+  "stages": [
+    {
+      "stage": "env",
+      "t": 0.1,
+      "python": "3.12.13",
+      "gpus": [
+        "NVIDIA L4, 23034 MiB",
+        "NVIDIA L4, 23034 MiB",
+        "NVIDIA L4, 23034 MiB",
+        "NVIDIA L4, 23034 MiB"
+      ],
+      "cpus": 48
+    },
+    {
+      "stage": "train_libs",
+      "t": 92.7,
+      "installed": {}
+    },
+    {
+      "stage": "libs",
+      "t": 102.5,
+      "versions": "2.10.0+cu128 5.13.1 0.19.1 0.46.1 1.13.0"
+    },
+    {
+      "stage": "vllm",
+      "t": 105.3,
+      "version": "0.19.1",
+      "chat_utils_mentions_reasoning_content": true,
+      "wheel_drops_past_thoughts": true,
+      "patched": false,
+      "reasoning_lines": [
+        "reasoning: str | None",
+        "\"\"\"The reasoning content for interleaved thinking.\"\"\"",
+        "reasoning: str | None",
+        "\"\"\"The reasoning content for interleaved thinking.\"\"\"",
+        "reasoning_content: str | None",
+        "\"\"\"Deprecated: The reasoning content for interleaved thinking.\"\"\"",
+        "reasoning = message.get(\"reasoning\")",
+        "# Include reasoning if present for interleaved thinking.",
+        "if reasoning is not None:",
+        "result_msg[\"reasoning\"] = cast(str, reasoning)",
+        "result_msg[\"reasoning_content\"] = cast(",
+        "str, reasoning"
+      ]
+    },
+    {
+      "stage": "repograph_data",
+      "t": 404.3,
+      "split": "priv_eval",
+      "tasks": 221,
+      "trusted": 215,
+      "eval_ids": 150,
+      "excluded_repos": 10,
+      "graphs": 220,
+      "embeddings": 220,
+      "controls": [
+        "/kaggle/input/notebooks/verracodeguacas/g4dev-repograph-controls-cpu/controls/controls.csv",
+        "/kaggle/input/notebooks/verracodeguacas/g4dev-repograph-controls2-cpu/controls/controls.csv"
+      ]
+    },
+    {
+      "stage": "inputs",
+      "t": 404.3,
+      "sft": "/kaggle/input/notebooks/verracodeguacas/g4dev-render-daily-cpu/render/sft.jsonl",
+      "qat_bf16": "/kaggle/input/models/google/gemma-4/transformers/gemma-4-31b-it-qat-q4_0-unquantized/2",
+      "serve": "/kaggle/input/models/google/gemma-4/other/gemma-4-31b-it-qat-w4a16-ct/2",
+      "env_args": [
+        "--py313-kit",
+        "/kaggle/input/datasets/verracodeguacas/g4dev-sandbox313",
+        "--find-links",
+        "/kaggle/input/datasets/verracodeguacas/g4dev-py313-wheels",
+        "--official-env",
+        "--repo-wheels",
+        "/kaggle/input/datasets/debmalya84/repograph-verified-swe-tasks-wheels"
+      ],
+      "eval_data": "/kaggle/working/rgdata"
+    },
+    {
+      "stage": "adapter_reused",
+      "t": 421.8,
+      "src": "/kaggle/input/notebooks/verracodeguacas/gemma-4-31b-agent-lora-short-thought-trainer/adapter_out",
+      "files": [
+        "adapter_config.json",
+        "adapter_model.safetensors"
+      ]
+    },
+    {
+      "stage": "train_done",
+      "t": 421.8,
+      "returncode": 0,
+      "minutes": 0.0,
+      "first": [],
+      "last": [],
+      "examples": 0,
+      "tok_per_s": null,
+      "loss_first": [],
+      "loss_last": [],
+      "oom_skips": 0,
+      "probe": [],
+      "nan_or_abort": [],
+      "steps": null,
+      "checkpoints": 0,
+      "val": []
+    },
+    {
+      "stage": "adapter_b",
+      "t": 439.9,
+      "src": "/kaggle/input/notebooks/verracodeguacas/gemma-4-31b-agent-in-step-teacher-preferences/adapter_out_b",
+      "files": [
+        "adapter_config.json",
+        "adapter_model.safetensors"
+      ]
+    },
+    {
+      "stage": "server_up",
+      "t": 883.5,
+      "startup_s": 415.5,
+      "served": [
+        "/kaggle/input/models/google/gemma-4/other/gemma-4-31b-it-qat-w4a16-ct/2",
+        "g4dev_random",
+        "g4dev_sft_b",
+        "g4dev_sft_v1"
+      ]
+    },
+    {
+      "stage": "lora_check",
+      "t": 888.1,
+      "base": "    \"\"\" own same same samethought",
+      "random_adapter": "thoughtthoughtthoughtthought",
+      "trained_adapter": "    \"\"\" own same same samethought",
+      "random_diff": 98.9279,
+      "trained_diff": 95.812
+    },
+    {
+      "stage": "canary_start",
+      "t": 888.1,
+      "budget_min": 25.0,
+      "concurrency": 2
+    },
+    {
+      "stage": "canary_done",
+      "t": 1129.8,
+      "base": {
+        "status": null,
+        "healthy": null,
+        "n_tasks": null,
+        "n_finished": null,
+        "n_resolved": null,
+        "n_errors": null,
+        "n_llm_calls": null,
+        "tool_calls_per_llm_call": null,
+        "resolved_ids": null
+      },
+      "adapter": {
+        "status": "complete",
+        "healthy": true,
+        "n_tasks": 2,
+        "n_finished": 2,
+        "n_resolved": 2,
+        "n_errors": 0,
+        "n_llm_calls": 25,
+        "tool_calls_per_llm_call": 0.84,
+        "resolved_ids": [
+          "rich_2943",
+          "rich_3043"
+        ]
+      }
+    },
+    {
+      "stage": "canary_behaviour",
+      "t": 1129.8,
+      "base": {
+        "steps": 0,
+        "text_p50": null,
+        "text_p90": null,
+        "stale_repeat_share": null,
+        "max_stale_chain": 0
+      },
+      "adapter": {
+        "steps": 27,
+        "text_p50": 227,
+        "text_p90": 280,
+        "stale_repeat_share": 0.0,
+        "max_stale_chain": 1
+      }
+    },
+    {
+      "stage": "eval_gate",
+      "t": 1129.8,
+      "go": true,
+      "why": [],
+      "val": {},
+      "behaviour": {
+        "base": {
+          "steps": 0,
+          "text_p50": null,
+          "text_p90": null,
+          "stale_repeat_share": null,
+          "max_stale_chain": 0
+        },
+        "adapter": {
+          "steps": 27,
+          "text_p50": 227,
+          "text_p90": 280,
+          "stale_repeat_share": 0.0,
+          "max_stale_chain": 1
+        }
+      }
+    },
+    {
+      "stage": "repograph_p0_start",
+      "t": 1129.8,
+      "budget_min": 151.2,
+      "concurrency": 8
+    },
+    {
+      "stage": "repograph_p0_done",
+      "t": 10217.1,
+      "base": {
+        "status": "budget_exhausted",
+        "healthy": true,
+        "n_tasks": 150,
+        "n_finished": 84,
+        "n_resolved": 19,
+        "n_errors": 37,
+        "n_llm_calls": 1376,
+        "tool_calls_per_llm_call": 0.91,
+        "resolved_ids": [
+          "openenv_1252",
+          "pymovements_1600",
+          "yamale_278",
+          "mnemosyne_1085",
+          "graphtage_163",
+          "python_nameparser_683",
+          "datacompy_563",
+          "pymovements_1727",
+          "felupe_1101",
+          "blackjax_1041",
+          "agentica_37",
+          "blackjax_1030",
+          "pymc_marketing_3005",
+          "powertools_lambda_python_8518",
+          "blackjax_1042",
+          "powertools_lambda_python_8453",
+          "fakesnow_386",
+          "flytekit_3343",
+          "graphtage_130"
+        ]
+      },
+      "adapter": {
+        "status": "budget_exhausted",
+        "healthy": true,
+        "n_tasks": 150,
+        "n_finished": 105,
+        "n_resolved": 29,
+        "n_errors": 25,
+        "n_llm_calls": 1729,
+        "tool_calls_per_llm_call": 0.83,
+        "resolved_ids": [
+          "mnemosyne_1085",
+          "pymovements_1600",
+          "yamale_278",
+          "graphtage_163",
+          "pymovements_1727",
+          "apiflask_759",
+          "datacompy_563",
+          "blackjax_1041",
+          "agentica_37",
+          "felupe_1101",
+          "blackjax_1030",
+          "powertools_lambda_python_8518",
+          "casbin_pycasbin_412",
+          "pymc_marketing_3005",
+          "blackjax_1042",
+          "powertools_lambda_python_8453",
+          "dbt_osmosis_321",
+          "flytekit_3343",
+          "fakesnow_386",
+          "graphtage_130",
+          "fakesnow_390",
+          "drawpyo_133",
+          "apiflask_749",
+          "winremote_mcp_71",
+          "pymovements_1668",
+          "qwed_verification_160",
+          "py7zr_682",
+          "metricflow_2092",
+          "btclib_2452"
+        ]
+      }
+    }
+  ],
+  "total_min": 170.4
+}

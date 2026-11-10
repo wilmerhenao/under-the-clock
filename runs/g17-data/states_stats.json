@@ -1,0 +1,20 @@
+{
+ "prefix_too_long": 48,
+ "unparsed_step": 4,
+ "states_c": 150,
+ "states_read_file": 301,
+ "long_thought": 694,
+ "repeat": 49,
+ "late_no_edit": 154,
+ "suite": 0,
+ "states_edit_file": 157,
+ "states_write_file": 188,
+ "states_run_command": 327,
+ "states_submit_patch": 26,
+ "states_r": 850,
+ "states_get_status": 1,
+ "transcript_tokens_p50": 6217,
+ "transcript_tokens_p90": 10098,
+ "runs_c": 450,
+ "runs_r": 441
+}

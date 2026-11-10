@@ -1,0 +1,30 @@
+{
+ "model": "/tmp/cut_d6",
+ "load_s": 180.7,
+ "speed": {
+  "p2k": {
+   "prompt_tokens": 2000,
+   "prefill_s": 1.153,
+   "prefill_tok_s": 1734.2,
+   "decode_tok_s": 41.67
+  },
+  "p16k": {
+   "prompt_tokens": 16000,
+   "prefill_s": 10.173,
+   "prefill_tok_s": 1572.8,
+   "decode_tok_s": 37.31
+  },
+  "streams8": {
+   "n": 8,
+   "prompt_tokens_each": 2000,
+   "decode_tok_s_total": 229.48
+  }
+ },
+ "quality": {
+  "agent_own_nats": 1.1876,
+  "agent_own_tokens": 25896,
+  "rows": 40,
+  "s": 238.2
+ },
+ "sanity": "```python\ndef is_prime(n):\n    \"\"\"\n    Check if a given integer n is a prime number.\n    \n    Args:\n        n (int): The number to check.\n        \n    Returns:\n        bool: True if n is prime, False otherwise.\n    \"\"\"\n    if n < 2:\n        return n == 2\n    if n == 2:\n        return True\n    if n % 2 == 0:\n        return False\n    \n    for i in range(2, int("
+}

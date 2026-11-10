@@ -1,0 +1,542 @@
+{
+ "run": "serve-v1",
+ "cuts": [
+  {
+   "name": "b70",
+   "keep": 0.7,
+   "drop": 0,
+   "group": 32
+  },
+  {
+   "name": "c70",
+   "keep": 0.7,
+   "drop": 0,
+   "group": 1
+  },
+  {
+   "name": "c85",
+   "keep": 0.85,
+   "drop": 0,
+   "group": 1
+  },
+  {
+   "name": "b85",
+   "keep": 0.85,
+   "drop": 0,
+   "group": 32
+  },
+  {
+   "name": "c55",
+   "keep": 0.55,
+   "drop": 0,
+   "group": 1
+  },
+  {
+   "name": "d6",
+   "keep": 1.0,
+   "drop": 6,
+   "group": 32
+  }
+ ],
+ "score_key": "agent_ff",
+ "timings_min": {
+  "total": 79.2
+ },
+ "models": {
+  "full": {
+   "model": "/kaggle/input/models/google/gemma-4/other/gemma-4-31b-it-qat-w4a16-ct/2",
+   "load_s": 348.4,
+   "speed": {
+    "p2k": {
+     "prompt_tokens": 2000,
+     "prefill_s": 1.282,
+     "prefill_tok_s": 1559.5,
+     "decode_tok_s": 38.88
+    },
+    "p16k": {
+     "prompt_tokens": 16000,
+     "prefill_s": 11.098,
+     "prefill_tok_s": 1441.6,
+     "decode_tok_s": 34.52
+    },
+    "streams8": {
+     "n": 8,
+     "prompt_tokens_each": 2000,
+     "decode_tok_s_total": 210.04
+    }
+   },
+   "quality": {
+    "agent_own_nats": 0.2623,
+    "agent_own_tokens": 25896,
+    "rows": 40,
+    "s": 258.2
+   },
+   "sanity": "```python\ndef is_prime(n):\n    \"\"\"\n    Checks if a given integer n is a prime number.\n    \n    Args:\n        n (int): The number to check.\n        \n    Returns:\n        bool: True if n is prime, False otherwise.\n    \"\"\"\n    if n <= 1:\n        return False\n    if n <= 3:\n        return True\n    if n % 2 == 0 or n % 3 == 0:\n        return False\n    \n    i = 5",
+   "rc": 0,
+   "wall_min": 12.0,
+   "gpu_free_gb_before": [
+    22.0,
+    22.0,
+    22.0,
+    22.0
+   ],
+   "gpu_free_gb_after": [
+    22.0,
+    22.0,
+    22.0,
+    22.0
+   ]
+  },
+  "b70": {
+   "model": "/tmp/cut_b70",
+   "load_s": 176.7,
+   "speed": {
+    "p2k": {
+     "prompt_tokens": 2000,
+     "prefill_s": 1.183,
+     "prefill_tok_s": 1690.8,
+     "decode_tok_s": 44.6
+    },
+    "p16k": {
+     "prompt_tokens": 16000,
+     "prefill_s": 10.377,
+     "prefill_tok_s": 1541.9,
+     "decode_tok_s": 39.24
+    },
+    "streams8": {
+     "n": 8,
+     "prompt_tokens_each": 2000,
+     "decode_tok_s_total": 230.87
+    }
+   },
+   "quality": {
+    "agent_own_nats": 0.4441,
+    "agent_own_tokens": 25896,
+    "rows": 40,
+    "s": 243.3
+   },
+   "sanity": "```python\ndef is_prime(n):\n    \"\"\"\n    Check if an integer n is a prime number.\n    Returns True if n is prime, False if it is not.\n    \"\"\"\n    if n < 2:\n        return False\n    for i in range(2, int(n.sqrt() if hasattr(n, 'sqrt') else int(n**0.5) + 1)):\n        if i**2 <= n:\n            # Optimization: check divisors from 2 to sqrt(n)\n            pass\n    ",
+   "rc": 0,
+   "wall_min": 8.7,
+   "gpu_free_gb_before": [
+    22.0,
+    22.0,
+    22.0,
+    22.0
+   ],
+   "gpu_free_gb_after": [
+    22.0,
+    22.0,
+    22.0,
+    22.0
+   ],
+   "plan_summary": {
+    "shards": 5,
+    "bytes": 19642091640,
+    "gb": 18.29,
+    "layers": 60,
+    "ff_channels": 14848,
+    "dropped": [],
+    "format": "w4 g32"
+   },
+   "dropped_layers": [],
+   "slice_min": 0.2
+  },
+  "c70": {
+   "model": "/tmp/cut_c70",
+   "load_s": 175.6,
+   "speed": {
+    "p2k": {
+     "prompt_tokens": 2000,
+     "prefill_s": 1.19,
+     "prefill_tok_s": 1680.5,
+     "decode_tok_s": 44.84
+    },
+    "p16k": {
+     "prompt_tokens": 16000,
+     "prefill_s": 10.377,
+     "prefill_tok_s": 1541.8,
+     "decode_tok_s": 39.35
+    },
+    "streams8": {
+     "n": 8,
+     "prompt_tokens_each": 2000,
+     "decode_tok_s_total": 229.81
+    }
+   },
+   "quality": {
+    "agent_own_nats": 0.3467,
+    "agent_own_tokens": 25896,
+    "rows": 40,
+    "s": 243.5
+   },
+   "sanity": "```python\ndef is_prime(n):\n    \"\"\"\n    Returns True if n is a prime number, otherwise False.\n    \"\"\"\n    if n < 2:\n        return False\n    for i in range(2, int(n**0.5) + 1):\n        if n % i == 0:\n            return False\n    return True\n```",
+   "rc": 0,
+   "wall_min": 8.7,
+   "gpu_free_gb_before": [
+    22.0,
+    22.0,
+    22.0,
+    22.0
+   ],
+   "gpu_free_gb_after": [
+    22.0,
+    22.0,
+    22.0,
+    22.0
+   ],
+   "plan_summary": {
+    "shards": 5,
+    "bytes": 19642091640,
+    "gb": 18.29,
+    "layers": 60,
+    "ff_channels": 14848,
+    "dropped": [],
+    "format": "w4 g32, down_proj re-quantized",
+    "requant_rel_err": {
+     "mean": 0.06305,
+     "max": 0.07137
+    }
+   },
+   "dropped_layers": [],
+   "slice_min": 4.1
+  },
+  "c85": {
+   "model": "/tmp/cut_c85",
+   "load_s": 166.1,
+   "speed": {
+    "p2k": {
+     "prompt_tokens": 2000,
+     "prefill_s": 1.24,
+     "prefill_tok_s": 1612.8,
+     "decode_tok_s": 40.89
+    },
+    "p16k": {
+     "prompt_tokens": 16000,
+     "prefill_s": 10.836,
+     "prefill_tok_s": 1476.5,
+     "decode_tok_s": 36.13
+    },
+    "streams8": {
+     "n": 8,
+     "prompt_tokens_each": 2000,
+     "decode_tok_s_total": 216.84
+    }
+   },
+   "quality": {
+    "agent_own_nats": 0.2868,
+    "agent_own_tokens": 25896,
+    "rows": 40,
+    "s": 251.9
+   },
+   "sanity": "```python\ndef is_prime(n):\n    \"\"\"\n    Returns True if n is a prime number, otherwise False.\n    \"\"\"\n    if n <= 1:\n        return False\n    if n <= 3:\n        return True\n    if n % 2 == 0 or n % 3 == 0:\n        return False\n    i = 5\n    while i * i <= n:\n        if n % i == 0 or n % (i + 2) == 0:\n            return False\n        ",
+   "rc": 0,
+   "wall_min": 8.7,
+   "gpu_free_gb_before": [
+    22.0,
+    22.0,
+    22.0,
+    22.0
+   ],
+   "gpu_free_gb_after": [
+    22.0,
+    22.0,
+    22.0,
+    22.0
+   ],
+   "plan_summary": {
+    "shards": 5,
+    "bytes": 21592934520,
+    "gb": 20.11,
+    "layers": 60,
+    "ff_channels": 18432,
+    "dropped": [],
+    "format": "w4 g32, down_proj re-quantized",
+    "requant_rel_err": {
+     "mean": 0.05794,
+     "max": 0.06539
+    }
+   },
+   "dropped_layers": [],
+   "slice_min": 4.8
+  },
+  "b85": {
+   "model": "/tmp/cut_b85",
+   "load_s": 177.4,
+   "speed": {
+    "p2k": {
+     "prompt_tokens": 2000,
+     "prefill_s": 1.243,
+     "prefill_tok_s": 1609.2,
+     "decode_tok_s": 40.73
+    },
+    "p16k": {
+     "prompt_tokens": 16000,
+     "prefill_s": 10.889,
+     "prefill_tok_s": 1469.3,
+     "decode_tok_s": 36.22
+    },
+    "streams8": {
+     "n": 8,
+     "prompt_tokens_each": 2000,
+     "decode_tok_s_total": 217.36
+    }
+   },
+   "quality": {
+    "agent_own_nats": 0.3215,
+    "agent_own_tokens": 25896,
+    "rows": 40,
+    "s": 252.9
+   },
+   "sanity": "```python\ndef is_prime(n):\n    \"\"\"\n    Checks if a given integer n is a prime number.\n    \n    Args:\n        n (int): The number to check.\n        \n    Returns:\n        bool: True if n is prime, False otherwise.\n    \"\"\"\n    if n < 2:\n        return False\n    for i in range(2, int(n**0.5) + 1):\n        if n % i == 0:\n            return False\n    return True\n```",
+   "rc": 0,
+   "wall_min": 8.9,
+   "gpu_free_gb_before": [
+    22.0,
+    22.0,
+    22.0,
+    22.0
+   ],
+   "gpu_free_gb_after": [
+    22.0,
+    22.0,
+    22.0,
+    22.0
+   ],
+   "plan_summary": {
+    "shards": 5,
+    "bytes": 21592934520,
+    "gb": 20.11,
+    "layers": 60,
+    "ff_channels": 18432,
+    "dropped": [],
+    "format": "w4 g32"
+   },
+   "dropped_layers": [],
+   "slice_min": 0.3
+  },
+  "c55": {
+   "model": "/tmp/cut_c55",
+   "load_s": 165.8,
+   "speed": {
+    "p2k": {
+     "prompt_tokens": 2000,
+     "prefill_s": 1.162,
+     "prefill_tok_s": 1720.7,
+     "decode_tok_s": 48.07
+    },
+    "p16k": {
+     "prompt_tokens": 16000,
+     "prefill_s": 10.126,
+     "prefill_tok_s": 1580.0,
+     "decode_tok_s": 42.0
+    },
+    "streams8": {
+     "n": 8,
+     "prompt_tokens_each": 2000,
+     "decode_tok_s_total": 240.11
+    }
+   },
+   "quality": {
+    "agent_own_nats": 0.4504,
+    "agent_own_tokens": 25896,
+    "rows": 40,
+    "s": 238.1
+   },
+   "sanity": "```python\ndef is_prime(n):\n    \"\"\"\n    Returns True if n is a prime number, otherwise False.\n    \"\"\"\n    if not isinstance(n, int):\n        return False\n    if n < 2:\n        return False\n    for i in range(2, min(n, 1000)): # Optimization for small numbers\n        if i == 2:\n            break\n    \n    # Miller-Rabinowitz primality test or trial division\n    if n == 2:\n        return True\n",
+   "rc": 0,
+   "wall_min": 8.4,
+   "gpu_free_gb_before": [
+    22.0,
+    22.0,
+    22.0,
+    22.0
+   ],
+   "gpu_free_gb_after": [
+    22.0,
+    22.0,
+    22.0,
+    22.0
+   ],
+   "plan_summary": {
+    "shards": 4,
+    "bytes": 17969940600,
+    "gb": 16.74,
+    "layers": 60,
+    "ff_channels": 11776,
+    "dropped": [],
+    "format": "w4 g32, down_proj re-quantized",
+    "requant_rel_err": {
+     "mean": 0.06762,
+     "max": 0.0753
+    }
+   },
+   "dropped_layers": [],
+   "slice_min": 3.2
+  },
+  "d6": {
+   "model": "/tmp/cut_d6",
+   "load_s": 180.7,
+   "speed": {
+    "p2k": {
+     "prompt_tokens": 2000,
+     "prefill_s": 1.153,
+     "prefill_tok_s": 1734.2,
+     "decode_tok_s": 41.67
+    },
+    "p16k": {
+     "prompt_tokens": 16000,
+     "prefill_s": 10.173,
+     "prefill_tok_s": 1572.8,
+     "decode_tok_s": 37.31
+    },
+    "streams8": {
+     "n": 8,
+     "prompt_tokens_each": 2000,
+     "decode_tok_s_total": 229.48
+    }
+   },
+   "quality": {
+    "agent_own_nats": 1.1876,
+    "agent_own_tokens": 25896,
+    "rows": 40,
+    "s": 238.2
+   },
+   "sanity": "```python\ndef is_prime(n):\n    \"\"\"\n    Check if a given integer n is a prime number.\n    \n    Args:\n        n (int): The number to check.\n        \n    Returns:\n        bool: True if n is prime, False otherwise.\n    \"\"\"\n    if n < 2:\n        return n == 2\n    if n == 2:\n        return True\n    if n % 2 == 0:\n        return False\n    \n    for i in range(2, int(",
+   "rc": 0,
+   "wall_min": 8.7,
+   "gpu_free_gb_before": [
+    22.0,
+    22.0,
+    22.0,
+    22.0
+   ],
+   "gpu_free_gb_after": [
+    22.0,
+    22.0,
+    22.0,
+    22.0
+   ],
+   "plan_summary": {
+    "shards": 5,
+    "bytes": 21648408012,
+    "gb": 20.16,
+    "layers": 54,
+    "ff_channels": 21504,
+    "dropped": [
+     4,
+     13,
+     14,
+     16,
+     18,
+     21
+    ],
+    "format": "w4 g32"
+   },
+   "dropped_layers": [
+    14,
+    13,
+    16,
+    18,
+    4,
+    21
+   ],
+   "slice_min": 0.3
+  }
+ },
+ "inputs": {
+  "model": "/kaggle/input/models/google/gemma-4/other/gemma-4-31b-it-qat-w4a16-ct/2",
+  "scores": "/kaggle/input/notebooks/verracodeguacas/g4dev-prune-score-gpu/prune/score-v1/scores.npz",
+  "agent_rows": "/kaggle/input/datasets/verracodeguacas/g4dev-g11-data/sft.jsonl",
+  "part1_run": "score-v1"
+ },
+ "disk_free_gb": {
+  "/tmp": 964.1,
+  "out": 19.5
+ },
+ "data": {
+  "heldout_rows": 40,
+  "heldout_own_tokens": 25896,
+  "max_tokens": 8192,
+  "streams": 8
+ },
+ "table": [
+  {
+   "model": "full",
+   "ok": true,
+   "size_gb": null,
+   "decode_speedup_2k": 1.0,
+   "decode_speedup_16k": 1.0,
+   "prefill_speedup_16k": 1.0,
+   "streams8_speedup": 1.0,
+   "agent_own_nats": 0.2623,
+   "agent_damage": 0.0
+  },
+  {
+   "model": "b70",
+   "ok": true,
+   "size_gb": 18.29,
+   "decode_speedup_2k": 1.147,
+   "decode_speedup_16k": 1.137,
+   "prefill_speedup_16k": 1.07,
+   "streams8_speedup": 1.099,
+   "agent_own_nats": 0.4441,
+   "agent_damage": 0.1818
+  },
+  {
+   "model": "c70",
+   "ok": true,
+   "size_gb": 18.29,
+   "decode_speedup_2k": 1.153,
+   "decode_speedup_16k": 1.14,
+   "prefill_speedup_16k": 1.07,
+   "streams8_speedup": 1.094,
+   "agent_own_nats": 0.3467,
+   "agent_damage": 0.0844
+  },
+  {
+   "model": "c85",
+   "ok": true,
+   "size_gb": 20.11,
+   "decode_speedup_2k": 1.052,
+   "decode_speedup_16k": 1.047,
+   "prefill_speedup_16k": 1.024,
+   "streams8_speedup": 1.032,
+   "agent_own_nats": 0.2868,
+   "agent_damage": 0.0245
+  },
+  {
+   "model": "b85",
+   "ok": true,
+   "size_gb": 20.11,
+   "decode_speedup_2k": 1.048,
+   "decode_speedup_16k": 1.049,
+   "prefill_speedup_16k": 1.019,
+   "streams8_speedup": 1.035,
+   "agent_own_nats": 0.3215,
+   "agent_damage": 0.0592
+  },
+  {
+   "model": "c55",
+   "ok": true,
+   "size_gb": 16.74,
+   "decode_speedup_2k": 1.236,
+   "decode_speedup_16k": 1.217,
+   "prefill_speedup_16k": 1.096,
+   "streams8_speedup": 1.143,
+   "agent_own_nats": 0.4504,
+   "agent_damage": 0.1881
+  },
+  {
+   "model": "d6",
+   "ok": true,
+   "size_gb": 20.16,
+   "decode_speedup_2k": 1.072,
+   "decode_speedup_16k": 1.081,
+   "prefill_speedup_16k": 1.091,
+   "streams8_speedup": 1.093,
+   "agent_own_nats": 1.1876,
+   "agent_damage": 0.9253
+  }
+ ]
+}

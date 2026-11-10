@@ -1,0 +1,3 @@
+sub-v9 (prompt with the post-compaction git-diff line) at 8 min / 24 calls; the prompt states the enforced budget.
+For the first LoRA submission (g5b): the scorer adds --enable-lora only when an adapter is mounted, so LoRA decode
+overhead (est. +5-10% at rank 16) is new; 8/24 models at <= the 11.0 h of base 8/28 at +10% (8/28: 11.8 h).

@@ -1,0 +1,17 @@
+{
+ "counts": {
+  "lines:onpolicy/post:chain0": 289,
+  "lines:onpolicy/post:chain1": 287,
+  "lines:onpolicy/pre:chain0": 611,
+  "skip_chain_pre_duplicate": 315,
+  "skip_no_trained_span": 368
+ },
+ "tokens": {
+  "onpolicy/pre": 8353720,
+  "onpolicy/post": 7643985
+ },
+ "runs": 611,
+ "runs_with_post_segments": 217,
+ "max_tokens": 24576,
+ "note": "G13: days through 10-23b (FreshSWE)"
+}

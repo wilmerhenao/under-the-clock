@@ -1,0 +1,48 @@
+{
+ "tasks_common": 70,
+ "tasks_per_arm": {
+  "G17v2a@B179": 70,
+  "G17v2b@B184": 105
+ },
+ "arms": {
+  "G17v2a@B179": {
+   "finished": 70,
+   "resolved": 20,
+   "timeouts": 43,
+   "task_s_mean_median": [
+    930,
+    995
+   ],
+   "tool_calls_mean": 12.7,
+   "other_errors": {}
+  },
+  "G17v2b@B184": {
+   "finished": 70,
+   "resolved": 18,
+   "timeouts": 12,
+   "task_s_mean_median": [
+    615,
+    567
+   ],
+   "tool_calls_mean": 14.1,
+   "other_errors": {
+    "Evaluation error: pytest missing in official-env task venv": 2
+   }
+  }
+ },
+ "pairs": {
+  "G17v2a@B179 vs G17v2b@B184": {
+   "G17v2a@B179_only": 3,
+   "G17v2b@B184_only": 1,
+   "mcnemar_exact_p": 0.625,
+   "G17v2a@B179_only_ids": [
+    "numbers_parser_259",
+    "openenv_1252",
+    "python_nameparser_683"
+   ],
+   "G17v2b@B184_only_ids": [
+    "dbt_osmosis_321"
+   ]
+  }
+ }
+}

@@ -1,0 +1,37 @@
+{
+ "mode": "eval",
+ "arms": {},
+ "stages": [
+  {
+   "stage": "env",
+   "t_min": 0.79,
+   "python": "3.12.14",
+   "cpus": 224,
+   "xla_cache_files": 0,
+   "tmp_free_gb": 1014,
+   "mem_gb": 378,
+   "arms": [
+    {
+     "name": "g17",
+     "adapter": "/kaggle/working/adapter_out"
+    },
+    {
+     "name": "g11a",
+     "adapter": "**/gemma-4-31b-agent-lora-short-thought-trainer/adapter_out"
+    },
+    {
+     "name": "g16a",
+     "adapter": "**/gemma-4-31b-agent-clock-calibrated-preferences/adapter_out"
+    }
+   ],
+   "mode": "eval"
+  },
+  {
+   "stage": "fatal",
+   "t_min": 11.7,
+   "error": "RuntimeError: harness env: installing google-genai did not provide google:   File \"<string>\", line 1, in <module>\n  File \"/tmp/tpu_eval/harness_venv/lib/python3.12/site-packages/swegemma/__init__.py\", line 7, in <module>\n    from swegemma.config import EvalConfig\n  File \"/tmp/tpu_eval/harness_venv/lib/python3.12/site-packages/swegemma/config.py\", line 9, in <module>\n    from adk_submission import (\n  File \"/tmp/tpu_eval/harness_venv/lib/python3.12/site-packages/adk_submission/__init__.py\", line 48, in <module>\n    from .compiler import compile_submission\n  File \"/tmp/tpu_eval/harness_venv/lib/python3.12/site-packages/adk_submission/compiler.py\", line 23, in <module>\n    from google.adk.tools.skill_toolset import SkillToolset\n  File \"/tmp/tpu_eval/harness_venv/lib/python3.12/site-packages/google/adk/tools/skill_toolset.py\", line 38, in <module>\n    from ..skills import models\n  File \"/tmp/tpu_eval/harness_venv/lib/python3.12/site-packages/google/adk/skills/__init__.py\", line 20, in <module>\n    from ._utils import _list_skills_in_dir as list_skills_in_dir\n  File \"/tmp/tpu_eval/harness_venv/lib/python3.12/site-packages/google/adk/skills/_utils.py\", line 27, in <module>\n    from google.cloud import storage\nModuleNotFoundError: No module named 'google.cloud'\n",
+   "tb": "Traceback (most recent call last):\n  File \"/kaggle/working/session/eval.py\", line 366, in <module>\n    raise RuntimeError(f'harness env: installing {pkg} did not provide {mod}: {out[-1200:]}')\nRuntimeError: harness env: installing google-genai did not provide google:   File \"<string>\", line 1, in <module>\n  File \"/tmp/tpu_eval/harness_venv/lib/python3.12/site-packages/swegemma/__init__.py\", line 7, in <module>\n    from swegemma.config import EvalConfig\n  File \"/tmp/tpu_eval/harness_venv/lib/python3.12/site-packages/swegemma/config.py\", line 9, in <module>\n    from adk_submission import (\n  File \"/tmp/tpu_eval/harness_venv/lib/python3.12/site-packages/adk_submission/__init__.py\", line 48, in <module>\n    from .compiler import compile_submission\n  File \"/tmp/tpu_eval/harness_venv/lib/python3.12/site-packages/adk_submission/compiler.py\", line 23, in <module>\n    from google.adk.tools.skill_toolset import SkillToolset\n  File \"/tmp/tpu_eval/harness_venv/lib/python3.12/site-packages/google/adk/tools/skill_toolset.py\", line 38, in <module>\n    from ..skills import models\n  File \"/tmp/tpu_eval/harness_venv/lib/python3.12/site-packages/google/adk/skills/__init__.py\", line 20, in <module>\n    from ._utils import _list_skills_in_dir as list_skills_in_dir\n  File \"/tmp/tpu_eval/harness_venv/lib/python3.12/site-packages/google/adk/skills/_utils.py\", line 27, in <module>\n    from google.cloud import storage\nModuleNotFoundError: No module named 'google.cloud'\n\n"
+  }
+ ],
+ "total_min": 11.7
+}

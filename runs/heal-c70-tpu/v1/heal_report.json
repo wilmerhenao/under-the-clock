@@ -1,0 +1,179 @@
+{
+ "log": "runs/heal-c70-tpu/v1/tpu/log.jsonl",
+ "lines": 1331,
+ "heal_eval_errors": [],
+ "teacher": {
+  "own_nats": 0.25768,
+  "all_nats": 2.56978,
+  "own_tokens": 25896,
+  "all_tokens": 320571,
+  "s": 112.2
+ },
+ "student": [
+  {
+   "tag": "start",
+   "t_min": 9.26,
+   "own_nats": 0.3427,
+   "all_nats": 2.72273,
+   "kl_own": 0.09804,
+   "kl_all": 0.29594,
+   "own_tokens": 25896,
+   "damage_own": 0.085,
+   "damage_all": 0.1529
+  },
+  {
+   "tag": "a:ep0",
+   "t_min": 52.11,
+   "own_nats": 0.27769,
+   "all_nats": 2.43831,
+   "kl_own": 0.0459,
+   "kl_all": 0.10359,
+   "own_tokens": 25896,
+   "damage_own": 0.02,
+   "damage_all": -0.1315
+  },
+  {
+   "tag": "a:final",
+   "t_min": 84.5,
+   "own_nats": 0.27864,
+   "all_nats": 2.41767,
+   "kl_own": 0.04218,
+   "kl_all": 0.09437,
+   "own_tokens": 25896,
+   "damage_own": 0.021,
+   "damage_all": -0.1521
+  },
+  {
+   "tag": "b:ep0",
+   "t_min": 116.71,
+   "own_nats": 0.18597,
+   "all_nats": 0.3782,
+   "kl_own": 0.20653,
+   "kl_all": 6.01098,
+   "own_tokens": 25896,
+   "damage_own": -0.0717,
+   "damage_all": -2.1916
+  },
+  {
+   "tag": "b:final",
+   "t_min": 144.4,
+   "own_nats": 0.17945,
+   "all_nats": 0.37099,
+   "kl_own": 0.24303,
+   "kl_all": 6.58381,
+   "own_tokens": 25896,
+   "damage_own": -0.0782,
+   "damage_all": -2.1988
+  }
+ ],
+ "train_loss": {
+  "a:ep0": {
+   "steps": 315,
+   "mean": 0.1257,
+   "first": 0.3746,
+   "last": 0.0869
+  },
+  "a:ep1": {
+   "steps": 315,
+   "mean": 0.0865,
+   "first": 0.0965,
+   "last": 0.0488
+  },
+  "b:ep0": {
+   "steps": 315,
+   "mean": 0.4953,
+   "first": 2.5547,
+   "last": 0.4606
+  },
+  "b:ep1": {
+   "steps": 315,
+   "mean": 0.3404,
+   "first": 0.4034,
+   "last": 0.1827
+  }
+ },
+ "steps_per_phase": {
+  "a": 630,
+  "b": 630
+ },
+ "done": [
+  {
+   "phase": "a",
+   "stop": "plan_done",
+   "steps_ok": 630,
+   "planned": 630,
+   "tokens": 10028689,
+   "step_errors": 1,
+   "rung": "flash512",
+   "min": 81.9
+  },
+  {
+   "phase": "b",
+   "stop": "plan_done",
+   "steps_ok": 630,
+   "planned": 630,
+   "tokens": 10028689,
+   "step_errors": 1,
+   "rung": "flash512",
+   "min": 141.8
+  }
+ ],
+ "heal_mask": {
+  "t_min": 4.08,
+  "layers": 60,
+  "kept_min": 14848,
+  "kept_max": 14848,
+  "units": 21504,
+  "kept_share": 0.6905,
+  "sha": "9bcf662fef51d9ec963d9d5b51cb7765ca5b96dcf73906ff7817f498333481e1",
+  "kd": true,
+  "temp": 1.0
+ },
+ "heal_arm": [
+  {
+   "stage": "heal_arm",
+   "t_min": 84.59,
+   "arm": "b",
+   "kd": false,
+   "temp": 1.0
+  }
+ ],
+ "criteria": {
+  "consistency": {
+   "teacher_own": 0.25768,
+   "target_teacher_own": 0.258,
+   "own_tokens": 25896,
+   "target_own_tokens": 25896,
+   "start_damage": 0.085,
+   "target_start_damage": 0.08
+  },
+  "healing_works": {
+   "a_final_damage": 0.021,
+   "damage_below_0.04": true,
+   "kl_own_start": 0.09804,
+   "kl_own_a_final": 0.04218,
+   "kl_ratio": 0.43,
+   "kl_halved": true,
+   "verdict": true
+  },
+  "teacher_matters": {
+   "kl_own_a": 0.04218,
+   "kl_own_b": 0.24303,
+   "ratio_a_over_b": 0.174,
+   "damage_a": 0.021,
+   "damage_b": -0.0782,
+   "steps_a": 630,
+   "steps_b": 630,
+   "verdict": true
+  },
+  "teacher_matters_per_epoch": {
+   "ep0": {
+    "kl_own_a": 0.0459,
+    "kl_own_b": 0.20653,
+    "ratio_a_over_b": 0.222,
+    "damage_a": 0.02,
+    "damage_b": -0.0717
+   }
+  }
+ }
+}

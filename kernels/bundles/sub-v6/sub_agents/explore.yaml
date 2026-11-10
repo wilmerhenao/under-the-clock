@@ -1,0 +1,11 @@
+name: explore
+model: gemma-4-31b-it-qat-w4a16-ct
+description: Read-only grep localization and a concrete repair plan.
+instruction: !include ../prompts/explore.md
+generate_content_config: !include ../configs/explore_sampling.yaml
+output_key: repair_plan
+tools:
+  - run_command
+  - read_file
+  - get_code_neighbors
+  - get_code_subgraph

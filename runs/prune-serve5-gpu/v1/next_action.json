@@ -1,0 +1,813 @@
+{
+ "states": 109,
+ "rows": 40,
+ "models": {
+  "full": {
+   "malformed": {
+    "states": 109,
+    "calls": 102,
+    "malformed": 2,
+    "share": 0.0196,
+    "unparsed": 2,
+    "by_tool": {
+     "edit_file": {
+      "calls": 1,
+      "malformed": 0
+     },
+     "read_file": {
+      "calls": 59,
+      "malformed": 2
+     },
+     "run_command": {
+      "calls": 37,
+      "malformed": 0
+     },
+     "write_file": {
+      "calls": 5,
+      "malformed": 0
+     }
+    }
+   },
+   "vs_full_b": {
+    "text": {
+     "share": 0.804,
+     "ci95": [
+      0.721,
+      0.881
+     ],
+     "states": 102,
+     "rows": 40
+    },
+    "parsed": {
+     "share": 0.784,
+     "ci95": [
+      0.706,
+      0.86
+     ],
+     "states": 102,
+     "rows": 40
+    },
+    "tool": {
+     "share": 0.961,
+     "ci95": [
+      0.911,
+      1.0
+     ],
+     "states": 102,
+     "rows": 40
+    }
+   },
+   "vs_recorded": {
+    "parsed": {
+     "share": 0.404,
+     "ci95": [
+      0.309,
+      0.505
+     ],
+     "states": 109,
+     "rows": 40
+    },
+    "tool": {
+     "share": 0.734,
+     "ci95": [
+      0.654,
+      0.818
+     ],
+     "states": 109,
+     "rows": 40
+    }
+   }
+  },
+  "full@T0.2": {
+   "malformed": {
+    "states": 109,
+    "calls": 105,
+    "malformed": 2,
+    "share": 0.019,
+    "unparsed": 2,
+    "by_tool": {
+     "edit_file": {
+      "calls": 2,
+      "malformed": 0
+     },
+     "read_file": {
+      "calls": 55,
+      "malformed": 2
+     },
+     "run_command": {
+      "calls": 41,
+      "malformed": 0
+     },
+     "write_file": {
+      "calls": 7,
+      "malformed": 0
+     }
+    }
+   },
+   "vs_full": {
+    "text": {
+     "share": 0.657,
+     "ci95": [
+      0.564,
+      0.74
+     ],
+     "states": 102,
+     "rows": 40
+    },
+    "parsed": {
+     "share": 0.637,
+     "ci95": [
+      0.545,
+      0.72
+     ],
+     "states": 102,
+     "rows": 40
+    },
+    "tool": {
+     "share": 0.912,
+     "ci95": [
+      0.85,
+      0.964
+     ],
+     "states": 102,
+     "rows": 40
+    }
+   },
+   "vs_full_b": {
+    "text": {
+     "share": 0.676,
+     "ci95": [
+      0.591,
+      0.761
+     ],
+     "states": 102,
+     "rows": 40
+    },
+    "parsed": {
+     "share": 0.657,
+     "ci95": [
+      0.571,
+      0.735
+     ],
+     "states": 102,
+     "rows": 40
+    },
+    "tool": {
+     "share": 0.941,
+     "ci95": [
+      0.886,
+      0.989
+     ],
+     "states": 102,
+     "rows": 40
+    }
+   },
+   "vs_recorded": {
+    "parsed": {
+     "share": 0.385,
+     "ci95": [
+      0.286,
+      0.491
+     ],
+     "states": 109,
+     "rows": 40
+    },
+    "tool": {
+     "share": 0.761,
+     "ci95": [
+      0.673,
+      0.846
+     ],
+     "states": 109,
+     "rows": 40
+    }
+   }
+  },
+  "full_b": {
+   "malformed": {
+    "states": 109,
+    "calls": 102,
+    "malformed": 2,
+    "share": 0.0196,
+    "unparsed": 2,
+    "by_tool": {
+     "edit_file": {
+      "calls": 2,
+      "malformed": 0
+     },
+     "read_file": {
+      "calls": 55,
+      "malformed": 2
+     },
+     "run_command": {
+      "calls": 40,
+      "malformed": 0
+     },
+     "write_file": {
+      "calls": 5,
+      "malformed": 0
+     }
+    }
+   },
+   "vs_full": {
+    "text": {
+     "share": 0.804,
+     "ci95": [
+      0.724,
+      0.879
+     ],
+     "states": 102,
+     "rows": 40
+    },
+    "parsed": {
+     "share": 0.784,
+     "ci95": [
+      0.705,
+      0.858
+     ],
+     "states": 102,
+     "rows": 40
+    },
+    "tool": {
+     "share": 0.961,
+     "ci95": [
+      0.922,
+      0.99
+     ],
+     "states": 102,
+     "rows": 40
+    }
+   },
+   "vs_recorded": {
+    "parsed": {
+     "share": 0.404,
+     "ci95": [
+      0.317,
+      0.492
+     ],
+     "states": 109,
+     "rows": 40
+    },
+    "tool": {
+     "share": 0.725,
+     "ci95": [
+      0.646,
+      0.806
+     ],
+     "states": 109,
+     "rows": 40
+    }
+   }
+  },
+  "c70": {
+   "malformed": {
+    "states": 109,
+    "calls": 100,
+    "malformed": 8,
+    "share": 0.08,
+    "unparsed": 8,
+    "by_tool": {
+     "edit_file": {
+      "calls": 1,
+      "malformed": 1
+     },
+     "read_file": {
+      "calls": 40,
+      "malformed": 7
+     },
+     "run_command": {
+      "calls": 55,
+      "malformed": 0
+     },
+     "write_file": {
+      "calls": 4,
+      "malformed": 0
+     }
+    }
+   },
+   "vs_full": {
+    "text": {
+     "share": 0.294,
+     "ci95": [
+      0.219,
+      0.381
+     ],
+     "states": 102,
+     "rows": 40
+    },
+    "parsed": {
+     "share": 0.294,
+     "ci95": [
+      0.219,
+      0.381
+     ],
+     "states": 102,
+     "rows": 40
+    },
+    "tool": {
+     "share": 0.706,
+     "ci95": [
+      0.62,
+      0.785
+     ],
+     "states": 102,
+     "rows": 40
+    }
+   },
+   "vs_full_b": {
+    "text": {
+     "share": 0.294,
+     "ci95": [
+      0.215,
+      0.376
+     ],
+     "states": 102,
+     "rows": 40
+    },
+    "parsed": {
+     "share": 0.294,
+     "ci95": [
+      0.215,
+      0.376
+     ],
+     "states": 102,
+     "rows": 40
+    },
+    "tool": {
+     "share": 0.725,
+     "ci95": [
+      0.642,
+      0.806
+     ],
+     "states": 102,
+     "rows": 40
+    }
+   },
+   "vs_recorded": {
+    "parsed": {
+     "share": 0.275,
+     "ci95": [
+      0.191,
+      0.359
+     ],
+     "states": 109,
+     "rows": 40
+    },
+    "tool": {
+     "share": 0.633,
+     "ci95": [
+      0.549,
+      0.714
+     ],
+     "states": 109,
+     "rows": 40
+    }
+   }
+  },
+  "c70+kd~": {
+   "malformed": {
+    "states": 109,
+    "calls": 105,
+    "malformed": 2,
+    "share": 0.019,
+    "unparsed": 2,
+    "by_tool": {
+     "edit_file": {
+      "calls": 2,
+      "malformed": 0
+     },
+     "read_file": {
+      "calls": 54,
+      "malformed": 2
+     },
+     "run_command": {
+      "calls": 45,
+      "malformed": 0
+     },
+     "write_file": {
+      "calls": 4,
+      "malformed": 0
+     }
+    }
+   },
+   "vs_full": {
+    "text": {
+     "share": 0.373,
+     "ci95": [
+      0.284,
+      0.464
+     ],
+     "states": 102,
+     "rows": 40
+    },
+    "parsed": {
+     "share": 0.373,
+     "ci95": [
+      0.284,
+      0.464
+     ],
+     "states": 102,
+     "rows": 40
+    },
+    "tool": {
+     "share": 0.775,
+     "ci95": [
+      0.694,
+      0.846
+     ],
+     "states": 102,
+     "rows": 40
+    }
+   },
+   "vs_full_b": {
+    "text": {
+     "share": 0.392,
+     "ci95": [
+      0.292,
+      0.5
+     ],
+     "states": 102,
+     "rows": 40
+    },
+    "parsed": {
+     "share": 0.402,
+     "ci95": [
+      0.309,
+      0.505
+     ],
+     "states": 102,
+     "rows": 40
+    },
+    "tool": {
+     "share": 0.794,
+     "ci95": [
+      0.717,
+      0.867
+     ],
+     "states": 102,
+     "rows": 40
+    }
+   },
+   "vs_recorded": {
+    "parsed": {
+     "share": 0.339,
+     "ci95": [
+      0.245,
+      0.43
+     ],
+     "states": 109,
+     "rows": 40
+    },
+    "tool": {
+     "share": 0.679,
+     "ci95": [
+      0.588,
+      0.767
+     ],
+     "states": 109,
+     "rows": 40
+    }
+   }
+  },
+  "c70own": {
+   "malformed": {
+    "states": 109,
+    "calls": 91,
+    "malformed": 6,
+    "share": 0.0659,
+    "unparsed": 6,
+    "by_tool": {
+     "edit_file": {
+      "calls": 2,
+      "malformed": 0
+     },
+     "read_file": {
+      "calls": 42,
+      "malformed": 6
+     },
+     "run_command": {
+      "calls": 46,
+      "malformed": 0
+     },
+     "write_file": {
+      "calls": 1,
+      "malformed": 0
+     }
+    }
+   },
+   "vs_full": {
+    "text": {
+     "share": 0.275,
+     "ci95": [
+      0.189,
+      0.359
+     ],
+     "states": 102,
+     "rows": 40
+    },
+    "parsed": {
+     "share": 0.275,
+     "ci95": [
+      0.189,
+      0.359
+     ],
+     "states": 102,
+     "rows": 40
+    },
+    "tool": {
+     "share": 0.676,
+     "ci95": [
+      0.574,
+      0.774
+     ],
+     "states": 102,
+     "rows": 40
+    }
+   },
+   "vs_full_b": {
+    "text": {
+     "share": 0.275,
+     "ci95": [
+      0.189,
+      0.355
+     ],
+     "states": 102,
+     "rows": 40
+    },
+    "parsed": {
+     "share": 0.275,
+     "ci95": [
+      0.189,
+      0.355
+     ],
+     "states": 102,
+     "rows": 40
+    },
+    "tool": {
+     "share": 0.686,
+     "ci95": [
+      0.577,
+      0.788
+     ],
+     "states": 102,
+     "rows": 40
+    }
+   },
+   "vs_recorded": {
+    "parsed": {
+     "share": 0.321,
+     "ci95": [
+      0.234,
+      0.414
+     ],
+     "states": 109,
+     "rows": 40
+    },
+    "tool": {
+     "share": 0.596,
+     "ci95": [
+      0.52,
+      0.667
+     ],
+     "states": 109,
+     "rows": 40
+    }
+   }
+  },
+  "c85": {
+   "malformed": {
+    "states": 109,
+    "calls": 101,
+    "malformed": 6,
+    "share": 0.0594,
+    "unparsed": 6,
+    "by_tool": {
+     "edit_file": {
+      "calls": 2,
+      "malformed": 0
+     },
+     "read_file": {
+      "calls": 51,
+      "malformed": 6
+     },
+     "run_command": {
+      "calls": 45,
+      "malformed": 0
+     },
+     "write_file": {
+      "calls": 3,
+      "malformed": 0
+     }
+    }
+   },
+   "vs_full": {
+    "text": {
+     "share": 0.422,
+     "ci95": [
+      0.33,
+      0.516
+     ],
+     "states": 102,
+     "rows": 40
+    },
+    "parsed": {
+     "share": 0.422,
+     "ci95": [
+      0.33,
+      0.516
+     ],
+     "states": 102,
+     "rows": 40
+    },
+    "tool": {
+     "share": 0.804,
+     "ci95": [
+      0.72,
+      0.883
+     ],
+     "states": 102,
+     "rows": 40
+    }
+   },
+   "vs_full_b": {
+    "text": {
+     "share": 0.441,
+     "ci95": [
+      0.343,
+      0.543
+     ],
+     "states": 102,
+     "rows": 40
+    },
+    "parsed": {
+     "share": 0.441,
+     "ci95": [
+      0.343,
+      0.543
+     ],
+     "states": 102,
+     "rows": 40
+    },
+    "tool": {
+     "share": 0.804,
+     "ci95": [
+      0.714,
+      0.884
+     ],
+     "states": 102,
+     "rows": 40
+    }
+   },
+   "vs_recorded": {
+    "parsed": {
+     "share": 0.312,
+     "ci95": [
+      0.229,
+      0.391
+     ],
+     "states": 109,
+     "rows": 40
+    },
+    "tool": {
+     "share": 0.688,
+     "ci95": [
+      0.602,
+      0.771
+     ],
+     "states": 109,
+     "rows": 40
+    }
+   }
+  },
+  "c55": {
+   "malformed": {
+    "states": 109,
+    "calls": 96,
+    "malformed": 14,
+    "share": 0.1458,
+    "unparsed": 14,
+    "by_tool": {
+     "edit_file": {
+      "calls": 2,
+      "malformed": 1
+     },
+     "read_file": {
+      "calls": 42,
+      "malformed": 13
+     },
+     "run_command": {
+      "calls": 49,
+      "malformed": 0
+     },
+     "write_file": {
+      "calls": 3,
+      "malformed": 0
+     }
+    }
+   },
+   "vs_full": {
+    "text": {
+     "share": 0.284,
+     "ci95": [
+      0.2,
+      0.369
+     ],
+     "states": 102,
+     "rows": 40
+    },
+    "parsed": {
+     "share": 0.284,
+     "ci95": [
+      0.2,
+      0.369
+     ],
+     "states": 102,
+     "rows": 40
+    },
+    "tool": {
+     "share": 0.686,
+     "ci95": [
+      0.578,
+      0.778
+     ],
+     "states": 102,
+     "rows": 40
+    }
+   },
+   "vs_full_b": {
+    "text": {
+     "share": 0.265,
+     "ci95": [
+      0.179,
+      0.347
+     ],
+     "states": 102,
+     "rows": 40
+    },
+    "parsed": {
+     "share": 0.265,
+     "ci95": [
+      0.179,
+      0.347
+     ],
+     "states": 102,
+     "rows": 40
+    },
+    "tool": {
+     "share": 0.676,
+     "ci95": [
+      0.576,
+      0.767
+     ],
+     "states": 102,
+     "rows": 40
+    }
+   },
+   "vs_recorded": {
+    "parsed": {
+     "share": 0.239,
+     "ci95": [
+      0.144,
+      0.328
+     ],
+     "states": 109,
+     "rows": 40
+    },
+    "tool": {
+     "share": 0.606,
+     "ci95": [
+      0.514,
+      0.692
+     ],
+     "states": 109,
+     "rows": 40
+    }
+   }
+  }
+ },
+ "recorded": {
+  "states": 109,
+  "calls": 109,
+  "malformed": 0,
+  "share": 0.0,
+  "unparsed": 0,
+  "by_tool": {
+   "edit_file": {
+    "calls": 1,
+    "malformed": 0
+   },
+   "read_file": {
+    "calls": 68,
+    "malformed": 0
+   },
+   "run_command": {
+    "calls": 29,
+    "malformed": 0
+   },
+   "write_file": {
+    "calls": 11,
+    "malformed": 0
+   }
+  }
+ }
+}

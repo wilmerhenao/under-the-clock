@@ -1,0 +1,52 @@
+{
+ "base": {
+  "finished": 82,
+  "resolved": 23,
+  "timeouts": 36,
+  "task_s_mean_median": [
+   832,
+   967
+  ],
+  "tool_calls_mean": 16.2,
+  "other_errors": {}
+ },
+ "base2": {
+  "finished": 84,
+  "resolved": 26,
+  "timeouts": 32,
+  "task_s_mean_median": [
+   806,
+   932
+  ],
+  "tool_calls_mean": 16.5,
+  "other_errors": {
+   "Evaluation error: pytest missing in official-env task venv": 1
+  }
+ },
+ "paired": {
+  "tasks": 82,
+  "resolved_base": 23,
+  "resolved_base2": 25,
+  "base_only": 2,
+  "base2_only": 4,
+  "mcnemar_exact_p": 0.688,
+  "base_only_ids": [
+   "agentica_37",
+   "casbin_pycasbin_412"
+  ],
+  "base2_only_ids": [
+   "blackjax_1041",
+   "datacompy_526",
+   "flytekit_3349",
+   "justhtml_46"
+  ]
+ },
+ "crosscheck_base_vs_earlier_run": {
+  "tasks": 64,
+  "resolved_now": 17,
+  "resolved_earlier": 19,
+  "agree": 58,
+  "now_only": 2,
+  "earlier_only": 4
+ }
+}

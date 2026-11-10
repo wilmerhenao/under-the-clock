@@ -1,0 +1,93 @@
+{
+ "run": "serve-v1",
+ "cuts": [
+  {
+   "name": "c70",
+   "keep": 0.7,
+   "drop": 0,
+   "group": 1
+  },
+  {
+   "name": "b70",
+   "keep": 0.7,
+   "drop": 0,
+   "group": 32
+  },
+  {
+   "name": "c85",
+   "keep": 0.85,
+   "drop": 0,
+   "group": 1
+  },
+  {
+   "name": "b85",
+   "keep": 0.85,
+   "drop": 0,
+   "group": 32
+  },
+  {
+   "name": "c55",
+   "keep": 0.55,
+   "drop": 0,
+   "group": 1
+  },
+  {
+   "name": "d6",
+   "keep": 1.0,
+   "drop": 6,
+   "group": 32
+  }
+ ],
+ "score_key": "agent_ff",
+ "timings_min": {},
+ "models": {
+  "full": {
+   "model": "/kaggle/input/models/google/gemma-4/other/gemma-4-31b-it-qat-w4a16-ct/2",
+   "load_s": 299.4,
+   "speed": {
+    "p2k": {
+     "prompt_tokens": 2000,
+     "prefill_s": 1.268,
+     "prefill_tok_s": 1576.7,
+     "decode_tok_s": 38.32
+    },
+    "p16k": {
+     "prompt_tokens": 16000,
+     "prefill_s": 11.142,
+     "prefill_tok_s": 1436.0,
+     "decode_tok_s": 34.52
+    },
+    "streams8": {
+     "n": 8,
+     "prompt_tokens_each": 2000,
+     "decode_tok_s_total": 209.44
+    }
+   },
+   "quality": {
+    "agent_own_nats": 0.2624,
+    "agent_own_tokens": 25896,
+    "rows": 40,
+    "s": 257.4
+   },
+   "sanity": "```python\ndef is_prime(n):\n    \"\"\"\n    Checks if a given integer n is a prime number.\n    \n    Args:\n        n (int): The number to check.\n        \n    Returns:\n        bool: True if n is prime, False otherwise.\n    \"\"\"\n    if n <= 1:\n        return False\n    if n <= 3:\n        return True\n    if n % 2 == 0 or n % 3 == 0:\n        return False\n    \n    i = 5",
+   "rc": 0,
+   "wall_min": 10.9
+  }
+ },
+ "inputs": {
+  "model": "/kaggle/input/models/google/gemma-4/other/gemma-4-31b-it-qat-w4a16-ct/2",
+  "scores": "/kaggle/input/notebooks/verracodeguacas/g4dev-prune-score-gpu/prune/score-v1/scores.npz",
+  "agent_rows": "/kaggle/input/datasets/verracodeguacas/g4dev-g11-data/sft.jsonl",
+  "part1_run": "score-v1"
+ },
+ "disk_free_gb": {
+  "/tmp": 964.1,
+  "out": 19.5
+ },
+ "data": {
+  "heldout_rows": 40,
+  "heldout_own_tokens": 25896,
+  "max_tokens": 8192,
+  "streams": 8
+ }
+}

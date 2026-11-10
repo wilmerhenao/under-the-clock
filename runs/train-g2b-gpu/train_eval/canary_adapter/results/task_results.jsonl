@@ -1,0 +1,2 @@
+{"instance_id": "rich_2943", "repo": "Textualize/rich", "resolved": false, "agent_patch_size": 0, "test_exit_code": -1, "duration_seconds": 174.32, "error": "Agent exceeded tool call budget (28 calls)", "tool_calls": 28, "total_llm_calls": 30, "task_index": 1}
+{"instance_id": "rich_3043", "repo": "Textualize/rich", "resolved": true, "agent_patch_size": 449, "test_exit_code": 0, "duration_seconds": 275.0, "error": null, "tool_calls": 19, "total_llm_calls": 21, "task_index": 2}

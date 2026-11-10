@@ -1,0 +1,192 @@
+{
+  "machine": "gpu-4xL4",
+  "started": "2026-10-12 05:21:28",
+  "stages": [
+    {
+      "stage": "env",
+      "t": 0.1,
+      "python": "3.12.13",
+      "gpus": [
+        "NVIDIA L4, 23034 MiB",
+        "NVIDIA L4, 23034 MiB",
+        "NVIDIA L4, 23034 MiB",
+        "NVIDIA L4, 23034 MiB"
+      ],
+      "cpus": 48
+    },
+    {
+      "stage": "train_libs",
+      "t": 99.5,
+      "installed": {}
+    },
+    {
+      "stage": "libs",
+      "t": 109.4,
+      "versions": "2.10.0+cu128 5.13.1 0.19.1 0.46.1 1.13.0"
+    },
+    {
+      "stage": "vllm",
+      "t": 112.2,
+      "version": "0.19.1",
+      "chat_utils_mentions_reasoning_content": true,
+      "wheel_drops_past_thoughts": true,
+      "patched": false,
+      "reasoning_lines": [
+        "reasoning: str | None",
+        "\"\"\"The reasoning content for interleaved thinking.\"\"\"",
+        "reasoning: str | None",
+        "\"\"\"The reasoning content for interleaved thinking.\"\"\"",
+        "reasoning_content: str | None",
+        "\"\"\"Deprecated: The reasoning content for interleaved thinking.\"\"\"",
+        "reasoning = message.get(\"reasoning\")",
+        "# Include reasoning if present for interleaved thinking.",
+        "if reasoning is not None:",
+        "result_msg[\"reasoning\"] = cast(str, reasoning)",
+        "result_msg[\"reasoning_content\"] = cast(",
+        "str, reasoning"
+      ]
+    },
+    {
+      "stage": "inputs",
+      "t": 112.9,
+      "sft": "/kaggle/input/notebooks/verracodeguacas/g4dev-render-daily-cpu/render/sft.jsonl",
+      "qat_bf16": "/kaggle/input/models/google/gemma-4/transformers/gemma-4-31b-it-qat-q4_0-unquantized/2",
+      "serve": "/kaggle/input/models/google/gemma-4/other/gemma-4-31b-it-qat-w4a16-ct/2",
+      "env_args": []
+    },
+    {
+      "stage": "train_done",
+      "t": 10033.4,
+      "returncode": 0,
+      "minutes": 165.3,
+      "first": [
+        "{\"event\": \"kinds\", \"skipped\": 0, \"skip_kinds\": [], \"train_on\": \"all\", \"t_min\": 0.16}",
+        "{\"event\": \"mistakes\", \"calls\": 0, \"masked\": 0, \"mask_mistakes\": false, \"t_min\": 0.3}",
+        "{\"event\": \"data\", \"examples\": 362, \"tokens\": 3760163, \"trainable\": 837149, \"skipped_no_trainable\": 0, \"t_min\": 0.3}"
+      ],
+      "last": [
+        "{\"event\": \"example\", \"epoch\": 0, \"instance_id\": \"developmentseed__titiler-937\", \"source\": \"gemma-onpolicy/fresh\", \"tokens\": 10103, \"trainable\": 1762, \"loss\": 0.1759, \"tok_per_s\": 92.1, \"t_min\": 163.27}",
+        "{\"event\": \"step\", \"step\": 20, \"lr\": 2.972802937206698e-10, \"t_min\": 163.27}",
+        "{\"event\": \"example\", \"epoch\": 0, \"instance_id\": \"tenable__pyTenable-664\", \"source\": \"gemma-onpolicy/fresh\", \"tokens\": 8504, \"trainable\": 1803, \"loss\": 0.1271, \"tok_per_s\": 92.1, \"t_min\": 164.72}",
+        "{\"event\": \"saved\", \"dir\": \"/kaggle/working/train_eval/train/adapter\", \"files\": {\"adapter_model.safetensors\": 489840816, \"adapter_config.json\": 1113, \"README.md\": 5326}, \"steps\": 21, \"examples_seen\": 81, \"stopped_by_time\": true, \"t_min\": 165.27}"
+      ],
+      "examples": 81,
+      "tok_per_s": 92.1,
+      "loss_first": [
+        0.2204,
+        0.1862,
+        0.1695
+      ],
+      "loss_last": [
+        0.1074,
+        0.1759,
+        0.1271
+      ],
+      "oom_skips": 0,
+      "probe": [
+        {
+          "event": "sdpa_backends",
+          "flash_d256": "ok",
+          "efficient_d256": "ok",
+          "math_d256": "ok",
+          "flash_d512": "RuntimeError: No available kernel. Aborting execution.",
+          "efficient_d512": "ok",
+          "math_d512": "ok",
+          "t_min": 9.02
+        },
+        {
+          "event": "probe",
+          "tokens": 12288,
+          "trainable": 3072,
+          "attn": "chunked",
+          "training": true,
+          "peak_gb": [
+            13.3,
+            16.5,
+            16.4,
+            18.6
+          ],
+          "fwd_peak_gb": [
+            7.5,
+            10.3,
+            10.3,
+            10.6
+          ],
+          "after_gb": [
+            3.7,
+            4.6,
+            4.6,
+            4.6
+          ],
+          "kind": "synthetic",
+          "trained_fraction": 0.25,
+          "ok": true,
+          "loss": 0.6312,
+          "seconds": 130.6,
+          "t_min": 11.23
+        },
+        {
+          "event": "probe",
+          "tokens": 12284,
+          "trainable": 2867,
+          "attn": "chunked",
+          "training": true,
+          "peak_gb": [
+            13.3,
+            16.5,
+            16.4,
+            18.6
+          ],
+          "fwd_peak_gb": [
+            7.5,
+            10.3,
+            10.3,
+            10.6
+          ],
+          "after_gb": [
+            3.7,
+            4.6,
+            4.6,
+            4.6
+          ],
+          "kind": "real",
+          "limit": 12288,
+          "instance_id": "proxmoxer__proxmoxer-189",
+          "source": "gemma-onpolicy/fresh",
+          "ok": true,
+          "loss": 0.2968,
+          "seconds": 130.8,
+          "t_min": 13.43
+        },
+        {
+          "event": "probe_gate",
+          "verdict": "training only up to 12288 tokens",
+          "all_fit": true,
+          "dropped": 0,
+          "val_dropped": 0,
+          "t_min": 13.43
+        }
+      ],
+      "nan_or_abort": [],
+      "steps": 21,
+      "checkpoints": 7,
+      "val": []
+    },
+    {
+      "stage": "adapter_saved",
+      "t": 10033.5,
+      "files": [
+        "README.md",
+        "adapter_config.json",
+        "adapter_model.safetensors"
+      ],
+      "mb": 489.8
+    },
+    {
+      "stage": "stopped",
+      "t": 10033.5,
+      "reason": "train only: done"
+    }
+  ],
+  "total_min": 167.2
+}

@@ -1,0 +1,107 @@
+{
+ "base": {
+  "sessions": 82,
+  "tool_calls_mean_max": [
+   17.3,
+   27
+  ],
+  "session_ends": {
+   "resolved": 23,
+   "ended_unresolved": 23,
+   "timeout": 36
+  },
+  "loop_sessions": 3,
+  "real_loop_sessions": 3,
+  "loop_sessions_by_tool": {
+   "write_file": 2,
+   "edit_file": 1
+  },
+  "loop_sessions_by_end": {
+   "real:ended_unresolved": 1,
+   "real:resolved": 1,
+   "real:timeout": 1
+  },
+  "repeated_calls_by_tool": {
+   "run_command": 41,
+   "read_file": 31,
+   "submit_patch": 15,
+   "write_file": 9,
+   "edit_file": 7,
+   "get_status": 0
+  },
+  "longest_runs": [
+   [
+    8,
+    "resolved",
+    "write_file{\"content\": \"\\nimport fakesnow\\nimport snowflake.connector\\nfrom sqlglot import exp\\n\\nTYP"
+   ],
+   [
+    5,
+    "ended_unresolved",
+    "edit_file{\"allow_multiple\": true, \"filepath\": \"src/clawrium/platform/registry/zeroclaw/templates/zer"
+   ],
+   [
+    3,
+    "timeout",
+    "write_file{\"content\": \"\\nfrom flytekit.exceptions.base import FlyteException\\nfrom flytekit.exceptio"
+   ]
+  ]
+ },
+ "base2": {
+  "sessions": 83,
+  "tool_calls_mean_max": [
+   18.0,
+   28
+  ],
+  "session_ends": {
+   "timeout": 32,
+   "resolved": 26,
+   "ended_unresolved": 25
+  },
+  "loop_sessions": 5,
+  "real_loop_sessions": 5,
+  "loop_sessions_by_tool": {
+   "edit_file": 3,
+   "write_file": 2
+  },
+  "loop_sessions_by_end": {
+   "real:timeout": 4,
+   "real:ended_unresolved": 1
+  },
+  "repeated_calls_by_tool": {
+   "run_command": 61,
+   "read_file": 51,
+   "edit_file": 22,
+   "submit_patch": 22,
+   "write_file": 10,
+   "get_status": 0
+  },
+  "longest_runs": [
+   [
+    10,
+    "timeout",
+    "edit_file{\"filepath\": \"opennem/queries/capacity_history.py\", \"new_string\": \"            AND u.fuelte"
+   ],
+   [
+    6,
+    "timeout",
+    "write_file{\"content\": \"\\nimport os\\nimport shutil\\nfrom pathlib import Path\\nfrom typer.testing impo"
+   ],
+   [
+    6,
+    "timeout",
+    "write_file{\"content\": \"\\nfrom agentica.cost_tracker import CostTracker, get_model_context_window\\n\\n"
+   ],
+   [
+    6,
+    "timeout",
+    "edit_file{\"class TestFormatting(TestCase)\": \"\\\\n    @staticmethod\\\\n    def make_random_int() -> int"
+   ],
+   [
+    6,
+    "ended_unresolved",
+    "edit_file{\"\\\\\\\"bech32.decode\\\\\\\"\": \"bech32.decode\", \"filepath\": \"tests/fuzz_test.py\", \"new_string\": "
+   ]
+  ]
+ }
+}

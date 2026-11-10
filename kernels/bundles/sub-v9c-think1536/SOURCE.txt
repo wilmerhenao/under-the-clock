@@ -1,0 +1,4 @@
+sub-v9c-think1536 (2026-10-31, B160): sub-v9c with thinking_config.thinking_budget 4096 -> 1536, nothing else.
+Evidence (B160, GPU eval traces of B159): G11a sessions containing a thought over ~1,540 tokens solved 1 of 17 (12
+timed out) vs 19 of 50 without; a 2,000-token step costs ~5 minutes of the 8. Thoughts that hit the 4,096 budget in
+those traces (4 of 4) still ended in a tool call, so a cut thought does not end the session.

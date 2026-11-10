@@ -1,0 +1,648 @@
+{
+ "inputs": {
+  "swesmith-tool": {
+   "path": "/kaggle/input/datasets/verracodeguacas/swe-smith-trajectories-transformed/sft_v1.jsonl",
+   "bytes": 66737523,
+   "rows": 670,
+   "kept": 0
+  },
+  "swesmith-xml": {
+   "path": "/kaggle/input/datasets/verracodeguacas/swe-smith-trajectories-transformed/xml_sft_v1.jsonl",
+   "bytes": 194127341,
+   "rows": 1937,
+   "kept": 0
+  },
+  "swegym": {
+   "path": "/kaggle/input/datasets/verracodeguacas/swe-gym-trajectories-transformed/sft_v1.jsonl",
+   "bytes": 16847806,
+   "rows": 224,
+   "kept": 0
+  },
+  "r2egym": {
+   "path": "/kaggle/input/datasets/verracodeguacas/r2egym-trajectories-transformed/sft_v1.jsonl",
+   "bytes": 169961338,
+   "rows": 2271,
+   "kept": 0
+  },
+  "swezero": {
+   "path": "/kaggle/input/datasets/verracodeguacas/swe-zero-harness-replays/sft_zero_v1.jsonl",
+   "bytes": 63060993,
+   "rows": 547,
+   "kept": 0
+  },
+  "swezero-r2": {
+   "path": "/kaggle/input/datasets/verracodeguacas/swe-zero-harness-replays/sft_zero_r2.jsonl",
+   "bytes": 58364013,
+   "rows": 500,
+   "kept": 0
+  },
+  "swezero-r3": {
+   "path": "/kaggle/input/datasets/verracodeguacas/swe-zero-harness-replays/sft_zero_r3.jsonl",
+   "bytes": 24642357,
+   "rows": 225,
+   "kept": 0
+  },
+  "qwen-rb2": {
+   "path": "/kaggle/input/notebooks/verracodeguacas/g4dev-render-rb2b-cpu/render/sft.jsonl",
+   "bytes": 14660783,
+   "rows": 155,
+   "kept": 0
+  }
+ },
+ "render_check": {
+  "swesmith-tool": {
+   "checked": 40,
+   "mismatched": 0,
+   "to_fix": 418
+  },
+  "swesmith-xml": {
+   "checked": 40,
+   "mismatched": 0,
+   "to_fix": 999
+  },
+  "swegym": {
+   "checked": 40,
+   "mismatched": 0,
+   "to_fix": 58
+  },
+  "r2egym": {
+   "checked": 40,
+   "mismatched": 0,
+   "to_fix": 167
+  },
+  "swezero": {
+   "checked": 40,
+   "mismatched": 0,
+   "to_fix": 0
+  },
+  "swezero-r2": {
+   "checked": 40,
+   "mismatched": 0,
+   "to_fix": 0
+  },
+  "swezero-r3": {
+   "checked": 40,
+   "mismatched": 0,
+   "to_fix": 0
+  },
+  "qwen-rb2": {
+   "checked": 24,
+   "mismatched": 0,
+   "to_fix": 0
+  }
+ },
+ "compaction": {
+  "parity": {
+   "tasks": 6,
+   "requests": 82,
+   "count_exact": 82,
+   "offset_diff": {
+    "0": 88
+   },
+   "trigger_ok": 6,
+   "prompt_ok": 6,
+   "post_msgs_ok": 6,
+   "post_render_ok": 6,
+   "post_count_ok": 6,
+   "failures": [],
+   "content_format": "openai",
+   "passed": true
+  },
+  "by_source": {
+   "swesmith-tool": {
+    "system_changed": 0,
+    "kept": 645,
+    "compacted": 273,
+    "compactions": 275
+   },
+   "swesmith-xml": {
+    "system_changed": 0,
+    "kept": 1492,
+    "compacted": 639,
+    "compactions": 643
+   },
+   "swegym": {
+    "system_changed": 0,
+    "kept": 224,
+    "compacted": 36,
+    "compactions": 36
+   },
+   "r2egym": {
+    "system_changed": 0,
+    "kept": 2255,
+    "compacted": 187,
+    "compactions": 187
+   },
+   "swezero": {
+    "system_changed": 535,
+    "kept": 531,
+    "compacted": 315,
+    "compactions": 332
+   },
+   "swezero-r2": {
+    "system_changed": 491,
+    "kept": 489,
+    "compacted": 310,
+    "compactions": 333
+   },
+   "swezero-r3": {
+    "system_changed": 217,
+    "kept": 217,
+    "compacted": 109,
+    "compactions": 115
+   },
+   "qwen-rb2": {
+    "system_changed": 0,
+    "kept": 106,
+    "compacted": 34,
+    "compactions": 35
+   }
+  },
+  "summaries": {
+   "n": 1956,
+   "chars": {
+    "p10": 1223,
+    "p50": 1780,
+    "p90": 2018
+   }
+  },
+  "refine": {
+   "refined": 563,
+   "diff": {
+    "0": 563
+   }
+  }
+ },
+ "rejects": {
+  "qwen-rb2": {
+   "excluded_repo": 1,
+   "no_final_submit": 46,
+   "over_budget": 2,
+   "per_instance_cap": 7
+  },
+  "r2egym": {
+   "duplicate": 7,
+   "over_budget": 5,
+   "per_instance_cap": 109,
+   "repo_cap": 658,
+   "teacher_markup": 4
+  },
+  "swegym": {
+   "per_instance_cap": 27,
+   "repo_cap": 13
+  },
+  "swesmith-tool": {
+   "edits_test_files": 2,
+   "excluded_repo": 17,
+   "over_budget": 6,
+   "per_instance_cap": 108,
+   "repo_cap": 18
+  },
+  "swesmith-xml": {
+   "duplicate": 369,
+   "edits_test_files": 2,
+   "excluded_repo": 46,
+   "over_budget": 24,
+   "per_instance_cap": 147,
+   "repo_cap": 93,
+   "teacher_markup": 3,
+   "too_many_tokens": 1
+  },
+  "swezero": {
+   "excluded_repo": 6,
+   "over_budget": 6,
+   "per_instance_cap": 106,
+   "too_many_tokens": 4
+  },
+  "swezero-r2": {
+   "excluded_repo": 5,
+   "over_budget": 4,
+   "per_instance_cap": 174,
+   "too_many_tokens": 2
+  },
+  "swezero-r3": {
+   "excluded_repo": 5,
+   "over_budget": 3,
+   "per_instance_cap": 48
+  }
+ },
+ "train": {
+  "rows": 4180,
+  "lines": 7012,
+  "lines_by_kind": {
+   "segment": 5596,
+   "summary": 1416
+  },
+  "line_tokens": {
+   "p10": 3149,
+   "p50": 9958,
+   "p90": 15160
+  },
+  "line_tokens_max": 19766,
+  "trainable_by_kind": {
+   "segment": 11448579,
+   "summary": 671775
+  },
+  "compactions": {
+   "0": 2799,
+   "1": 1347,
+   "2": 33,
+   "3": 1
+  },
+  "tokens": 66963212,
+  "trainable": 12120354,
+  "by_source": {
+   "swezero-r2": 297,
+   "r2egym": 1375,
+   "swezero": 408,
+   "swesmith-xml": 1186,
+   "swesmith-tool": 499,
+   "swegym": 154,
+   "qwen-rb2": 94,
+   "swezero-r3": 167
+  },
+  "repos": 470,
+  "n_tokens": {
+   "p10": 8512,
+   "p50": 12605,
+   "p90": 27751
+  },
+  "n_trainable": {
+   "p10": 1403,
+   "p50": 2601,
+   "p90": 4733
+  },
+  "calls": {
+   "p10": 9,
+   "p50": 15,
+   "p90": 23
+  },
+  "fixed": {
+   "scratch_renamed": 1324,
+   "issue_markers": 5
+  }
+ },
+ "val": {
+  "rows": 271,
+  "lines": 421,
+  "lines_by_kind": {
+   "segment": 346,
+   "summary": 75
+  },
+  "line_tokens": {
+   "p10": 3559,
+   "p50": 9161,
+   "p90": 15057
+  },
+  "line_tokens_max": 17427,
+  "trainable_by_kind": {
+   "segment": 577139,
+   "summary": 38317
+  },
+  "compactions": {
+   "1": 69,
+   "0": 199,
+   "2": 3
+  },
+  "tokens": 3917344,
+  "trainable": 615456,
+  "by_source": {
+   "swezero": 17,
+   "swegym": 30,
+   "swesmith-xml": 66,
+   "swesmith-tool": 20,
+   "swezero-r2": 18,
+   "qwen-rb2": 5,
+   "swezero-r3": 2,
+   "r2egym": 113
+  },
+  "repos": 13,
+  "n_tokens": {
+   "p10": 7649,
+   "p50": 10699,
+   "p90": 27495
+  },
+  "n_trainable": {
+   "p10": 1019,
+   "p50": 1748,
+   "p90": 4104
+  },
+  "calls": {
+   "p10": 8,
+   "p50": 11,
+   "p90": 22
+  },
+  "fixed": {
+   "scratch_renamed": 59
+  }
+ },
+ "val_repos": [
+  "mozman/steputils",
+  "planetlabs/planet-client-python",
+  "konradhalas/dacite",
+  "python-wheel-build/fromager",
+  "pydantic/pydantic",
+  "dask/dask",
+  "openshift/openshift-client-python",
+  "mozman/svgwrite",
+  "hhursev/recipe-scrapers",
+  "networkx/networkx",
+  "rfverbruggen/rachiopy",
+  "bluebrain/neurom",
+  "pylons/pyramid"
+ ],
+ "top_repos": [
+  [
+   "numpy/numpy",
+   250
+  ],
+  [
+   "pandas-dev/pandas",
+   250
+  ],
+  [
+   "python-pillow/pillow",
+   250
+  ],
+  [
+   "aio-libs/aiohttp",
+   168
+  ],
+  [
+   "biolab/orange3",
+   156
+  ],
+  [
+   "tornadoweb/tornado",
+   147
+  ],
+  [
+   "scrapy/scrapy",
+   124
+  ],
+  [
+   "getmoto/moto",
+   117
+  ],
+  [
+   "pylons/pyramid",
+   113
+  ],
+  [
+   "dask/dask",
+   86
+  ],
+  [
+   "conan-io/conan",
+   72
+  ],
+  [
+   "joke2k/faker",
+   67
+  ],
+  [
+   "pydicom/pydicom",
+   65
+  ],
+  [
+   "datalad/datalad",
+   64
+  ],
+  [
+   "iterative/dvc",
+   64
+  ]
+ ],
+ "prefixes": {
+  "250": {
+   "tokens": 2397423,
+   "trainable": 447450,
+   "by_family": {
+    "swezero": 89,
+    "r2egym": 42,
+    "swesmith": 90,
+    "swegym": 11,
+    "qwen": 18
+   },
+   "top_repos": [
+    [
+     "biolab/orange3",
+     9
+    ],
+    [
+     "pydicom/pydicom",
+     9
+    ],
+    [
+     "conan-io/conan",
+     8
+    ],
+    [
+     "numpy/numpy",
+     8
+    ],
+    [
+     "pandas-dev/pandas",
+     8
+    ]
+   ]
+  },
+  "500": {
+   "tokens": 4768220,
+   "trainable": 869017,
+   "by_family": {
+    "swezero": 166,
+    "r2egym": 72,
+    "swesmith": 200,
+    "swegym": 28,
+    "qwen": 34
+   },
+   "top_repos": [
+    [
+     "pydicom/pydicom",
+     19
+    ],
+    [
+     "pandas-dev/pandas",
+     16
+    ],
+    [
+     "conan-io/conan",
+     12
+    ],
+    [
+     "getmoto/moto",
+     12
+    ],
+    [
+     "joke2k/faker",
+     12
+    ]
+   ]
+  },
+  "1000": {
+   "tokens": 9477762,
+   "trainable": 1702876,
+   "by_family": {
+    "swezero": 337,
+    "r2egym": 151,
+    "swesmith": 412,
+    "swegym": 47,
+    "qwen": 53
+   },
+   "top_repos": [
+    [
+     "getmoto/moto",
+     37
+    ],
+    [
+     "pandas-dev/pandas",
+     37
+    ],
+    [
+     "numpy/numpy",
+     28
+    ],
+    [
+     "python-pillow/pillow",
+     27
+    ],
+    [
+     "pydicom/pydicom",
+     27
+    ]
+   ]
+  },
+  "2000": {
+   "tokens": 19003778,
+   "trainable": 3391229,
+   "by_family": {
+    "swezero": 691,
+    "r2egym": 303,
+    "swesmith": 826,
+    "swegym": 77,
+    "qwen": 103
+   },
+   "top_repos": [
+    [
+     "getmoto/moto",
+     73
+    ],
+    [
+     "pandas-dev/pandas",
+     72
+    ],
+    [
+     "numpy/numpy",
+     63
+    ],
+    [
+     "python-pillow/pillow",
+     59
+    ],
+    [
+     "conan-io/conan",
+     50
+    ]
+   ]
+  },
+  "4000": {
+   "tokens": 38185958,
+   "trainable": 6837058,
+   "by_family": {
+    "swezero": 1255,
+    "r2egym": 687,
+    "swesmith": 1735,
+    "swegym": 174,
+    "qwen": 149
+   },
+   "top_repos": [
+    [
+     "pandas-dev/pandas",
+     178
+    ],
+    [
+     "getmoto/moto",
+     141
+    ],
+    [
+     "numpy/numpy",
+     128
+    ],
+    [
+     "python-pillow/pillow",
+     114
+    ],
+    [
+     "conan-io/conan",
+     98
+    ]
+   ]
+  },
+  "6000": {
+   "tokens": 57291146,
+   "trainable": 10334696,
+   "by_family": {
+    "swezero": 1772,
+    "r2egym": 1189,
+    "swesmith": 2690,
+    "swegym": 197,
+    "qwen": 152
+   },
+   "top_repos": [
+    [
+     "pandas-dev/pandas",
+     317
+    ],
+    [
+     "python-pillow/pillow",
+     230
+    ],
+    [
+     "numpy/numpy",
+     213
+    ],
+    [
+     "getmoto/moto",
+     179
+    ],
+    [
+     "aio-libs/aiohttp",
+     151
+    ]
+   ]
+  }
+ },
+ "settings": {
+  "SHARES": {
+   "swezero": 0.25,
+   "swesmith": 0.35,
+   "r2egym": 0.22,
+   "swegym": 0.08,
+   "qwen": 0.1
+  },
+  "EXCLUDE_REPOS": [
+   "fastapi/fastapi",
+   "textualize/rich",
+   "encode/httpx",
+   "psf/requests",
+   "encode/starlette"
+  ],
+  "EXCLUDE_SUBSTR": [
+   "fastapi",
+   "starlette",
+   "httpx"
+  ],
+  "MAX_CALLS": 28,
+  "MAX_TOKENS": 20000,
+  "PER_INSTANCE": 2,
+  "REPO_CAP": 250,
+  "VAL_SHARE": 0.04,
+  "COMPACT": true,
+  "NORMALIZE_SYSTEM": true,
+  "PARITY_GLOB": "/kaggle/input/**/zero_replay/captured/*.json",
+  "SEED": 20261006,
+  "tokenizer": "/kaggle/input/models/google/gemma-4/other/gemma-4-31b-it-qat-w4a16-ct/2"
+ },
+ "minutes": 12.0
+}

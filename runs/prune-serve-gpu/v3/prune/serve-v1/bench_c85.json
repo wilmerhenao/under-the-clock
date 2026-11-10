@@ -1,0 +1,30 @@
+{
+ "model": "/tmp/cut_c85",
+ "load_s": 166.1,
+ "speed": {
+  "p2k": {
+   "prompt_tokens": 2000,
+   "prefill_s": 1.24,
+   "prefill_tok_s": 1612.8,
+   "decode_tok_s": 40.89
+  },
+  "p16k": {
+   "prompt_tokens": 16000,
+   "prefill_s": 10.836,
+   "prefill_tok_s": 1476.5,
+   "decode_tok_s": 36.13
+  },
+  "streams8": {
+   "n": 8,
+   "prompt_tokens_each": 2000,
+   "decode_tok_s_total": 216.84
+  }
+ },
+ "quality": {
+  "agent_own_nats": 0.2868,
+  "agent_own_tokens": 25896,
+  "rows": 40,
+  "s": 251.9
+ },
+ "sanity": "```python\ndef is_prime(n):\n    \"\"\"\n    Returns True if n is a prime number, otherwise False.\n    \"\"\"\n    if n <= 1:\n        return False\n    if n <= 3:\n        return True\n    if n % 2 == 0 or n % 3 == 0:\n        return False\n    i = 5\n    while i * i <= n:\n        if n % i == 0 or n % (i + 2) == 0:\n            return False\n        "
+}

@@ -1,0 +1,3 @@
+sub-v9g (2026-10-25, B125): sub-v9c with the graph-tool ban replaced by one narrow use: after locating the
+function to change, one get_code_neighbors call on its dotted name to list callers/callees (twin edits).
+Evidence: async defs are absent from the official graph; BM25 beats the graph for search (B124).

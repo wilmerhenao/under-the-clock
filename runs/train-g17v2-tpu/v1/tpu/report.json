@@ -1,0 +1,236 @@
+{
+ "mode": "train",
+ "rc": 0,
+ "total_min": 228.0,
+ "steps": 1792,
+ "steps_applied": 1792,
+ "first_loss": 4.9851,
+ "last_loss": 0.9402,
+ "loss_by_epoch": {
+  "a:ep0": 0.5891,
+  "a:ep1": 0.3275,
+  "b:ep0": 1.2495,
+  "b:ep1": 1.0047
+ },
+ "step_s_median_by_len": {
+  "8192": 4.77,
+  "12288": 6.9
+ },
+ "tok_s_median": 2719.6,
+ "compile_s": [
+  [
+   8192,
+   "flash512",
+   262.25
+  ],
+  [
+   12288,
+   "flash512",
+   224.58
+  ]
+ ],
+ "peak_hbm_gb": 9.85,
+ "exports": [
+  {
+   "tag": "a:step111",
+   "dir": "/kaggle/working/adapter_out",
+   "match": true,
+   "bytes": 489840784,
+   "b_absmax": 0.0053266314789652824,
+   "t_min": 52.4
+  },
+  {
+   "tag": "a:step321",
+   "dir": "/kaggle/working/adapter_out",
+   "match": true,
+   "bytes": 489840784,
+   "b_absmax": 0.006654071155935526,
+   "t_min": 72.53
+  },
+  {
+   "tag": "a:step589",
+   "dir": "/kaggle/working/adapter_out",
+   "match": true,
+   "bytes": 489840784,
+   "b_absmax": 0.007211877033114433,
+   "t_min": 92.6
+  },
+  {
+   "tag": "a:ep0",
+   "dir": "/kaggle/working/adapters/ep0",
+   "match": true,
+   "bytes": 489840784,
+   "b_absmax": 0.007211877033114433,
+   "t_min": 92.61
+  },
+  {
+   "tag": "a:step862",
+   "dir": "/kaggle/working/adapter_out",
+   "match": true,
+   "bytes": 489840784,
+   "b_absmax": 0.0077275983057916164,
+   "t_min": 112.69
+  },
+  {
+   "tag": "a:step1114",
+   "dir": "/kaggle/working/adapter_out",
+   "match": true,
+   "bytes": 489840784,
+   "b_absmax": 0.008103265427052975,
+   "t_min": 132.75
+  },
+  {
+   "tag": "a:final",
+   "dir": "/kaggle/working/adapter_out",
+   "match": true,
+   "bytes": 489840784,
+   "b_absmax": 0.008131887763738632,
+   "t_min": 137.62
+  },
+  {
+   "tag": "b:step259",
+   "dir": "/kaggle/working/adapter_out_b",
+   "match": true,
+   "bytes": 489840784,
+   "b_absmax": 0.0062514664605259895,
+   "t_min": 157.78
+  },
+  {
+   "tag": "b:step522",
+   "dir": "/kaggle/working/adapter_out_b",
+   "match": true,
+   "bytes": 489840784,
+   "b_absmax": 0.007971751503646374,
+   "t_min": 177.9
+  },
+  {
+   "tag": "b:ep0",
+   "dir": "/kaggle/working/adapters_b/ep0",
+   "match": true,
+   "bytes": 489840784,
+   "b_absmax": 0.008223410695791245,
+   "t_min": 182.65
+  },
+  {
+   "tag": "b:step861",
+   "dir": "/kaggle/working/adapter_out_b",
+   "match": true,
+   "bytes": 489840784,
+   "b_absmax": 0.008129117079079151,
+   "t_min": 202.74
+  },
+  {
+   "tag": "b:step1113",
+   "dir": "/kaggle/working/adapter_out_b",
+   "match": true,
+   "bytes": 489840784,
+   "b_absmax": 0.008182954043149948,
+   "t_min": 222.76
+  },
+  {
+   "tag": "b:final",
+   "dir": "/kaggle/working/adapter_out_b",
+   "match": true,
+   "bytes": 489840784,
+   "b_absmax": 0.00824341457337141,
+   "t_min": 227.76
+  }
+ ],
+ "events": [
+  {
+   "stage": "step_error",
+   "t_min": 44.07,
+   "phase": "a",
+   "k": 2,
+   "bucket": 16384,
+   "as_len": 16384,
+   "rung": "flash512",
+   "kind": "memory",
+   "error": "JaxRuntimeError: RESOURCE_EXHAUSTED: E1000: CompileTimeHbmOom: XLA:TPU compile permanent error. Ran out of memory in memory space hbm. Used 15.80G of 15.75G hbm. Exceeded hbm capacity by 58.98M.\n\nTotal hbm usage >= 16.06G:\n    reserved        258.00M \n    program           8.24G \n    arguments         7.56G \n\nOutput size 7.56G; shares 7.56G with arguments.\n\nProgram hbm requirement 8.24G:\n    global           39.83M\n    scoped            3.14M\n    HLO temp          8.01G (100.0% utilization: Unpadded (6.37G) Padded (6.37G), 20.4% fragmentation (1.64G))\n    overlays        192.50M\n\n  Largest program allocations in hbm:\n\n  1. Size: 256.00M\n     Operator: op_name=\"jit(step)/transpose(jvp(jvp()))/checkpoint/convert_element_type\"\n     Shape: f32[1,16384,8,512]{3,1,2,0:T(8,128)}\n     Unpadded size: 256.00M\n     XLA label: convert_bitcast_fusion.1 = fusion(get-tuple-element.13688), kind=kLoop, calls=fused_computation.215\n     Allocation type: HLO temp\n     ==========================\n\n  2. Size: 192.50M\n     XLA label: overlays\n     Allocation type: overlays\n     ==========================\n\n  3. Size: 168.00M\n     Operator: op_name=\"jit(step)/transpose(jvp(jvp()))/checkpoint/rematted_computation/dot_general\"\n     Shape: bf16[1,16384,5376]{2,1,0:T(8,128)(2,1)}\n     Unpadded size: 168.00M\n     XLA label: bitcast_multiply_fusion.128 = fusion(fusion.1956, convolution_multiply_fusion.26, all-gather.15161, async-collective-done.562), kind=kOutput, calls=fused_computation.2579\n     Allocation type: HLO temp\n",
+   "peak_gb": 9.85,
+   "limit_gb": 15.75
+  },
+  {
+   "stage": "demote",
+   "t_min": 44.07,
+   "length": 16384,
+   "to": 12288
+  },
+  {
+   "stage": "step_error",
+   "t_min": 63.78,
+   "phase": "a",
+   "k": 205,
+   "bucket": 20480,
+   "as_len": 20480,
+   "rung": "flash512",
+   "kind": "memory",
+   "error": "JaxRuntimeError: RESOURCE_EXHAUSTED: E1000: CompileTimeHbmOom: XLA:TPU compile permanent error. Ran out of memory in memory space hbm. Used 15.88G of 15.75G hbm. Exceeded hbm capacity by 135.08M.\n\nTotal hbm usage >= 16.13G:\n    reserved        258.00M \n    program           8.31G \n    arguments         7.56G \n\nOutput size 7.56G; shares 7.56G with arguments.\n\nProgram hbm requirement 8.31G:\n    global           40.30M\n    scoped            3.14M\n    HLO temp          8.09G (100.0% utilization: Unpadded (6.53G) Padded (6.53G), 19.2% fragmentation (1.55G))\n    overlays        189.67M\n\n  Largest program allocations in hbm:\n\n  1. Size: 320.00M\n     Operator: op_name=\"jit(step)/transpose(jvp(jvp()))/checkpoint/convert_element_type\"\n     Shape: f32[1,20480,8,512]{3,1,2,0:T(8,128)}\n     Unpadded size: 320.00M\n     XLA label: convert_bitcast_fusion.6.remat2 = fusion(get-tuple-element.13598), kind=kLoop, calls=fused_computation.54283\n     Allocation type: HLO temp\n     ==========================\n\n  2. Size: 210.00M\n     Operator: op_name=\"jit(step)/transpose(jvp(jvp()))/checkpoint/dot_general\"\n     Shape: bf16[1,20480,5376]{2,1,0:T(8,128)(2,1)}\n     Unpadded size: 210.00M\n     XLA label: bitcast_multiply_fusion.267 = fusion(fusion.2992, get-tuple-element.40805, fusion.29204.remat2, bitcast.87, ...(+5)), kind=kOutput, calls=fused_computation.3420\n     Allocation type: HLO temp\n     ==========================\n\n  3. Size: 210.00M\n     Operator: op_name=\"jit(step)/transpose(jvp(jvp()))/checkpoint/dot_genera",
+   "peak_gb": 9.85,
+   "limit_gb": 15.75
+  },
+  {
+   "stage": "demote",
+   "t_min": 63.78,
+   "length": 20480,
+   "to": 16384
+  },
+  {
+   "stage": "phase2_start",
+   "t_min": 137.71,
+   "lr": 5e-05,
+   "epochs": 2,
+   "source_contains": "",
+   "rows": 1178,
+   "left_min": 264.8,
+   "b_absmax_after_reset": 0.004631015472114086,
+   "opt_absmax_after_reset": 0.0
+  }
+ ],
+ "done": [
+  {
+   "stage": "done",
+   "t_min": 137.62,
+   "phase": "a",
+   "stop": "plan_done",
+   "steps_ok": 896,
+   "planned": 1178,
+   "tokens": 14434268,
+   "step_errors": 2,
+   "rung": "flash512",
+   "demoted": [
+    16384,
+    20480
+   ],
+   "truncated_label_frac_kept": null,
+   "min": 135.1,
+   "adapter_matches_ref": true
+  },
+  {
+   "stage": "done",
+   "t_min": 227.77,
+   "phase": "b",
+   "stop": "plan_done",
+   "steps_ok": 896,
+   "planned": 1178,
+   "tokens": 14434268,
+   "step_errors": 2,
+   "rung": "flash512",
+   "demoted": [
+    16384,
+    20480
+   ],
+   "truncated_label_frac_kept": null,
+   "min": 225.3,
+   "adapter_matches_ref": true
+  }
+ ],
+ "adapters": {
+  "adapter_out": 489840784,
+  "adapter_out_b": 489840784,
+  "adapters_b/ep1": 489840784,
+  "adapters_b/ep0": 489840784,
+  "adapters/ep1": 489840784,
+  "adapters/ep0": 489840784
+ }
+}

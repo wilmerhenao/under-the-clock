@@ -1,0 +1,65 @@
+{
+ "source": "runs/train-g2b-gpu/train_eval/dev_p1_{base,adapter}/results/traces (local only) and canaries; computed 2026-10-07 13:00 UTC",
+ "thought_chars_p50_p90": {
+  "base": {
+   "first_5_steps": [
+    285,
+    1088
+   ],
+   "before_compaction": [
+    188,
+    1763
+   ],
+   "after_compaction": [
+    120,
+    1678
+   ]
+  },
+  "adapter": {
+   "first_5_steps": [
+    203,
+    772
+   ],
+   "before_compaction": [
+    133,
+    448
+   ],
+   "after_compaction": [
+    113,
+    356
+   ]
+  }
+ },
+ "steps_without_any_thought": {
+  "base": 0.0,
+  "adapter": 0.002
+ },
+ "runs_reaching_compaction_threshold_14336": {
+  "base": "41/53",
+  "adapter": "36/70"
+ },
+ "adapter_runs_with_stale_chain_ge5": 29,
+ "loop_onset": {
+  "before_compaction": 27,
+  "after_compaction": 2,
+  "within_first_10_steps": 27
+ },
+ "looped_calls_by_kind": {
+  "read_file ok, content truncated": 20,
+  "run_command ok": 18,
+  "run_command error": 6,
+  "read_file error": 1
+ },
+ "example": {
+  "task": "fastapi_11355",
+  "call": "read_file fastapi/_compat/v1.py (no line range)",
+  "times": 12,
+  "thought": "Let's read fastapi/_compat/v1.py.",
+  "note": "continued past the 28-call budget with BudgetExceeded errors"
+ },
+ "template_render": {
+  "no_thought_step": "<|turn>model\\n<|tool_call>...",
+  "summary_row": "<|turn>model\\nSUMMARY<turn|>",
+  "trainable_span": "everything in the model turn except tool-response bodies, so the first token of each step is trained"
+ }
+}

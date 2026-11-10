@@ -1,0 +1,31 @@
+{
+ "max_thought": 1500,
+ "fast_calls": 14,
+ "counts": {
+  "rows:onpolicy/post": 281,
+  "rows:onpolicy/post/fast": 50,
+  "rows:onpolicy/pre": 295,
+  "rows:onpolicy/pre/fast": 315,
+  "rows_dropped_no_turn": 246,
+  "span_chars_all": 13128458,
+  "span_chars_kept": 2377317,
+  "tokens:onpolicy/post": 3688418,
+  "tokens:onpolicy/post/fast": 448707,
+  "tokens:onpolicy/pre": 4575380,
+  "tokens:onpolicy/pre/fast": 3758438,
+  "turns_all": 4737,
+  "turns_kept": 2836
+ },
+ "thought_chars_all": {
+  "50": 1041,
+  "75": 2794,
+  "90": 6336,
+  "99": 18177
+ },
+ "thought_chars_kept": {
+  "50": 508,
+  "75": 837,
+  "90": 1184,
+  "99": 1462
+ }
+}

@@ -1,0 +1,85 @@
+{
+ "pass": "dev_p1",
+ "note": "from results/traces (ATIF); message = the agent step text the harness logs as thinking",
+ "base_all_steps": {
+  "steps": 1083,
+  "message_chars_p10_p50_p90": [
+   30,
+   176,
+   1681
+  ],
+  "under_200": 0.526
+ },
+ "adapter_all_steps": {
+  "steps": 1353,
+  "message_chars_p10_p50_p90": [
+   37,
+   114,
+   404
+  ],
+  "under_200": 0.75
+ },
+ "base_common": {
+  "runs": 53,
+  "completion_tokens_median": 5005,
+  "per_step_completion_median": 245.2,
+  "runs_with_edit": 40,
+  "first_edit_call_median": 8.0,
+  "submitted": 21
+ },
+ "adapter_common": {
+  "runs": 53,
+  "completion_tokens_median": 2096,
+  "per_step_completion_median": 118.2,
+  "runs_with_edit": 21,
+  "first_edit_call_median": 3,
+  "submitted": 26
+ },
+ "repeats_dev_p1": {
+  "base": {
+   "runs": 53,
+   "repeat_share_median": 0.042,
+   "repeat_share_mean": 0.069,
+   "runs_one_call_ge5": 0
+  },
+  "adapter": {
+   "runs": 70,
+   "repeat_share_median": 0.203,
+   "repeat_share_mean": 0.378,
+   "runs_one_call_ge5": 31
+  }
+ },
+ "canary_behaviour": {
+  "base": {
+   "steps": 53,
+   "text_p50": 419,
+   "text_p90": 2522,
+   "stale_repeat_share": 0.0,
+   "max_stale_chain": 1
+  },
+  "adapter": {
+   "steps": 51,
+   "text_p50": 270,
+   "text_p90": 270,
+   "stale_repeat_share": 0.631,
+   "max_stale_chain": 26
+  }
+ },
+ "stale_repeats_dev_p1": {
+  "definition": "same call (name + arguments) again with no edit_file/write_file since its previous occurrence",
+  "base": {
+   "runs": 53,
+   "stale_repeat_share_median": 0.0,
+   "mean": 0.022,
+   "runs_stale_chain_ge3": 1,
+   "runs_stale_chain_ge5": 0
+  },
+  "adapter": {
+   "runs": 70,
+   "stale_repeat_share_median": 0.132,
+   "mean": 0.345,
+   "runs_stale_chain_ge3": 32,
+   "runs_stale_chain_ge5": 29
+  }
+ }
+}

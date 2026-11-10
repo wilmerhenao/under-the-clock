@@ -1,0 +1,47 @@
+{
+ "full": {
+  "sessions": 112,
+  "tool_calls": 1920,
+  "swallowed_calls": 18,
+  "share": 0.0094,
+  "sessions_with_one": 7,
+  "by_tool": {
+   "read_file": 6,
+   "edit_file": 12
+  }
+ },
+ "full2": {
+  "sessions": 112,
+  "tool_calls": 1989,
+  "swallowed_calls": 37,
+  "share": 0.0186,
+  "sessions_with_one": 10,
+  "by_tool": {
+   "edit_file": 30,
+   "read_file": 7
+  }
+ },
+ "c55": {
+  "sessions": 112,
+  "tool_calls": 2941,
+  "swallowed_calls": 1277,
+  "share": 0.4342,
+  "sessions_with_one": 80,
+  "by_tool": {
+   "read_file": 562,
+   "edit_file": 712,
+   "write_file": 3
+  }
+ },
+ "c55kd": {
+  "sessions": 112,
+  "tool_calls": 2239,
+  "swallowed_calls": 300,
+  "share": 0.134,
+  "sessions_with_one": 42,
+  "by_tool": {
+   "read_file": 127,
+   "edit_file": 173
+  }
+ }
+}

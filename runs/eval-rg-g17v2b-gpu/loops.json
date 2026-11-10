@@ -1,0 +1,125 @@
+{
+ "g11a": {
+  "sessions": 83,
+  "tool_calls_mean_max": [
+   15.9,
+   28
+  ],
+  "session_ends": {
+   "resolved": 19,
+   "ended_unresolved": 28,
+   "timeout": 34,
+   "other_error": 2
+  },
+  "loop_sessions": 0,
+  "real_loop_sessions": 0,
+  "loop_sessions_by_tool": {},
+  "loop_sessions_by_end": {},
+  "repeated_calls_by_tool": {
+   "run_command": 67,
+   "read_file": 42,
+   "submit_patch": 20,
+   "edit_file": 3,
+   "write_file": 0,
+   "get_status": 0
+  },
+  "longest_runs": []
+ },
+ "g17v2b": {
+  "sessions": 103,
+  "tool_calls_mean_max": [
+   15.7,
+   69
+  ],
+  "session_ends": {
+   "resolved": 29,
+   "ended_unresolved": 51,
+   "timeout": 23
+  },
+  "loop_sessions": 35,
+  "real_loop_sessions": 31,
+  "loop_sessions_by_tool": {
+   "run_command": 16,
+   "read_file": 13,
+   "submit_patch{}": 4,
+   "edit_file": 2
+  },
+  "loop_sessions_by_end": {
+   "real:resolved": 2,
+   "real:ended_unresolved": 23,
+   "real:timeout": 6,
+   "submit_patch{}:timeout": 3,
+   "submit_patch{}:resolved": 1
+  },
+  "repeated_calls_by_tool": {
+   "run_command": 338,
+   "read_file": 249,
+   "submit_patch": 93,
+   "edit_file": 24,
+   "write_file": 0,
+   "search_similar_code": 0
+  },
+  "longest_runs": [
+   [
+    62,
+    "timeout",
+    "run_command{\"command\": \"git grep -n \\\"get_bg_color\\\"\"}"
+   ],
+   [
+    43,
+    "timeout",
+    "submit_patch{}"
+   ],
+   [
+    23,
+    "ended_unresolved",
+    "read_file{\"end_line\": 360, \"filepath\": \"fakesnow/cursor.py\", \"start_line\": 320}"
+   ],
+   [
+    22,
+    "ended_unresolved",
+    "read_file{\"end_line\": 315, \"filepath\": \"src/downloader/download.py\", \"start_line\": 275}"
+   ],
+   [
+    21,
+    "timeout",
+    "submit_patch{}"
+   ],
+   [
+    21,
+    "ended_unresolved",
+    "read_file{\"end_line\": 260, \"filepath\": \"evalview/commands/check_cmd.py\", \"start_line\": 235}"
+   ],
+   [
+    20,
+    "ended_unresolved",
+    "run_command{\"command\": \"git grep -n \\\"SEMICOLON\\\" src/sqlfmt/\"}"
+   ],
+   [
+    19,
+    "ended_unresolved",
+    "run_command{\"command\": \"pytest tests/test_table.py\"}"
+   ],
+   [
+    19,
+    "ended_unresolved",
+    "read_file{\"end_line\": 1535, \"filepath\": \"src/jcodemunch_mcp/storage/sqlite_store.py\", \"start_line\": "
+   ],
+   [
+    19,
+    "ended_unresolved",
+    "read_file{\"end_line\": 150, \"filepath\": \"src/fabric_cicd/_items/_paginatedreport.py\", \"start_line\": 1"
+   ],
+   [
+    18,
+    "timeout",
+    "run_command{\"command\": \"python3 -c \\\"from btclib import electrum as e; from btclib.exceptions import"
+   ],
+   [
+    17,
+    "timeout",
+    "read_file{\"end_line\": 545, \"filepath\": \"src/dbt_osmosis/core/transforms.py\", \"start_line\": 535}"
+   ]
+  ]
+ }
+}

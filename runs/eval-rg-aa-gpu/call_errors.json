@@ -1,0 +1,32 @@
+{
+ "base": {
+  "sessions": 82,
+  "tool_calls": 1415,
+  "malformed_calls": 30,
+  "malformed_share": 0.0212,
+  "malformed_by_tool": {
+   "write_file": 13,
+   "edit_file": 9,
+   "read_file": 8
+  },
+  "sessions_with_a_malformed_call": 10,
+  "sessions_with_3_plus": 4,
+  "steps_with_tool_error": 158,
+  "tool_error_share": 0.1117
+ },
+ "base2": {
+  "sessions": 83,
+  "tool_calls": 1494,
+  "malformed_calls": 61,
+  "malformed_share": 0.0408,
+  "malformed_by_tool": {
+   "edit_file": 32,
+   "write_file": 16,
+   "read_file": 13
+  },
+  "sessions_with_a_malformed_call": 15,
+  "sessions_with_3_plus": 8,
+  "steps_with_tool_error": 139,
+  "tool_error_share": 0.093
+ }
+}

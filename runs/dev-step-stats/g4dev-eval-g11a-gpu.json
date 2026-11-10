@@ -1,0 +1,88 @@
+{
+ "base": {
+  "traces": 71,
+  "agent_steps": 1373,
+  "completion_tokens_p50_p90_mean": [
+   114,
+   624,
+   268
+  ],
+  "step_text_chars_p50_p90": [
+   192,
+   1767
+  ],
+  "steps_per_task_mean": 19.3,
+  "agent_steps_without_tool_call": 60,
+  "share_without_tool_call": 0.044,
+  "seconds_per_step_p50_p90": [
+   16.8,
+   94.1
+  ],
+  "calls_over_1024_tokens_share": 0.051,
+  "token_share_of_calls_over_1024": 0.354,
+  "sessions_with_a_step_over_1540_tokens": {
+   "n": 29,
+   "resolved": 0,
+   "timeout": 0
+  },
+  "repeated_calls_share": 0.093,
+  "sessions_with_3_identical_calls_in_a_row": 2,
+  "steps_per_task_by_outcome": {
+   "resolved": [
+    null,
+    0
+   ],
+   "timeout": [
+    null,
+    0
+   ],
+   "other": [
+    19.3,
+    71
+   ]
+  }
+ },
+ "G11a": {
+  "traces": 71,
+  "agent_steps": 1363,
+  "completion_tokens_p50_p90_mean": [
+   102,
+   589,
+   240
+  ],
+  "step_text_chars_p50_p90": [
+   179,
+   1587
+  ],
+  "steps_per_task_mean": 19.2,
+  "agent_steps_without_tool_call": 77,
+  "share_without_tool_call": 0.056,
+  "seconds_per_step_p50_p90": [
+   16.6,
+   100.2
+  ],
+  "calls_over_1024_tokens_share": 0.041,
+  "token_share_of_calls_over_1024": 0.31,
+  "sessions_with_a_step_over_1540_tokens": {
+   "n": 21,
+   "resolved": 0,
+   "timeout": 0
+  },
+  "repeated_calls_share": 0.089,
+  "sessions_with_3_identical_calls_in_a_row": 0,
+  "steps_per_task_by_outcome": {
+   "resolved": [
+    null,
+    0
+   ],
+   "timeout": [
+    null,
+    0
+   ],
+   "other": [
+    19.2,
+    71
+   ]
+  }
+ }
+}

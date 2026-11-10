@@ -1,0 +1,58 @@
+{
+  "tag": "base",
+  "model_id": "/kaggle/input/models/google/gemma-4/other/gemma-4-31b-it-qat-w4a16-ct/2",
+  "status": "complete",
+  "eval_secs": 272.9,
+  "n_tasks": 2,
+  "task_set": "canary",
+  "order_seed": null,
+  "control": null,
+  "extra_wheels": "/kaggle/input/datasets/verracodeguacas/g4dev-sandbox313",
+  "isolate": false,
+  "py313": null,
+  "official_env": false,
+  "uv_task_env": false,
+  "official_paths": true,
+  "n_finished": 2,
+  "n_resolved": 2,
+  "n_errors": 0,
+  "n_llm_calls": 35,
+  "n_tool_calls": 31,
+  "tool_calls_per_llm_call": 0.89,
+  "healthy": true,
+  "errors_sample": [],
+  "drop_thinking_budget": false,
+  "stop_token_ids": [],
+  "resolved_ids": [
+    "rich_2943",
+    "rich_3043"
+  ],
+  "generated_tokens": 17259.0,
+  "gen_tok_per_s": 63.2,
+  "finished_per_hour": 26.4,
+  "run_ids": [
+    "rich_2943",
+    "rich_3043"
+  ],
+  "concurrency": 2,
+  "sampling": "temperature: 0.2\ntop_p: 0.95\nmax_output_tokens: 8192\nthinking_config:\n  thinking_budget: 4096\n  include_thoughts: true\n",
+  "bundle": "sub-v9c",
+  "caps": {
+    "max_time_minutes": 16.0,
+    "max_tool_calls": 24,
+    "max_turns": 80,
+    "timeout_seconds": 240
+  },
+  "row_keys": [
+    "agent_patch_size",
+    "duration_seconds",
+    "error",
+    "instance_id",
+    "repo",
+    "resolved",
+    "task_index",
+    "test_exit_code",
+    "tool_calls",
+    "total_llm_calls"
+  ]
+}

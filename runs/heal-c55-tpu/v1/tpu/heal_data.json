@@ -1,0 +1,18 @@
+{
+ "rows_total": 694,
+ "train_rows": 628,
+ "train_tokens": 4999389,
+ "train_own_tokens": 289390,
+ "train_rows_cut_at_max_len": 549,
+ "skipped": 0,
+ "positions": "all",
+ "eval_rows": 40,
+ "eval_tokens": 320611,
+ "eval_own_tokens": 25896,
+ "eval_tasks_in_train": 0,
+ "train_tasks_held": 0,
+ "mask_keep_per_layer": 11776,
+ "mask_units": 21504,
+ "mask_layers": 60,
+ "mask_sha": "145cbeeb1a4a6f1206ee552beb6352350ad4d6f683d61ed4b38c99dd9e466b6d"
+}

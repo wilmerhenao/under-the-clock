@@ -1,0 +1,4 @@
+{"event": "kinds", "skipped": 0, "skip_kinds": [], "train_on": "actions", "t_min": 0.2}
+{"event": "mistakes", "calls": 2836, "masked": 22, "mask_mistakes": true, "t_min": 0.52}
+{"event": "data", "examples": 941, "tokens": 12470943, "trainable": 169715, "skipped_no_trainable": 0, "t_min": 0.52}
+{"event": "dump_npz", "path": "/tmp/g8/rows.npz", "examples": 941, "t_min": 0.56}

@@ -1,0 +1,648 @@
+{
+ "models": {
+  "c55": {
+   "all": {
+    "finished": 112,
+    "resolved": 13,
+    "timeouts": 81,
+    "task_s_mean_median": [
+     487,
+     501
+    ],
+    "tool_calls_mean": 16.5,
+    "other_errors": {
+     "Agent exceeded turns budget (80 turns)": 7,
+     "Agent exceeded tool call budget (24 calls)": 3,
+     "Agent completed execution without calling submit_patch.": 1
+    }
+   },
+   "block0": {
+    "finished": 56,
+    "resolved": 6,
+    "timeouts": 40,
+    "task_s_mean_median": [
+     492,
+     504
+    ],
+    "tool_calls_mean": 17.8,
+    "other_errors": {
+     "Agent exceeded turns budget (80 turns)": 3,
+     "Agent exceeded tool call budget (24 calls)": 2
+    }
+   },
+   "block1": {
+    "finished": 56,
+    "resolved": 7,
+    "timeouts": 41,
+    "task_s_mean_median": [
+     483,
+     498
+    ],
+    "tool_calls_mean": 15.3,
+    "other_errors": {
+     "Agent completed execution without calling submit_patch.": 1,
+     "Agent exceeded turns budget (80 turns)": 4,
+     "Agent exceeded tool call budget (24 calls)": 1
+    }
+   }
+  },
+  "c55kd": {
+   "all": {
+    "finished": 112,
+    "resolved": 27,
+    "timeouts": 51,
+    "task_s_mean_median": [
+     430,
+     489
+    ],
+    "tool_calls_mean": 16.7,
+    "other_errors": {
+     "Agent exceeded turns budget (80 turns)": 2
+    }
+   },
+   "block0": {
+    "finished": 56,
+    "resolved": 13,
+    "timeouts": 28,
+    "task_s_mean_median": [
+     440,
+     490
+    ],
+    "tool_calls_mean": 17.2,
+    "other_errors": {}
+   },
+   "block1": {
+    "finished": 56,
+    "resolved": 14,
+    "timeouts": 23,
+    "task_s_mean_median": [
+     419,
+     482
+    ],
+    "tool_calls_mean": 16.3,
+    "other_errors": {
+     "Agent exceeded turns budget (80 turns)": 2
+    }
+   }
+  },
+  "full": {
+   "all": {
+    "finished": 112,
+    "resolved": 37,
+    "timeouts": 44,
+    "task_s_mean_median": [
+     457,
+     494
+    ],
+    "tool_calls_mean": 16.1,
+    "other_errors": {}
+   },
+   "block0": {
+    "finished": 56,
+    "resolved": 19,
+    "timeouts": 20,
+    "task_s_mean_median": [
+     457,
+     497
+    ],
+    "tool_calls_mean": 17.1,
+    "other_errors": {}
+   },
+   "block1": {
+    "finished": 56,
+    "resolved": 18,
+    "timeouts": 24,
+    "task_s_mean_median": [
+     456,
+     494
+    ],
+    "tool_calls_mean": 15.1,
+    "other_errors": {}
+   }
+  },
+  "full2": {
+   "all": {
+    "finished": 112,
+    "resolved": 33,
+    "timeouts": 37,
+    "task_s_mean_median": [
+     439,
+     480
+    ],
+    "tool_calls_mean": 16.4,
+    "other_errors": {}
+   },
+   "block0": {
+    "finished": 56,
+    "resolved": 15,
+    "timeouts": 16,
+    "task_s_mean_median": [
+     420,
+     469
+    ],
+    "tool_calls_mean": 17,
+    "other_errors": {}
+   },
+   "block1": {
+    "finished": 56,
+    "resolved": 18,
+    "timeouts": 21,
+    "task_s_mean_median": [
+     458,
+     500
+    ],
+    "tool_calls_mean": 15.7,
+    "other_errors": {}
+   }
+  }
+ },
+ "analysis_set": {
+  "block0": 56,
+  "block1": 56
+ },
+ "primary": {
+  "c55": {
+   "analysis_tasks": 112,
+   "cut": "c55",
+   "fulls": [
+    "full",
+    "full2"
+   ],
+   "mean_d": -0.1964,
+   "sum_d": -22.0,
+   "nonzero": 28,
+   "signflip_exact_p": 0.0
+  },
+  "c55kd": {
+   "analysis_tasks": 112,
+   "cut": "c55kd",
+   "fulls": [
+    "full",
+    "full2"
+   ],
+   "mean_d": -0.0714,
+   "sum_d": -8.0,
+   "nonzero": 16,
+   "signflip_exact_p": 0.0074
+  }
+ },
+ "pairs": {
+  "c55 vs c55kd": {
+   "all": {
+    "tasks": 112,
+    "resolved_c55": 13,
+    "resolved_c55kd": 27,
+    "c55_only": 4,
+    "c55kd_only": 18,
+    "mcnemar_exact_p": 0.0043,
+    "timeouts_c55": 81,
+    "timeouts_c55kd": 51,
+    "c55_only_ids": [
+     "blackjax_1042",
+     "py7zr_682",
+     "pymovements_1600",
+     "pymovements_1668"
+    ],
+    "c55kd_only_ids": [
+     "agentica_37",
+     "blackjax_1041",
+     "casbin_pycasbin_412",
+     "clawrium_961",
+     "drawpyo_133",
+     "fakesnow_337",
+     "fakesnow_390",
+     "gibr_71",
+     "graphtage_130",
+     "metricflow_2092",
+     "modern_di_545",
+     "numbers_parser_259",
+     "powertools_lambda_python_8453",
+     "powertools_lambda_python_8518",
+     "pymc_marketing_3005",
+     "pymovements_1727",
+     "yamale_278",
+     "yamllint_776"
+    ]
+   },
+   "block0": {
+    "tasks": 56,
+    "resolved_c55": 6,
+    "resolved_c55kd": 13,
+    "c55_only": 1,
+    "c55kd_only": 8,
+    "mcnemar_exact_p": 0.0391,
+    "timeouts_c55": 40,
+    "timeouts_c55kd": 28,
+    "c55_only_ids": [
+     "pymovements_1600"
+    ],
+    "c55kd_only_ids": [
+     "agentica_37",
+     "blackjax_1041",
+     "casbin_pycasbin_412",
+     "numbers_parser_259",
+     "powertools_lambda_python_8518",
+     "pymc_marketing_3005",
+     "pymovements_1727",
+     "yamale_278"
+    ]
+   },
+   "block1": {
+    "tasks": 56,
+    "resolved_c55": 7,
+    "resolved_c55kd": 14,
+    "c55_only": 3,
+    "c55kd_only": 10,
+    "mcnemar_exact_p": 0.0923,
+    "timeouts_c55": 41,
+    "timeouts_c55kd": 23,
+    "c55_only_ids": [
+     "blackjax_1042",
+     "py7zr_682",
+     "pymovements_1668"
+    ],
+    "c55kd_only_ids": [
+     "clawrium_961",
+     "drawpyo_133",
+     "fakesnow_337",
+     "fakesnow_390",
+     "gibr_71",
+     "graphtage_130",
+     "metricflow_2092",
+     "modern_di_545",
+     "powertools_lambda_python_8453",
+     "yamllint_776"
+    ]
+   }
+  },
+  "c55 vs full": {
+   "all": {
+    "tasks": 112,
+    "resolved_c55": 13,
+    "resolved_full": 37,
+    "c55_only": 0,
+    "full_only": 24,
+    "mcnemar_exact_p": 0.0,
+    "timeouts_c55": 81,
+    "timeouts_full": 44,
+    "c55_only_ids": [],
+    "full_only_ids": [
+     "agentica_37",
+     "apiflask_759",
+     "blackjax_1041",
+     "casbin_pycasbin_412",
+     "clawrium_961",
+     "datacompy_563",
+     "drawpyo_133",
+     "fabric_cicd_927",
+     "fakesnow_337",
+     "fakesnow_390",
+     "gibr_71",
+     "graphtage_130",
+     "metricflow_2092",
+     "mnemosyne_1085",
+     "modern_di_545",
+     "numbers_parser_259",
+     "powertools_lambda_python_8453",
+     "powertools_lambda_python_8518",
+     "pymc_marketing_3005",
+     "pymovements_1727",
+     "python_nameparser_683",
+     "transparenttorproxy_72",
+     "yamale_278",
+     "yamllint_776"
+    ]
+   },
+   "block0": {
+    "tasks": 56,
+    "resolved_c55": 6,
+    "resolved_full": 19,
+    "c55_only": 0,
+    "full_only": 13,
+    "mcnemar_exact_p": 0.0002,
+    "timeouts_c55": 40,
+    "timeouts_full": 20,
+    "c55_only_ids": [],
+    "full_only_ids": [
+     "agentica_37",
+     "apiflask_759",
+     "blackjax_1041",
+     "casbin_pycasbin_412",
+     "datacompy_563",
+     "mnemosyne_1085",
+     "numbers_parser_259",
+     "powertools_lambda_python_8518",
+     "pymc_marketing_3005",
+     "pymovements_1727",
+     "python_nameparser_683",
+     "transparenttorproxy_72",
+     "yamale_278"
+    ]
+   },
+   "block1": {
+    "tasks": 56,
+    "resolved_c55": 7,
+    "resolved_full": 18,
+    "c55_only": 0,
+    "full_only": 11,
+    "mcnemar_exact_p": 0.001,
+    "timeouts_c55": 41,
+    "timeouts_full": 24,
+    "c55_only_ids": [],
+    "full_only_ids": [
+     "clawrium_961",
+     "drawpyo_133",
+     "fabric_cicd_927",
+     "fakesnow_337",
+     "fakesnow_390",
+     "gibr_71",
+     "graphtage_130",
+     "metricflow_2092",
+     "modern_di_545",
+     "powertools_lambda_python_8453",
+     "yamllint_776"
+    ]
+   }
+  },
+  "c55 vs full2": {
+   "all": {
+    "tasks": 112,
+    "resolved_c55": 13,
+    "resolved_full2": 33,
+    "c55_only": 1,
+    "full2_only": 21,
+    "mcnemar_exact_p": 0.0,
+    "timeouts_c55": 81,
+    "timeouts_full2": 37,
+    "c55_only_ids": [
+     "pymovements_1600"
+    ],
+    "full2_only_ids": [
+     "agentica_37",
+     "blackjax_1041",
+     "btclib_2500",
+     "clawrium_961",
+     "datacompy_563",
+     "drawpyo_133",
+     "fabric_cicd_927",
+     "fakesnow_390",
+     "gibr_71",
+     "graphtage_127",
+     "graphtage_130",
+     "justhtml_46",
+     "metricflow_2092",
+     "numbers_parser_259",
+     "powertools_lambda_python_8453",
+     "powertools_lambda_python_8518",
+     "pymc_marketing_3005",
+     "pymovements_1727",
+     "python_nameparser_683",
+     "yamale_278",
+     "yamllint_776"
+    ]
+   },
+   "block0": {
+    "tasks": 56,
+    "resolved_c55": 6,
+    "resolved_full2": 15,
+    "c55_only": 1,
+    "full2_only": 10,
+    "mcnemar_exact_p": 0.0117,
+    "timeouts_c55": 40,
+    "timeouts_full2": 16,
+    "c55_only_ids": [
+     "pymovements_1600"
+    ],
+    "full2_only_ids": [
+     "agentica_37",
+     "blackjax_1041",
+     "datacompy_563",
+     "justhtml_46",
+     "numbers_parser_259",
+     "powertools_lambda_python_8518",
+     "pymc_marketing_3005",
+     "pymovements_1727",
+     "python_nameparser_683",
+     "yamale_278"
+    ]
+   },
+   "block1": {
+    "tasks": 56,
+    "resolved_c55": 7,
+    "resolved_full2": 18,
+    "c55_only": 0,
+    "full2_only": 11,
+    "mcnemar_exact_p": 0.001,
+    "timeouts_c55": 41,
+    "timeouts_full2": 21,
+    "c55_only_ids": [],
+    "full2_only_ids": [
+     "btclib_2500",
+     "clawrium_961",
+     "drawpyo_133",
+     "fabric_cicd_927",
+     "fakesnow_390",
+     "gibr_71",
+     "graphtage_127",
+     "graphtage_130",
+     "metricflow_2092",
+     "powertools_lambda_python_8453",
+     "yamllint_776"
+    ]
+   }
+  },
+  "c55kd vs full": {
+   "all": {
+    "tasks": 112,
+    "resolved_c55kd": 27,
+    "resolved_full": 37,
+    "c55kd_only": 0,
+    "full_only": 10,
+    "mcnemar_exact_p": 0.002,
+    "timeouts_c55kd": 51,
+    "timeouts_full": 44,
+    "c55kd_only_ids": [],
+    "full_only_ids": [
+     "apiflask_759",
+     "blackjax_1042",
+     "datacompy_563",
+     "fabric_cicd_927",
+     "mnemosyne_1085",
+     "py7zr_682",
+     "pymovements_1600",
+     "pymovements_1668",
+     "python_nameparser_683",
+     "transparenttorproxy_72"
+    ]
+   },
+   "block0": {
+    "tasks": 56,
+    "resolved_c55kd": 13,
+    "resolved_full": 19,
+    "c55kd_only": 0,
+    "full_only": 6,
+    "mcnemar_exact_p": 0.0312,
+    "timeouts_c55kd": 28,
+    "timeouts_full": 20,
+    "c55kd_only_ids": [],
+    "full_only_ids": [
+     "apiflask_759",
+     "datacompy_563",
+     "mnemosyne_1085",
+     "pymovements_1600",
+     "python_nameparser_683",
+     "transparenttorproxy_72"
+    ]
+   },
+   "block1": {
+    "tasks": 56,
+    "resolved_c55kd": 14,
+    "resolved_full": 18,
+    "c55kd_only": 0,
+    "full_only": 4,
+    "mcnemar_exact_p": 0.125,
+    "timeouts_c55kd": 23,
+    "timeouts_full": 24,
+    "c55kd_only_ids": [],
+    "full_only_ids": [
+     "blackjax_1042",
+     "fabric_cicd_927",
+     "py7zr_682",
+     "pymovements_1668"
+    ]
+   }
+  },
+  "c55kd vs full2": {
+   "all": {
+    "tasks": 112,
+    "resolved_c55kd": 27,
+    "resolved_full2": 33,
+    "c55kd_only": 3,
+    "full2_only": 9,
+    "mcnemar_exact_p": 0.146,
+    "timeouts_c55kd": 51,
+    "timeouts_full2": 37,
+    "c55kd_only_ids": [
+     "casbin_pycasbin_412",
+     "fakesnow_337",
+     "modern_di_545"
+    ],
+    "full2_only_ids": [
+     "blackjax_1042",
+     "btclib_2500",
+     "datacompy_563",
+     "fabric_cicd_927",
+     "graphtage_127",
+     "justhtml_46",
+     "py7zr_682",
+     "pymovements_1668",
+     "python_nameparser_683"
+    ]
+   },
+   "block0": {
+    "tasks": 56,
+    "resolved_c55kd": 13,
+    "resolved_full2": 15,
+    "c55kd_only": 1,
+    "full2_only": 3,
+    "mcnemar_exact_p": 0.625,
+    "timeouts_c55kd": 28,
+    "timeouts_full2": 16,
+    "c55kd_only_ids": [
+     "casbin_pycasbin_412"
+    ],
+    "full2_only_ids": [
+     "datacompy_563",
+     "justhtml_46",
+     "python_nameparser_683"
+    ]
+   },
+   "block1": {
+    "tasks": 56,
+    "resolved_c55kd": 14,
+    "resolved_full2": 18,
+    "c55kd_only": 2,
+    "full2_only": 6,
+    "mcnemar_exact_p": 0.2891,
+    "timeouts_c55kd": 23,
+    "timeouts_full2": 21,
+    "c55kd_only_ids": [
+     "fakesnow_337",
+     "modern_di_545"
+    ],
+    "full2_only_ids": [
+     "blackjax_1042",
+     "btclib_2500",
+     "fabric_cicd_927",
+     "graphtage_127",
+     "py7zr_682",
+     "pymovements_1668"
+    ]
+   }
+  },
+  "full vs full2": {
+   "all": {
+    "tasks": 112,
+    "resolved_full": 37,
+    "resolved_full2": 33,
+    "full_only": 7,
+    "full2_only": 3,
+    "mcnemar_exact_p": 0.3438,
+    "timeouts_full": 44,
+    "timeouts_full2": 37,
+    "full_only_ids": [
+     "apiflask_759",
+     "casbin_pycasbin_412",
+     "fakesnow_337",
+     "mnemosyne_1085",
+     "modern_di_545",
+     "pymovements_1600",
+     "transparenttorproxy_72"
+    ],
+    "full2_only_ids": [
+     "btclib_2500",
+     "graphtage_127",
+     "justhtml_46"
+    ]
+   },
+   "block0": {
+    "tasks": 56,
+    "resolved_full": 19,
+    "resolved_full2": 15,
+    "full_only": 5,
+    "full2_only": 1,
+    "mcnemar_exact_p": 0.2188,
+    "timeouts_full": 20,
+    "timeouts_full2": 16,
+    "full_only_ids": [
+     "apiflask_759",
+     "casbin_pycasbin_412",
+     "mnemosyne_1085",
+     "pymovements_1600",
+     "transparenttorproxy_72"
+    ],
+    "full2_only_ids": [
+     "justhtml_46"
+    ]
+   },
+   "block1": {
+    "tasks": 56,
+    "resolved_full": 18,
+    "resolved_full2": 18,
+    "full_only": 2,
+    "full2_only": 2,
+    "mcnemar_exact_p": 1.0,
+    "timeouts_full": 24,
+    "timeouts_full2": 21,
+    "full_only_ids": [
+     "fakesnow_337",
+     "modern_di_545"
+    ],
+    "full2_only_ids": [
+     "btclib_2500",
+     "graphtage_127"
+    ]
+   }
+  }
+ }
+}

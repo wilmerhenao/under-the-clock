@@ -1,0 +1,53 @@
+{
+ "g11a": {
+  "finished": 77,
+  "resolved": 22,
+  "timeouts": 26,
+  "task_s_mean_median": [
+   857,
+   961
+  ],
+  "tool_calls_mean": 15.5,
+  "other_errors": {
+   "Sandbox execution error: [Errno 2] No such file or directory": 1
+  }
+ },
+ "g17v2a": {
+  "finished": 70,
+  "resolved": 20,
+  "timeouts": 43,
+  "task_s_mean_median": [
+   930,
+   995
+  ],
+  "tool_calls_mean": 12.7,
+  "other_errors": {}
+ },
+ "paired": {
+  "tasks": 70,
+  "resolved_g11a": 17,
+  "resolved_g17v2a": 20,
+  "g11a_only": 2,
+  "g17v2a_only": 5,
+  "mcnemar_exact_p": 0.453,
+  "g11a_only_ids": [
+   "datacompy_526",
+   "flytekit_3349"
+  ],
+  "g17v2a_only_ids": [
+   "agentica_37",
+   "casbin_pycasbin_412",
+   "datacompy_563",
+   "mnemosyne_1085",
+   "pymovements_1600"
+  ]
+ },
+ "crosscheck_base_vs_earlier_run": {
+  "tasks": 77,
+  "resolved_now": 22,
+  "resolved_earlier": 25,
+  "agree": 68,
+  "now_only": 3,
+  "earlier_only": 6
+ }
+}

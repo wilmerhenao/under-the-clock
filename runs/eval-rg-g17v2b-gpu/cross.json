@@ -1,0 +1,568 @@
+{
+ "tasks_common": 64,
+ "tasks_per_arm": {
+  "G11a@B159": 70,
+  "G11a@B165": 91,
+  "G11a@B179": 77,
+  "G11a@A": 70,
+  "G11a@B184": 84,
+  "base@A": 64,
+  "G17v2a@B179": 70,
+  "G17v2b@B184": 105
+ },
+ "arms": {
+  "G11a@B159": {
+   "finished": 64,
+   "resolved": 19,
+   "timeouts": 24,
+   "task_s_mean_median": [
+    971,
+    994
+   ],
+   "tool_calls_mean": 16.7,
+   "other_errors": {
+    "Evaluation error: pytest missing in official-env task venv": 3
+   }
+  },
+  "G11a@B165": {
+   "finished": 64,
+   "resolved": 19,
+   "timeouts": 21,
+   "task_s_mean_median": [
+    770,
+    840
+   ],
+   "tool_calls_mean": 16.7,
+   "other_errors": {
+    "Evaluation error: pytest missing in official-env task venv": 2,
+    "Sandbox execution error: pytest missing in official-env task": 1
+   }
+  },
+  "G11a@B179": {
+   "finished": 64,
+   "resolved": 16,
+   "timeouts": 25,
+   "task_s_mean_median": [
+    891,
+    979
+   ],
+   "tool_calls_mean": 16.0,
+   "other_errors": {
+    "Sandbox execution error: [Errno 2] No such file or directory": 1
+   }
+  },
+  "G11a@A": {
+   "finished": 64,
+   "resolved": 17,
+   "timeouts": 21,
+   "task_s_mean_median": [
+    986,
+    1009
+   ],
+   "tool_calls_mean": 16.5,
+   "other_errors": {}
+  },
+  "G11a@B184": {
+   "finished": 64,
+   "resolved": 16,
+   "timeouts": 24,
+   "task_s_mean_median": [
+    823,
+    967
+   ],
+   "tool_calls_mean": 15.6,
+   "other_errors": {
+    "Sandbox execution error: pytest missing in official-env task": 1,
+    "Evaluation error: pytest missing in official-env task venv": 1
+   }
+  },
+  "base@A": {
+   "finished": 64,
+   "resolved": 19,
+   "timeouts": 21,
+   "task_s_mean_median": [
+    997,
+    1001
+   ],
+   "tool_calls_mean": 17.7,
+   "other_errors": {
+    "Evaluation error: pytest missing in official-env task venv": 1
+   }
+  },
+  "G17v2a@B179": {
+   "finished": 64,
+   "resolved": 19,
+   "timeouts": 39,
+   "task_s_mean_median": [
+    947,
+    996
+   ],
+   "tool_calls_mean": 12.6,
+   "other_errors": {}
+  },
+  "G17v2b@B184": {
+   "finished": 64,
+   "resolved": 17,
+   "timeouts": 11,
+   "task_s_mean_median": [
+    605,
+    554
+   ],
+   "tool_calls_mean": 14.6,
+   "other_errors": {
+    "Evaluation error: pytest missing in official-env task venv": 2
+   }
+  }
+ },
+ "pairs": {
+  "G11a@B159 vs G11a@B165": {
+   "G11a@B159_only": 4,
+   "G11a@B165_only": 4,
+   "mcnemar_exact_p": 1.0,
+   "G11a@B159_only_ids": [
+    "blackjax_1041",
+    "flytekit_3349",
+    "graphtage_163",
+    "it2_2"
+   ],
+   "G11a@B165_only_ids": [
+    "httptap_310",
+    "ifetch_36",
+    "justhtml_46",
+    "openenv_1252"
+   ]
+  },
+  "G11a@B159 vs G11a@B179": {
+   "G11a@B159_only": 4,
+   "G11a@B179_only": 1,
+   "mcnemar_exact_p": 0.375,
+   "G11a@B159_only_ids": [
+    "agentica_37",
+    "it2_2",
+    "mnemosyne_1085",
+    "pymovements_1600"
+   ],
+   "G11a@B179_only_ids": [
+    "openenv_1252"
+   ]
+  },
+  "G11a@B159 vs G11a@A": {
+   "G11a@B159_only": 4,
+   "G11a@A_only": 2,
+   "mcnemar_exact_p": 0.688,
+   "G11a@B159_only_ids": [
+    "agentica_37",
+    "datacompy_526",
+    "it2_2",
+    "pymovements_1600"
+   ],
+   "G11a@A_only_ids": [
+    "openenv_1252",
+    "transparenttorproxy_72"
+   ]
+  },
+  "G11a@B159 vs G11a@B184": {
+   "G11a@B159_only": 5,
+   "G11a@B184_only": 2,
+   "mcnemar_exact_p": 0.453,
+   "G11a@B159_only_ids": [
+    "apiflask_759",
+    "datacompy_526",
+    "flytekit_3349",
+    "it2_2",
+    "numbers_parser_259"
+   ],
+   "G11a@B184_only_ids": [
+    "datacompy_563",
+    "openenv_1252"
+   ]
+  },
+  "G11a@B159 vs base@A": {
+   "G11a@B159_only": 2,
+   "base@A_only": 2,
+   "mcnemar_exact_p": 1.0,
+   "G11a@B159_only_ids": [
+    "apiflask_759",
+    "datacompy_526"
+   ],
+   "base@A_only_ids": [
+    "httptap_310",
+    "openenv_1252"
+   ]
+  },
+  "G11a@B159 vs G17v2a@B179": {
+   "G11a@B159_only": 3,
+   "G17v2a@B179_only": 3,
+   "mcnemar_exact_p": 1.0,
+   "G11a@B159_only_ids": [
+    "datacompy_526",
+    "flytekit_3349",
+    "it2_2"
+   ],
+   "G17v2a@B179_only_ids": [
+    "casbin_pycasbin_412",
+    "datacompy_563",
+    "openenv_1252"
+   ]
+  },
+  "G11a@B159 vs G17v2b@B184": {
+   "G11a@B159_only": 5,
+   "G17v2b@B184_only": 3,
+   "mcnemar_exact_p": 0.727,
+   "G11a@B159_only_ids": [
+    "datacompy_526",
+    "flytekit_3349",
+    "it2_2",
+    "numbers_parser_259",
+    "python_nameparser_683"
+   ],
+   "G17v2b@B184_only_ids": [
+    "casbin_pycasbin_412",
+    "datacompy_563",
+    "dbt_osmosis_321"
+   ]
+  },
+  "G11a@B165 vs G11a@B179": {
+   "G11a@B165_only": 6,
+   "G11a@B179_only": 3,
+   "mcnemar_exact_p": 0.508,
+   "G11a@B165_only_ids": [
+    "agentica_37",
+    "httptap_310",
+    "ifetch_36",
+    "justhtml_46",
+    "mnemosyne_1085",
+    "pymovements_1600"
+   ],
+   "G11a@B179_only_ids": [
+    "blackjax_1041",
+    "flytekit_3349",
+    "graphtage_163"
+   ]
+  },
+  "G11a@B165 vs G11a@A": {
+   "G11a@B165_only": 6,
+   "G11a@A_only": 4,
+   "mcnemar_exact_p": 0.754,
+   "G11a@B165_only_ids": [
+    "agentica_37",
+    "datacompy_526",
+    "httptap_310",
+    "ifetch_36",
+    "justhtml_46",
+    "pymovements_1600"
+   ],
+   "G11a@A_only_ids": [
+    "blackjax_1041",
+    "flytekit_3349",
+    "graphtage_163",
+    "transparenttorproxy_72"
+   ]
+  },
+  "G11a@B165 vs G11a@B184": {
+   "G11a@B165_only": 6,
+   "G11a@B184_only": 3,
+   "mcnemar_exact_p": 0.508,
+   "G11a@B165_only_ids": [
+    "apiflask_759",
+    "datacompy_526",
+    "httptap_310",
+    "ifetch_36",
+    "justhtml_46",
+    "numbers_parser_259"
+   ],
+   "G11a@B184_only_ids": [
+    "blackjax_1041",
+    "datacompy_563",
+    "graphtage_163"
+   ]
+  },
+  "G11a@B165 vs base@A": {
+   "G11a@B165_only": 4,
+   "base@A_only": 4,
+   "mcnemar_exact_p": 1.0,
+   "G11a@B165_only_ids": [
+    "apiflask_759",
+    "datacompy_526",
+    "ifetch_36",
+    "justhtml_46"
+   ],
+   "base@A_only_ids": [
+    "blackjax_1041",
+    "flytekit_3349",
+    "graphtage_163",
+    "it2_2"
+   ]
+  },
+  "G11a@B165 vs G17v2a@B179": {
+   "G11a@B165_only": 4,
+   "G17v2a@B179_only": 4,
+   "mcnemar_exact_p": 1.0,
+   "G11a@B165_only_ids": [
+    "datacompy_526",
+    "httptap_310",
+    "ifetch_36",
+    "justhtml_46"
+   ],
+   "G17v2a@B179_only_ids": [
+    "blackjax_1041",
+    "casbin_pycasbin_412",
+    "datacompy_563",
+    "graphtage_163"
+   ]
+  },
+  "G11a@B165 vs G17v2b@B184": {
+   "G11a@B165_only": 7,
+   "G17v2b@B184_only": 5,
+   "mcnemar_exact_p": 0.774,
+   "G11a@B165_only_ids": [
+    "datacompy_526",
+    "httptap_310",
+    "ifetch_36",
+    "justhtml_46",
+    "numbers_parser_259",
+    "openenv_1252",
+    "python_nameparser_683"
+   ],
+   "G17v2b@B184_only_ids": [
+    "blackjax_1041",
+    "casbin_pycasbin_412",
+    "datacompy_563",
+    "dbt_osmosis_321",
+    "graphtage_163"
+   ]
+  },
+  "G11a@B179 vs G11a@A": {
+   "G11a@B179_only": 1,
+   "G11a@A_only": 2,
+   "mcnemar_exact_p": 1.0,
+   "G11a@B179_only_ids": [
+    "datacompy_526"
+   ],
+   "G11a@A_only_ids": [
+    "mnemosyne_1085",
+    "transparenttorproxy_72"
+   ]
+  },
+  "G11a@B179 vs G11a@B184": {
+   "G11a@B179_only": 4,
+   "G11a@B184_only": 4,
+   "mcnemar_exact_p": 1.0,
+   "G11a@B179_only_ids": [
+    "apiflask_759",
+    "datacompy_526",
+    "flytekit_3349",
+    "numbers_parser_259"
+   ],
+   "G11a@B184_only_ids": [
+    "agentica_37",
+    "datacompy_563",
+    "mnemosyne_1085",
+    "pymovements_1600"
+   ]
+  },
+  "G11a@B179 vs base@A": {
+   "G11a@B179_only": 2,
+   "base@A_only": 5,
+   "mcnemar_exact_p": 0.453,
+   "G11a@B179_only_ids": [
+    "apiflask_759",
+    "datacompy_526"
+   ],
+   "base@A_only_ids": [
+    "agentica_37",
+    "httptap_310",
+    "it2_2",
+    "mnemosyne_1085",
+    "pymovements_1600"
+   ]
+  },
+  "G11a@B179 vs G17v2a@B179": {
+   "G11a@B179_only": 2,
+   "G17v2a@B179_only": 5,
+   "mcnemar_exact_p": 0.453,
+   "G11a@B179_only_ids": [
+    "datacompy_526",
+    "flytekit_3349"
+   ],
+   "G17v2a@B179_only_ids": [
+    "agentica_37",
+    "casbin_pycasbin_412",
+    "datacompy_563",
+    "mnemosyne_1085",
+    "pymovements_1600"
+   ]
+  },
+  "G11a@B179 vs G17v2b@B184": {
+   "G11a@B179_only": 5,
+   "G17v2b@B184_only": 6,
+   "mcnemar_exact_p": 1.0,
+   "G11a@B179_only_ids": [
+    "datacompy_526",
+    "flytekit_3349",
+    "numbers_parser_259",
+    "openenv_1252",
+    "python_nameparser_683"
+   ],
+   "G17v2b@B184_only_ids": [
+    "agentica_37",
+    "casbin_pycasbin_412",
+    "datacompy_563",
+    "dbt_osmosis_321",
+    "mnemosyne_1085",
+    "pymovements_1600"
+   ]
+  },
+  "G11a@A vs G11a@B184": {
+   "G11a@A_only": 4,
+   "G11a@B184_only": 3,
+   "mcnemar_exact_p": 1.0,
+   "G11a@A_only_ids": [
+    "apiflask_759",
+    "flytekit_3349",
+    "numbers_parser_259",
+    "transparenttorproxy_72"
+   ],
+   "G11a@B184_only_ids": [
+    "agentica_37",
+    "datacompy_563",
+    "pymovements_1600"
+   ]
+  },
+  "G11a@A vs base@A": {
+   "G11a@A_only": 2,
+   "base@A_only": 4,
+   "mcnemar_exact_p": 0.688,
+   "G11a@A_only_ids": [
+    "apiflask_759",
+    "transparenttorproxy_72"
+   ],
+   "base@A_only_ids": [
+    "agentica_37",
+    "httptap_310",
+    "it2_2",
+    "pymovements_1600"
+   ]
+  },
+  "G11a@A vs G17v2a@B179": {
+   "G11a@A_only": 2,
+   "G17v2a@B179_only": 4,
+   "mcnemar_exact_p": 0.688,
+   "G11a@A_only_ids": [
+    "flytekit_3349",
+    "transparenttorproxy_72"
+   ],
+   "G17v2a@B179_only_ids": [
+    "agentica_37",
+    "casbin_pycasbin_412",
+    "datacompy_563",
+    "pymovements_1600"
+   ]
+  },
+  "G11a@A vs G17v2b@B184": {
+   "G11a@A_only": 5,
+   "G17v2b@B184_only": 5,
+   "mcnemar_exact_p": 1.0,
+   "G11a@A_only_ids": [
+    "flytekit_3349",
+    "numbers_parser_259",
+    "openenv_1252",
+    "python_nameparser_683",
+    "transparenttorproxy_72"
+   ],
+   "G17v2b@B184_only_ids": [
+    "agentica_37",
+    "casbin_pycasbin_412",
+    "datacompy_563",
+    "dbt_osmosis_321",
+    "pymovements_1600"
+   ]
+  },
+  "G11a@B184 vs base@A": {
+   "G11a@B184_only": 1,
+   "base@A_only": 4,
+   "mcnemar_exact_p": 0.375,
+   "G11a@B184_only_ids": [
+    "datacompy_563"
+   ],
+   "base@A_only_ids": [
+    "flytekit_3349",
+    "httptap_310",
+    "it2_2",
+    "numbers_parser_259"
+   ]
+  },
+  "G11a@B184 vs G17v2a@B179": {
+   "G11a@B184_only": 0,
+   "G17v2a@B179_only": 3,
+   "mcnemar_exact_p": 0.25,
+   "G11a@B184_only_ids": [],
+   "G17v2a@B179_only_ids": [
+    "apiflask_759",
+    "casbin_pycasbin_412",
+    "numbers_parser_259"
+   ]
+  },
+  "G11a@B184 vs G17v2b@B184": {
+   "G11a@B184_only": 2,
+   "G17v2b@B184_only": 3,
+   "mcnemar_exact_p": 1.0,
+   "G11a@B184_only_ids": [
+    "openenv_1252",
+    "python_nameparser_683"
+   ],
+   "G17v2b@B184_only_ids": [
+    "apiflask_759",
+    "casbin_pycasbin_412",
+    "dbt_osmosis_321"
+   ]
+  },
+  "base@A vs G17v2a@B179": {
+   "base@A_only": 3,
+   "G17v2a@B179_only": 3,
+   "mcnemar_exact_p": 1.0,
+   "base@A_only_ids": [
+    "flytekit_3349",
+    "httptap_310",
+    "it2_2"
+   ],
+   "G17v2a@B179_only_ids": [
+    "apiflask_759",
+    "casbin_pycasbin_412",
+    "datacompy_563"
+   ]
+  },
+  "base@A vs G17v2b@B184": {
+   "base@A_only": 6,
+   "G17v2b@B184_only": 4,
+   "mcnemar_exact_p": 0.754,
+   "base@A_only_ids": [
+    "flytekit_3349",
+    "httptap_310",
+    "it2_2",
+    "numbers_parser_259",
+    "openenv_1252",
+    "python_nameparser_683"
+   ],
+   "G17v2b@B184_only_ids": [
+    "apiflask_759",
+    "casbin_pycasbin_412",
+    "datacompy_563",
+    "dbt_osmosis_321"
+   ]
+  },
+  "G17v2a@B179 vs G17v2b@B184": {
+   "G17v2a@B179_only": 3,
+   "G17v2b@B184_only": 1,
+   "mcnemar_exact_p": 0.625,
+   "G17v2a@B179_only_ids": [
+    "numbers_parser_259",
+    "openenv_1252",
+    "python_nameparser_683"
+   ],
+   "G17v2b@B184_only_ids": [
+    "dbt_osmosis_321"
+   ]
+  }
+ }
+}

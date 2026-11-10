@@ -1,0 +1,66 @@
+{
+ "run": "serve-v1",
+ "cuts": [
+  {
+   "name": "c70",
+   "keep": 0.7,
+   "drop": 0,
+   "group": 1
+  },
+  {
+   "name": "b70",
+   "keep": 0.7,
+   "drop": 0,
+   "group": 32
+  },
+  {
+   "name": "c85",
+   "keep": 0.85,
+   "drop": 0,
+   "group": 1
+  },
+  {
+   "name": "b85",
+   "keep": 0.85,
+   "drop": 0,
+   "group": 32
+  },
+  {
+   "name": "c55",
+   "keep": 0.55,
+   "drop": 0,
+   "group": 1
+  },
+  {
+   "name": "d6",
+   "keep": 1.0,
+   "drop": 6,
+   "group": 32
+  }
+ ],
+ "score_key": "agent_ff",
+ "timings_min": {},
+ "models": {
+  "full": {
+   "rc": 1,
+   "wall_min": 1.2,
+   "stderr_tail": "ss_obj)\n  File \"/usr/lib/python3.12/multiprocessing/popen_spawn_posix.py\", line 42, in _launch\n    prep_data = spawn.get_preparation_data(process_obj._name)\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/multiprocessing/spawn.py\", line 164, in get_preparation_data\n    _check_not_importing_main()\n  File \"/usr/lib/python3.12/multiprocessing/spawn.py\", line 140, in _check_not_importing_main\n    raise RuntimeError('''\nRuntimeError: \n        An attempt has been made to start a new process before the\n        current process has finished its bootstrapping phase.\n\n        This probably means that you are not using fork to start your\n        child processes and you have forgotten to use the proper idiom\n        in the main module:\n\n            if __name__ == '__main__':\n                freeze_support()\n                ...\n\n        The \"freeze_support()\" line can be omitted if the program\n        is not going to be frozen to produce an executable.\n\n        To fix this issue, refer to the \"Safe importing of main module\"\n        section in https://docs.python.org/3/library/multiprocessing.html\n        \nTraceback (most recent call last):\n  File \"/tmp/prune_lib/serve_bench.py\", line 27, in <module>\n    llm = LLM(model=model_dir, tensor_parallel_size=4, max_model_len=32768, gpu_memory_utilization=0.80, dtype='auto',\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.12/dist-packages/vllm/entrypoints/llm.py\", line 382, in __init__\n    self.llm_engine = LLMEngine.from_engine_args(\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/llm_engine.py\", line 177, in from_engine_args\n    return cls(\n           ^^^^\n  File \"/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/llm_engine.py\", line 111, in __init__\n    self.engine_core = EngineCoreClient.make_client(\n                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core_client.py\", line 101, in make_client\n    return SyncMPClient(vllm_config, executor_class, log_stats)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core_client.py\", line 710, in __init__\n    super().__init__(\n  File \"/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core_client.py\", line 535, in __init__\n    with launch_core_engines(\n         ^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.12/contextlib.py\", line 144, in __exit__\n    next(self.gen)\n  File \"/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/utils.py\", line 998, in launch_core_engines\n    wait_for_engine_startup(\n  File \"/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/utils.py\", line 1057, in wait_for_engine_startup\n    raise RuntimeError(\nRuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {}\n"
+  }
+ },
+ "inputs": {
+  "model": "/kaggle/input/models/google/gemma-4/other/gemma-4-31b-it-qat-w4a16-ct/2",
+  "scores": "/kaggle/input/notebooks/verracodeguacas/g4dev-prune-score-gpu/prune/score-v1/scores.npz",
+  "agent_rows": "/kaggle/input/datasets/verracodeguacas/g4dev-g11-data/sft.jsonl",
+  "part1_run": "score-v1"
+ },
+ "disk_free_gb": {
+  "/tmp": 964.1,
+  "out": 19.5
+ },
+ "data": {
+  "heldout_rows": 40,
+  "heldout_own_tokens": 25896,
+  "max_tokens": 8192,
+  "streams": 8
+ }
+}

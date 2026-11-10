@@ -1,0 +1,310 @@
+{
+  "machine": "gpu-4xL4",
+  "started": "2026-10-25 16:51:18",
+  "stages": [
+    {
+      "stage": "env",
+      "t": 0.1,
+      "python": "3.12.13",
+      "gpus": [
+        "NVIDIA L4, 23034 MiB",
+        "NVIDIA L4, 23034 MiB",
+        "NVIDIA L4, 23034 MiB",
+        "NVIDIA L4, 23034 MiB"
+      ],
+      "cpus": 48
+    },
+    {
+      "stage": "train_libs",
+      "t": 128.3,
+      "installed": {}
+    },
+    {
+      "stage": "libs",
+      "t": 138.0,
+      "versions": "2.10.0+cu128 5.13.1 0.19.1 0.46.1 1.13.0"
+    },
+    {
+      "stage": "vllm",
+      "t": 140.7,
+      "version": "0.19.1",
+      "chat_utils_mentions_reasoning_content": true,
+      "wheel_drops_past_thoughts": true,
+      "patched": false,
+      "reasoning_lines": [
+        "reasoning: str | None",
+        "\"\"\"The reasoning content for interleaved thinking.\"\"\"",
+        "reasoning: str | None",
+        "\"\"\"The reasoning content for interleaved thinking.\"\"\"",
+        "reasoning_content: str | None",
+        "\"\"\"Deprecated: The reasoning content for interleaved thinking.\"\"\"",
+        "reasoning = message.get(\"reasoning\")",
+        "# Include reasoning if present for interleaved thinking.",
+        "if reasoning is not None:",
+        "result_msg[\"reasoning\"] = cast(str, reasoning)",
+        "result_msg[\"reasoning_content\"] = cast(",
+        "str, reasoning"
+      ]
+    },
+    {
+      "stage": "repograph_data",
+      "t": 800.1,
+      "split": "priv_eval",
+      "tasks": 221,
+      "trusted": 141,
+      "eval_ids": 125,
+      "excluded_repos": 10,
+      "graphs": 220,
+      "embeddings": 220,
+      "controls": [
+        "/kaggle/input/notebooks/verracodeguacas/g4dev-repograph-controls-cpu/controls/controls.csv"
+      ]
+    },
+    {
+      "stage": "inputs",
+      "t": 800.1,
+      "sft": "/kaggle/input/notebooks/verracodeguacas/g4dev-render-daily-cpu/render/sft.jsonl",
+      "qat_bf16": "/kaggle/input/models/google/gemma-4/transformers/gemma-4-31b-it-qat-q4_0-unquantized/2",
+      "serve": "/kaggle/input/models/google/gemma-4/other/gemma-4-31b-it-qat-w4a16-ct/2",
+      "env_args": [
+        "--py313-kit",
+        "/kaggle/input/datasets/verracodeguacas/g4dev-sandbox313",
+        "--find-links",
+        "/kaggle/input/datasets/verracodeguacas/g4dev-py313-wheels",
+        "--official-env",
+        "--repo-wheels",
+        "/kaggle/input/datasets/debmalya84/repograph-verified-swe-tasks-wheels"
+      ],
+      "eval_data": "/kaggle/working/rgdata"
+    },
+    {
+      "stage": "adapter_reused",
+      "t": 873.2,
+      "src": "/kaggle/input/notebooks/verracodeguacas/gemma-4-31b-agent-lora-short-thought-trainer/adapter_out",
+      "files": [
+        "adapter_config.json",
+        "adapter_model.safetensors"
+      ]
+    },
+    {
+      "stage": "train_done",
+      "t": 873.2,
+      "returncode": 0,
+      "minutes": 0.0,
+      "first": [],
+      "last": [],
+      "examples": 0,
+      "tok_per_s": null,
+      "loss_first": [],
+      "loss_last": [],
+      "oom_skips": 0,
+      "probe": [],
+      "nan_or_abort": [],
+      "steps": null,
+      "checkpoints": 0,
+      "val": []
+    },
+    {
+      "stage": "adapter_b",
+      "t": 937.5,
+      "src": "/kaggle/input/notebooks/verracodeguacas/gemma-4-31b-agent-lora-short-thought-trainer-v3/adapter_out",
+      "files": [
+        "adapter_config.json",
+        "adapter_model.safetensors"
+      ]
+    },
+    {
+      "stage": "server_up",
+      "t": 1376.7,
+      "startup_s": 412.5,
+      "served": [
+        "/kaggle/input/models/google/gemma-4/other/gemma-4-31b-it-qat-w4a16-ct/2",
+        "g4dev_random",
+        "g4dev_sft_b",
+        "g4dev_sft_v1"
+      ]
+    },
+    {
+      "stage": "lora_check",
+      "t": 1381.5,
+      "base": "    \"\"\" own same same samethought",
+      "random_adapter": "thoughtthoughtthoughtthought",
+      "trained_adapter": "    \"\"\" own same same samethought",
+      "random_diff": 98.9175,
+      "trained_diff": 0.8594
+    },
+    {
+      "stage": "canary_start",
+      "t": 1381.5,
+      "budget_min": 25.0,
+      "concurrency": 2
+    },
+    {
+      "stage": "canary_done",
+      "t": 1665.2,
+      "base": {
+        "status": null,
+        "healthy": null,
+        "n_tasks": null,
+        "n_finished": null,
+        "n_resolved": null,
+        "n_errors": null,
+        "n_llm_calls": null,
+        "tool_calls_per_llm_call": null,
+        "resolved_ids": null
+      },
+      "adapter": {
+        "status": "complete",
+        "healthy": true,
+        "n_tasks": 2,
+        "n_finished": 2,
+        "n_resolved": 2,
+        "n_errors": 0,
+        "n_llm_calls": 48,
+        "tool_calls_per_llm_call": 0.92,
+        "resolved_ids": [
+          "rich_2943",
+          "rich_3043"
+        ]
+      }
+    },
+    {
+      "stage": "canary_behaviour",
+      "t": 1665.3,
+      "base": {
+        "steps": 0,
+        "text_p50": null,
+        "text_p90": null,
+        "stale_repeat_share": null,
+        "max_stale_chain": 0
+      },
+      "adapter": {
+        "steps": 50,
+        "text_p50": 156,
+        "text_p90": 1535,
+        "stale_repeat_share": 0.0,
+        "max_stale_chain": 1
+      }
+    },
+    {
+      "stage": "eval_gate",
+      "t": 1665.3,
+      "go": true,
+      "why": [],
+      "val": {},
+      "behaviour": {
+        "base": {
+          "steps": 0,
+          "text_p50": null,
+          "text_p90": null,
+          "stale_repeat_share": null,
+          "max_stale_chain": 0
+        },
+        "adapter": {
+          "steps": 50,
+          "text_p50": 156,
+          "text_p90": 1535,
+          "stale_repeat_share": 0.0,
+          "max_stale_chain": 1
+        }
+      }
+    },
+    {
+      "stage": "repograph_p0_start",
+      "t": 1665.3,
+      "budget_min": 502.2,
+      "concurrency": 8
+    },
+    {
+      "stage": "repograph_p0_done",
+      "t": 16378.4,
+      "base": {
+        "status": "complete",
+        "healthy": true,
+        "n_tasks": 125,
+        "n_finished": 125,
+        "n_resolved": 35,
+        "n_errors": 53,
+        "n_llm_calls": 2043,
+        "tool_calls_per_llm_call": 0.91,
+        "resolved_ids": [
+          "yamale_278",
+          "python_nameparser_683",
+          "apiflask_759",
+          "datacompy_563",
+          "justhtml_46",
+          "blackjax_1041",
+          "felupe_1101",
+          "agentica_37",
+          "datacompy_526",
+          "apiflask_756",
+          "blackjax_1030",
+          "pymc_marketing_3005",
+          "powertools_lambda_python_8518",
+          "blackjax_1042",
+          "powertools_lambda_python_8453",
+          "fakesnow_386",
+          "drawpyo_133",
+          "graphtage_130",
+          "apiflask_749",
+          "mlsynth_674",
+          "graphtage_127",
+          "py7zr_682",
+          "yamllint_776",
+          "py7zr_735",
+          "qwed_verification_160",
+          "metricflow_2092",
+          "btclib_2452",
+          "jsonargparse_973",
+          "aiosonic_592",
+          "marko_242",
+          "btclib_2497",
+          "felupe_1127",
+          "powertools_lambda_python_8488",
+          "modern_di_540",
+          "fakesnow_377"
+        ]
+      },
+      "adapter": {
+        "status": "complete",
+        "healthy": true,
+        "n_tasks": 125,
+        "n_finished": 125,
+        "n_resolved": 27,
+        "n_errors": 78,
+        "n_llm_calls": 1833,
+        "tool_calls_per_llm_call": 0.94,
+        "resolved_ids": [
+          "yamale_278",
+          "blackjax_1041",
+          "felupe_1101",
+          "agentica_37",
+          "blackjax_1030",
+          "pymc_marketing_3005",
+          "powertools_lambda_python_8518",
+          "blackjax_1042",
+          "powertools_lambda_python_8453",
+          "fakesnow_386",
+          "drawpyo_133",
+          "graphtage_130",
+          "apiflask_749",
+          "graphtage_127",
+          "py7zr_735",
+          "qwed_verification_160",
+          "metricflow_2092",
+          "btclib_2452",
+          "jsonargparse_973",
+          "aiosonic_592",
+          "marko_242",
+          "btclib_2497",
+          "felupe_1127",
+          "powertools_lambda_python_8488",
+          "justhtml_14",
+          "modern_di_540",
+          "fakesnow_377"
+        ]
+      }
+    }
+  ],
+  "total_min": 273.1
+}

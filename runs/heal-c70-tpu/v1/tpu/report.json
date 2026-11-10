@@ -1,0 +1,304 @@
+{
+ "mode": "train",
+ "rc": 0,
+ "total_min": 144.6,
+ "steps": 1260,
+ "steps_applied": 1260,
+ "first_loss": 0.3746,
+ "last_loss": 0.1827,
+ "loss_by_epoch": {
+  "a:ep0": 0.1156,
+  "a:ep1": 0.0846,
+  "b:ep0": 0.404,
+  "b:ep1": 0.3398
+ },
+ "step_s_median_by_len": {
+  "8192": 5.91
+ },
+ "tok_s_median": 2773.8,
+ "compile_s": [
+  [
+   8192,
+   "flash512",
+   338.78
+  ],
+  [
+   8192,
+   "flash512",
+   271.31
+  ]
+ ],
+ "peak_hbm_gb": 9.24,
+ "exports": [
+  {
+   "tag": "a:step96",
+   "dir": "/kaggle/working/adapter_out",
+   "match": true,
+   "bytes": 489840784,
+   "b_absmax": 0.00693934690207243,
+   "t_min": 29.29
+  },
+  {
+   "tag": "a:step297",
+   "dir": "/kaggle/working/adapter_out",
+   "match": true,
+   "bytes": 489840784,
+   "b_absmax": 0.018284782767295837,
+   "t_min": 49.41
+  },
+  {
+   "tag": "a:ep0",
+   "dir": "/kaggle/working/adapters/ep0",
+   "match": true,
+   "bytes": 489840784,
+   "b_absmax": 0.01916860230267048,
+   "t_min": 51.22
+  },
+  {
+   "tag": "a:step516",
+   "dir": "/kaggle/working/adapter_out",
+   "match": true,
+   "bytes": 489840784,
+   "b_absmax": 0.023168187588453293,
+   "t_min": 72.21
+  },
+  {
+   "tag": "a:final",
+   "dir": "/kaggle/working/adapter_out",
+   "match": true,
+   "bytes": 489840784,
+   "b_absmax": 0.023546138778328896,
+   "t_min": 83.63
+  },
+  {
+   "tag": "b:step184",
+   "dir": "/kaggle/working/adapter_out_b",
+   "match": true,
+   "bytes": 489840784,
+   "b_absmax": 0.012102060951292515,
+   "t_min": 104.69
+  },
+  {
+   "tag": "b:ep0",
+   "dir": "/kaggle/working/adapters_b/ep0",
+   "match": true,
+   "bytes": 489840784,
+   "b_absmax": 0.012148953042924404,
+   "t_min": 115.84
+  },
+  {
+   "tag": "b:step551",
+   "dir": "/kaggle/working/adapter_out_b",
+   "match": true,
+   "bytes": 489840784,
+   "b_absmax": 0.012474213726818562,
+   "t_min": 136.78
+  },
+  {
+   "tag": "b:final",
+   "dir": "/kaggle/working/adapter_out_b",
+   "match": true,
+   "bytes": 489840784,
+   "b_absmax": 0.012640558183193207,
+   "t_min": 143.53
+  }
+ ],
+ "events": [
+  {
+   "stage": "step_error",
+   "t_min": 14.2,
+   "phase": "a",
+   "k": 0,
+   "bucket": 12288,
+   "as_len": 12288,
+   "rung": "flash512",
+   "kind": "memory",
+   "error": "JaxRuntimeError: RESOURCE_EXHAUSTED: E1000: CompileTimeHbmOom: XLA:TPU compile permanent error. Ran out of memory in memory space hbm. Used 15.75G of 15.75G hbm. Exceeded hbm capacity by 3.73M.\n\nTotal hbm usage >= 16.00G:\n    reserved        258.00M \n    program           8.18G \n    arguments         7.57G \n\nOutput size 7.57G; shares 7.57G with arguments.\n\nProgram hbm requirement 8.18G:\n    global           41.92M\n    scoped            3.16M\n    HLO temp          7.90G (100.0% utilization: Unpadded (6.25G) Padded (6.25G), 20.8% fragmentation (1.65G))\n    overlays        246.25M\n\n  Largest program allocations in hbm:\n\n  1. Size: 246.25M\n     XLA label: overlays\n     Allocation type: overlays\n     ==========================\n\n  2. Size: 192.00M\n     Operator: op_name=\"jit(step)/transpose(jvp(jvp()))/checkpoint/convert_element_type\"\n     Shape: f32[1,12288,8,512]{3,1,2,0:T(8,128)}\n     Unpadded size: 192.00M\n     XLA label: convert_bitcast_fusion.6 = fusion(get-tuple-element.14912), kind=kLoop, calls=fused_computation.271\n     Allocation type: HLO temp\n     ==========================\n\n  3. Size: 126.00M\n     Operator: op_name=\"jit(step)/transpose(jvp(jvp()))/checkpoint/rematted_computation/dot_general\"\n     Shape: bf16[1,12288,5376]{2,1,0:T(8,128)(2,1)}\n     Unpadded size: 126.00M\n     XLA label: fusion.3844 = fusion(fusion.3851, copy-done.12227, convolution_multiply_fusion.82, all-gather.17039, ...(+1)), kind=kOutput, calls=fused_computation.5500\n     Allocation type: HLO temp\n     =============",
+   "peak_gb": 9.24,
+   "limit_gb": 15.75
+  },
+  {
+   "stage": "demote",
+   "t_min": 14.2,
+   "length": 12288,
+   "to": 8192
+  },
+  {
+   "stage": "phase2_start",
+   "t_min": 84.59,
+   "lr": 0.0001,
+   "epochs": 2,
+   "source_contains": "",
+   "rows": 628,
+   "left_min": 203.1,
+   "b_absmax_after_reset": 0.0,
+   "opt_absmax_after_reset": 0.0
+  }
+ ],
+ "done": [
+  {
+   "stage": "done",
+   "t_min": 84.5,
+   "phase": "a",
+   "stop": "plan_done",
+   "steps_ok": 630,
+   "planned": 630,
+   "tokens": 10028689,
+   "step_errors": 1,
+   "rung": "flash512",
+   "demoted": [
+    12288
+   ],
+   "truncated_label_frac_kept": 0.7,
+   "min": 81.9,
+   "adapter_matches_ref": true
+  },
+  {
+   "stage": "done",
+   "t_min": 144.4,
+   "phase": "b",
+   "stop": "plan_done",
+   "steps_ok": 630,
+   "planned": 630,
+   "tokens": 10028689,
+   "step_errors": 1,
+   "rung": "flash512",
+   "demoted": [
+    12288
+   ],
+   "truncated_label_frac_kept": 0.7,
+   "min": 141.8,
+   "adapter_matches_ref": true
+  }
+ ],
+ "heal": {
+  "mask": {
+   "layers": 60,
+   "kept_min": 14848,
+   "kept_max": 14848,
+   "units": 21504,
+   "kept_share": 0.6905,
+   "sha": "9bcf662fef51d9ec963d9d5b51cb7765ca5b96dcf73906ff7817f498333481e1",
+   "kd": true,
+   "temp": 1.0
+  },
+  "evals": [
+   {
+    "t_min": 9.26,
+    "tag": "start",
+    "len": 8192,
+    "rows": 40,
+    "teacher": {
+     "own_nats": 0.25768,
+     "all_nats": 2.56978,
+     "own_tokens": 25896,
+     "all_tokens": 320571,
+     "s": 112.2
+    },
+    "student": {
+     "own_nats": 0.3427,
+     "all_nats": 2.72273,
+     "own_tokens": 25896,
+     "all_tokens": 320571,
+     "s": 195.2,
+     "kl_own": 0.09804,
+     "kl_all": 0.29594
+    }
+   },
+   {
+    "t_min": 52.11,
+    "tag": "a:ep0",
+    "len": 8192,
+    "rows": 40,
+    "student": {
+     "own_nats": 0.27769,
+     "all_nats": 2.43831,
+     "own_tokens": 25896,
+     "all_tokens": 320571,
+     "s": 53.2,
+     "kl_own": 0.0459,
+     "kl_all": 0.10359
+    }
+   },
+   {
+    "t_min": 84.5,
+    "tag": "a:final",
+    "len": 8192,
+    "rows": 40,
+    "student": {
+     "own_nats": 0.27864,
+     "all_nats": 2.41767,
+     "own_tokens": 25896,
+     "all_tokens": 320571,
+     "s": 52.1,
+     "kl_own": 0.04218,
+     "kl_all": 0.09437
+    }
+   },
+   {
+    "t_min": 116.71,
+    "tag": "b:ep0",
+    "len": 8192,
+    "rows": 40,
+    "student": {
+     "own_nats": 0.18597,
+     "all_nats": 0.3782,
+     "own_tokens": 25896,
+     "all_tokens": 320571,
+     "s": 51.9,
+     "kl_own": 0.20653,
+     "kl_all": 6.01098
+    }
+   },
+   {
+    "t_min": 144.4,
+    "tag": "b:final",
+    "len": 8192,
+    "rows": 40,
+    "student": {
+     "own_nats": 0.17945,
+     "all_nats": 0.37099,
+     "own_tokens": 25896,
+     "all_tokens": 320571,
+     "s": 51.9,
+     "kl_own": 0.24303,
+     "kl_all": 6.58381
+    }
+   }
+  ],
+  "arms": {
+   "a": {
+    "kd": true
+   },
+   "b": {
+    "kd": false
+   }
+  },
+  "data": {
+   "rows_total": 694,
+   "train_rows": 628,
+   "train_tokens": 6928925,
+   "train_own_tokens": 396984,
+   "train_rows_cut_at_max_len": 381,
+   "skipped": 0,
+   "positions": "all",
+   "eval_rows": 40,
+   "eval_tokens": 320611,
+   "eval_own_tokens": 25896,
+   "eval_tasks_in_train": 0,
+   "train_tasks_held": 0,
+   "mask_keep_per_layer": 14848,
+   "mask_units": 21504,
+   "mask_layers": 60,
+   "mask_sha": "9bcf662fef51d9ec963d9d5b51cb7765ca5b96dcf73906ff7817f498333481e1"
+  }
+ },
+ "adapters": {
+  "adapter_out_b": 489840784,
+  "adapter_out": 489840784,
+  "adapters_b/ep1": 489840784,
+  "adapters_b/ep0": 489840784,
+  "adapters/ep1": 489840784,
+  "adapters/ep0": 489840784
+ }
+}

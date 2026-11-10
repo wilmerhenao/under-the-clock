@@ -1,0 +1,44 @@
+{
+ "base": {
+  "finished": 64,
+  "resolved": 19,
+  "timeouts": 21,
+  "task_s_mean_median": [
+   997,
+   1001
+  ],
+  "tool_calls_mean": 17.7,
+  "other_errors": {
+   "Evaluation error: pytest missing in official-env task venv": 1
+  }
+ },
+ "G11a": {
+  "finished": 70,
+  "resolved": 19,
+  "timeouts": 21,
+  "task_s_mean_median": [
+   954,
+   998
+  ],
+  "tool_calls_mean": 16.2,
+  "other_errors": {}
+ },
+ "paired": {
+  "tasks": 64,
+  "resolved_base": 19,
+  "resolved_G11a": 17,
+  "base_only": 4,
+  "G11a_only": 2,
+  "mcnemar_exact_p": 0.688,
+  "base_only_ids": [
+   "agentica_37",
+   "httptap_310",
+   "it2_2",
+   "pymovements_1600"
+  ],
+  "G11a_only_ids": [
+   "apiflask_759",
+   "transparenttorproxy_72"
+  ]
+ }
+}

@@ -1,0 +1,34 @@
+{
+ "rating_wasteful": 432,
+ "side_r_wasteful": 381,
+ "same_call": 138,
+ "pairs": 589,
+ "pairs_wasteful": 400,
+ "side_c_wasteful": 51,
+ "rating_good": 73,
+ "side_r_good": 65,
+ "rating_slow": 182,
+ "side_c_slow": 42,
+ "dropped_too_long": 28,
+ "side_r_slow": 140,
+ "pairs_slow": 164,
+ "dropped_edit_unseen": 24,
+ "rating_wrong": 30,
+ "side_c_wrong": 5,
+ "pairs_wrong": 25,
+ "side_r_wrong": 25,
+ "side_c_good": 8,
+ "dropped_bad_tool": 3,
+ "plan_chars_p10_50_90": [
+  219,
+  322,
+  417
+ ],
+ "rejected_thought_chars_p10_50_90": [
+  608,
+  2359,
+  6587
+ ],
+ "lines": 1178,
+ "est_tokens": 11040611
+}

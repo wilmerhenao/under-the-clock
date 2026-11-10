@@ -1,0 +1,3 @@
+sub-v9T1 (2026-10-28, B142): sub-v9c with temperature 1.0 (Gemma 4's default sampling; top_p 0.95 unchanged, top_k left
+to the server's generation_config default 64). Evidence: public 0.24 lineage and loop-breaker bundles sample at 1.0;
+Thakur's 129-task ablation 51 (T 1.0) vs 48 (T 0.2); our traces repeat/re-read 3x more after compaction (B85).

@@ -1,0 +1,2 @@
+{"instance_id": "rich_2943", "repo": "Textualize/rich", "resolved": true, "agent_patch_size": 400, "test_exit_code": 0, "duration_seconds": 135.12, "error": null, "tool_calls": 16, "total_llm_calls": 19, "task_index": 1}
+{"instance_id": "rich_3043", "repo": "Textualize/rich", "resolved": true, "agent_patch_size": 813, "test_exit_code": 0, "duration_seconds": 368.36, "error": null, "tool_calls": 22, "total_llm_calls": 24, "task_index": 2}

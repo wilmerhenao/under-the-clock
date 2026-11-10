@@ -1,0 +1,140 @@
+{
+ "mode": "train",
+ "rc": 0,
+ "total_min": 201.7,
+ "steps": 1182,
+ "steps_applied": 1182,
+ "first_loss": -0.0433,
+ "last_loss": 0.3881,
+ "loss_by_epoch": {
+  "a:ep0": -50.1272,
+  "a:ep1": 0.2978
+ },
+ "step_s_median_by_len": {
+  "8192": 4.8,
+  "12288": 7.02,
+  "16384": 9.33,
+  "20480": 12.05
+ },
+ "tok_s_median": 2821.1,
+ "compile_s": [
+  [
+   8192,
+   "flash512",
+   257.89
+  ],
+  [
+   16384,
+   "flash512",
+   256.28
+  ],
+  [
+   20480,
+   "flash512",
+   258.89
+  ],
+  [
+   12288,
+   "flash512",
+   258.24
+  ]
+ ],
+ "peak_hbm_gb": 9.85,
+ "exports": [
+  {
+   "tag": "a:step30",
+   "dir": "/kaggle/working/adapter_out",
+   "match": true,
+   "bytes": 489840784,
+   "b_absmax": 0.0003893832035828382,
+   "t_min": 52.96
+  },
+  {
+   "tag": "a:step208",
+   "dir": "/kaggle/working/adapter_out",
+   "match": true,
+   "bytes": 489840784,
+   "b_absmax": 0.006608649156987667,
+   "t_min": 73.07
+  },
+  {
+   "tag": "a:step388",
+   "dir": "/kaggle/working/adapter_out",
+   "match": true,
+   "bytes": 489840784,
+   "b_absmax": 0.01450719591230154,
+   "t_min": 93.15
+  },
+  {
+   "tag": "a:step570",
+   "dir": "/kaggle/working/adapter_out",
+   "match": true,
+   "bytes": 489840784,
+   "b_absmax": 0.018453553318977356,
+   "t_min": 113.28
+  },
+  {
+   "tag": "a:ep0",
+   "dir": "/kaggle/working/adapters/ep0",
+   "match": true,
+   "bytes": 489840784,
+   "b_absmax": 0.018691042438149452,
+   "t_min": 115.71
+  },
+  {
+   "tag": "a:step774",
+   "dir": "/kaggle/working/adapter_out",
+   "match": true,
+   "bytes": 489840784,
+   "b_absmax": 0.018811246380209923,
+   "t_min": 155.38
+  },
+  {
+   "tag": "a:step952",
+   "dir": "/kaggle/working/adapter_out",
+   "match": true,
+   "bytes": 489840784,
+   "b_absmax": 0.01879020221531391,
+   "t_min": 175.5
+  },
+  {
+   "tag": "a:step1131",
+   "dir": "/kaggle/working/adapter_out",
+   "match": true,
+   "bytes": 489840784,
+   "b_absmax": 0.018778523430228233,
+   "t_min": 195.61
+  },
+  {
+   "tag": "a:final",
+   "dir": "/kaggle/working/adapter_out",
+   "match": true,
+   "bytes": 489840784,
+   "b_absmax": 0.018776021897792816,
+   "t_min": 201.37
+  }
+ ],
+ "events": [],
+ "done": [
+  {
+   "stage": "done",
+   "t_min": 201.37,
+   "phase": "a",
+   "stop": "plan_done",
+   "steps_ok": 1182,
+   "planned": 1182,
+   "tokens": 22160462,
+   "step_errors": 0,
+   "rung": "flash512",
+   "demoted": [],
+   "truncated_label_frac_kept": null,
+   "min": 196.2,
+   "adapter_matches_ref": true
+  }
+ ],
+ "adapters": {
+  "adapter_out": 489840784,
+  "adapters/ep1": 489840784,
+  "adapters/ep0": 489840784
+ }
+}

@@ -1,0 +1,62 @@
+{
+ "G11a": {
+  "finished": 91,
+  "resolved": 27,
+  "timeouts": 28,
+  "task_s_mean_median": [
+   745,
+   793
+  ],
+  "tool_calls_mean": 15.6,
+  "other_errors": {
+   "Evaluation error: pytest missing in official-env task venv": 2,
+   "Sandbox execution error: pytest missing in official-env task": 1
+  }
+ },
+ "G17v1": {
+  "finished": 99,
+  "resolved": 23,
+  "timeouts": 35,
+  "task_s_mean_median": [
+   687,
+   676
+  ],
+  "tool_calls_mean": 11.9,
+  "other_errors": {
+   "Evaluation error: pytest missing in official-env task venv": 1
+  }
+ },
+ "paired": {
+  "tasks": 91,
+  "resolved_G11a": 27,
+  "resolved_G17v1": 20,
+  "G11a_only": 10,
+  "G17v1_only": 3,
+  "mcnemar_exact_p": 0.092,
+  "G11a_only_ids": [
+   "apiflask_759",
+   "datacompy_526",
+   "drawpyo_133",
+   "graphtage_127",
+   "httptap_310",
+   "ifetch_36",
+   "justhtml_46",
+   "numbers_parser_259",
+   "pymovements_1600",
+   "python_nameparser_683"
+  ],
+  "G17v1_only_ids": [
+   "blackjax_1041",
+   "flytekit_3349",
+   "graphtage_163"
+  ]
+ },
+ "crosscheck_base_vs_earlier_run": {
+  "tasks": 70,
+  "resolved_now": 21,
+  "resolved_earlier": 20,
+  "agree": 61,
+  "now_only": 5,
+  "earlier_only": 4
+ }
+}
