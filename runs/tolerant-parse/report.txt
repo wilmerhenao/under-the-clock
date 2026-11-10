@@ -1,0 +1,16 @@
+serve-v5 (109 states)
+      full: malformed  2 of 102 calls, repaired  2, then equal to the full model's call  0
+    full_b: malformed  2 of 102 calls, repaired  2, then equal to the full model's call  0
+       c85: malformed  6 of 101 calls, repaired  6, then equal to the full model's call  3
+       c70: malformed  8 of 100 calls, repaired  8, then equal to the full model's call  2
+   c70+kd~: malformed  2 of 105 calls, repaired  2, then equal to the full model's call  1
+    c70own: malformed  6 of  91 calls, repaired  6, then equal to the full model's call  1
+       c55: malformed 14 of  96 calls, repaired  9, then equal to the full model's call  4
+serve-v6 (141 states)
+      full: malformed  2 of 131 calls, repaired  2, then equal to the full model's call  0
+       c55: malformed 20 of 122 calls, repaired 11, then equal to the full model's call  4
+   c55role: malformed 12 of 112 calls, repaired 11, then equal to the full model's call  3
+serve-v7 (109 states)
+      full: malformed  2 of 100 calls, repaired  2, then equal to the full model's call  0
+    full_b: malformed  2 of 103 calls, repaired  2, then equal to the full model's call  0
+total {'malformed': 78, 'repaired': 63, 'exact': 18}

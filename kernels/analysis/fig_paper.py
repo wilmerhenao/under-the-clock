@@ -156,16 +156,18 @@ def framework():
     ax.plot([1.30, 4.18], [2.80, 2.80], color=INK2, lw=0.8)
     for x in (1.30, 4.18):
         ax.plot([x, x], [2.75, 2.85], color=INK2, lw=0.8)
-    ax.text(2.74, 2.86, '8 minutes per task: every step spends the clock', fontsize=6.6, color=INK2, ha='center',
-            va='bottom')
+    ax.text(2.74, 2.86, '8 minutes and 24 calls per task: every step spends the clock', fontsize=6.6, color=INK2,
+            ha='center', va='bottom')
     # the step-time model
     box(ax, 1.30, 1.50, 2.88, 0.42, TINT['eq'], ec=INK2, lw=0.9)
-    ax.text(3.28, 1.77, 'seconds per step  ≈  a  +  ', fontsize=8.2, color=INK, ha='right', va='center',
+    ax.text(3.28, 1.815, 'seconds per step  ≈  a  +  ', fontsize=8.2, color=INK, ha='right', va='center',
             weight='bold')
     for x, t, c in ((3.35, 'n', GREEN), (3.45, '·', INK), (3.55, 'b', GREEN)):
-        ax.text(x, 1.77, t, fontsize=8.2, color=c, ha='center', va='center', weight='bold')
-    ax.text(2.74, 1.59, 'a = 16.7 s per call,  n = tokens written,  b = 0.139 s per token', fontsize=6.0,
+        ax.text(x, 1.815, t, fontsize=8.2, color=c, ha='center', va='center', weight='bold')
+    ax.text(2.74, 1.655, 'a = 16.7 s per call,  n = tokens written,  b = 0.139 s per token', fontsize=6.0,
             color=INK2, ha='center', va='center')
+    ax.text(2.74, 1.565, 'fit at 16 concurrent requests; one stream alone: b = 0.026 s', fontsize=5.4, color=MUTED,
+            ha='center', va='center')
     arrow(ax, (2.01, 2.12), (2.01, 1.92), color=MUTED, style='-')
     # the two levers
     for x, title, lines, target in (
@@ -173,7 +175,7 @@ def framework():
              ['LoRA on the agent\'s own verified runs', 'supervise calls made after short reasoning',
               'a teacher at the agent\'s decision points'], 3.08),
             (2.80, 'Lever 2: pruning (Section 4)  →  b',
-             ['cut 30-45% of MLP channels, scored on agent traces', 'serve the cut in 4 bits',
+             ['keep 70% or 55% of MLP channels, by agent scores', 'serve the cut in 4 bits',
               'heal: the full model teaches (KL); merge into 4 bits'], 3.37)):
         box(ax, x, 0.50, 2.68, 0.80, TINT['lever'], ec='#9fd6bb')
         ax.text(x + 0.10, 1.17, title, fontsize=7.0, weight='bold', color=INK, va='center')
@@ -334,7 +336,7 @@ def speed():
     import numpy as np
     d = 'runs/prune-serve-gpu/v3/prune/serve-v1/'
     gib = 1.073741824
-    size = {'full': 21.93, 'c85': 20.11, 'c70': 18.29, 'c55': 16.74, 'b85': 20.11, 'b70': 18.29, 'd6': 20.16}  # GiB, B175
+    size = {'full': 21.668, 'c85': 20.11, 'c70': 18.29, 'c55': 16.74, 'b85': 20.11, 'b70': 18.29, 'd6': 20.16}  # GiB, B175; full = its model.safetensors, 23,265,352,448 bytes (B208)
     rep = {r['model']: r for r in json.load(open(d + 'report.json'))['table']}
     P = {}
     for m, g in size.items():
@@ -536,7 +538,7 @@ def speed_col():
     import numpy as np
     d = 'runs/prune-serve-gpu/v3/prune/serve-v1/'
     gib = 1.073741824
-    size = {'full': 21.93, 'c85': 20.11, 'c70': 18.29, 'c55': 16.74, 'b85': 20.11, 'b70': 18.29, 'd6': 20.16}  # GiB, B175
+    size = {'full': 21.668, 'c85': 20.11, 'c70': 18.29, 'c55': 16.74, 'b85': 20.11, 'b70': 18.29, 'd6': 20.16}  # GiB, B175; full = its model.safetensors, 23,265,352,448 bytes (B208)
     rep = {r['model']: r for r in json.load(open(d + 'report.json'))['table']}
     P = {}
     for m, g in size.items():

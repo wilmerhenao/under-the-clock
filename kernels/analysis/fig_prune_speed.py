@@ -15,8 +15,8 @@ import numpy as np  # noqa: E402
 D = 'runs/prune-serve-gpu/v3/prune/serve-v1/'
 OUT = sys.argv[1] if len(sys.argv) > 1 else 'docs/paper/fig_prune_speed.png'
 GIB = 1.073741824
-# weights file size in GiB (B175; the full model's is derived from its shards)
-SIZE_GIB = {'full': 21.93, 'c85': 20.11, 'c70': 18.29, 'c55': 16.74, 'b85': 20.11, 'b70': 18.29, 'd6': 20.16}
+# weights file size in GiB (B175; the full model's is its model.safetensors, 23,265,352,448 bytes, B208)
+SIZE_GIB = {'full': 21.668, 'c85': 20.11, 'c70': 18.29, 'c55': 16.74, 'b85': 20.11, 'b70': 18.29, 'd6': 20.16}
 rep = {r['model']: r for r in json.load(open(D + 'report.json'))['table']}
 P = {}
 for m, g in SIZE_GIB.items():

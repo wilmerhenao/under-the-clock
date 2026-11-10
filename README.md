@@ -32,13 +32,13 @@ numbers and figures.
 
 ## Highlights
 
-- **Fine-tuning moves reasoning length before it moves actions.** Supervising only the tool calls made after short
-  reasoning solved **25 vs 18** development tasks (8/1 discordant, p 0.039), though not on unseen repositories. A
+- **Fine-tuning moves reasoning length first.** Supervising only the tool calls made after short reasoning solved
+  **25 vs 18** development tasks (8/1 discordant, p 0.039, exploratory), though not on unseen repositories. A
   teacher's preferences halved the slow steps (**125 s → 56 s** at the 90th percentile) but broke the agent's stopping.
 - **Pruning breaks tool-call syntax first.** Keeping 70% of the MLP channels, chosen on agent trajectories, decodes
   **1.15×** faster at +0.08 nats per agent token, yet the cut solved **20 of 112** tasks against 32 and 34 for two
   full-model runs (p 1.5e-5): its string arguments ran into one another in **24%** of its calls.
-- **Healing from the full model fixes it.** A LoRA trained with KL to the full model and merged into the 4-bit weights by
+- **Healing from the full model repairs the calls.** A LoRA trained with KL to the full model and merged into the 4-bit weights by
   stochastic rounding keeps the speed and solves **32 of 112**, within noise of the full model (**−1 task**, 95%
   interval −7.5 to +5).
 - **Average loss ranks cuts but cannot find the failure.** A 15-minute next-action test locates it, and shows a
@@ -85,7 +85,7 @@ flowchart LR
   </tr>
   <tr>
     <td width="50%"><img src="docs/paper/figs/fig_tasks.png" alt="Figure 4"><br><sub><b>Figure 4.</b> Same-session comparisons on 112 unseen-repository tasks. Grey band: two runs of the full model.</sub></td>
-    <td width="50%"><img src="docs/paper/figs/fig_nextaction.png" alt="Figure 5"><br><sub><b>Figure 5.</b> The next-action test at 102 held-out states. Grey band: two engines with the same weights.</sub></td>
+    <td width="50%"><img src="docs/paper/figs/fig_nextaction.png" alt="Figure 5"><br><sub><b>Figure 5.</b> The next-action test at 109 held-out states. Grey band: the same weights with other batching.</sub></td>
   </tr>
   <tr>
     <td width="50%"><img src="docs/paper/figs/fig_failure_moves.png" alt="Figure 6"><br><sub><b>Figure 6.</b> Scoring by token role (55% cut): the closing quote recovers and the opener breaks.</sub></td>
@@ -102,7 +102,8 @@ pip install matplotlib numpy
 
 python kernels/analysis/fig_paper.py            # the seven figures, Kaggle layout -> docs/paper/figs/
 python kernels/analysis/fig_paper.py --twocol   # arXiv two-column layout       -> docs/paper/arxiv/figs/
-python kernels/analysis/late_episodes.py        # "seven fewer timeouts, worth about 3 tasks"
+python kernels/analysis/late_episodes.py        # how episodes end (clock, call cap, own stop) and how often each passes
+python kernels/analysis/tolerant_parse.py       # a tolerant call parser repairs 53 of the cuts' 68 malformed next calls
 python kernels/analysis/heal_report.py runs/heal-c70-tpu/v1/tpu/log.jsonl   # the healing criteria
 
 cd docs/paper/arxiv && pdflatex main && pdflatex main   # the paper (main.bbl is included)
@@ -113,6 +114,7 @@ cd docs/paper/arxiv && pdflatex main && pdflatex main   # the paper (main.bbl is
 | path | contents |
 |---|---|
 | [`docs/paper/`](docs/paper/) | the Kaggle text, the arXiv source (`arxiv/main.tex`, `refs.bib`, `main.bbl`), the PDF, the figures |
+| [`docs/preregistrations.md`](docs/preregistrations.md) | the pre-registered analysis plans, verbatim from the project's dated logbook |
 | [`kernels/smoke/`](kernels/smoke/) | sources of the Kaggle notebooks (agent runs through the competition harness, paired evaluation, TPU training and serving entry points); `build.py` assembles each notebook |
 | [`kernels/train/`](kernels/train/) | training rows (compaction simulator, tool-call spans for healing) and the TPU LoRA trainer (JAX / Tunix) |
 | [`kernels/colab/prune/`](kernels/colab/prune/) | channel scores and token roles, 4-bit cuts, LoRA merges by stochastic rounding, vLLM serving and the next-action bench, with tests |
@@ -127,11 +129,11 @@ The paper names each fine-tuned adapter after what it supervises; the run direct
 
 | paper | run ID | supervision | trained in | evaluated in |
 |---|---|---|---|---|
-| Imitation | G2b | stronger models' trajectories, whole turns | `g4dev-train-g2b-gpu` v1 | the same notebook |
+| Imitation | G2b | stronger models' public trajectories (SWE-smith, SWE-Gym, R2E-Gym, SWE-Zero), whole turns | `g4dev-train-g2b-gpu` v1 | the same notebook |
 | Thought-first | G6 | own runs, only turns opening with a thought | `g4dev-train-g6-gpu` v1 | `g4dev-eval-g6-gpu` v1 |
-| Every-call | G10a | own runs, compaction-aware, every call | `gemma-4-31b-agent-lora-compaction-aware-trainer` v1 | `g4dev-eval-g10a-gpu` v1 |
-| Short-thought | G11a | Every-call's rows, calls after at most 1,500 characters of reasoning | `gemma-4-31b-agent-lora-short-thought-trainer` v1 | `g4dev-eval-g11a-gpu` v1; unseen repositories `g4dev-eval-rg-base-g11a-gpu` v1 |
-| Short-thought+ | G13a | Short-thought's recipe, 153 more runs | `gemma-4-31b-agent-lora-short-thought-trainer-v3` v1 | `g4dev-eval-g11g13-gpu` v1; unseen `g4dev-eval-rg-g11g13-gpu` v1 |
+| Every-call | G10a | own runs (422 verified), compaction-aware, every call | `gemma-4-31b-agent-lora-compaction-aware-trainer` v1 | `g4dev-eval-g10a-gpu` v1 |
+| Short-thought | G11a | Every-call's recipe on 458 runs, calls after at most 1,500 characters of reasoning | `gemma-4-31b-agent-lora-short-thought-trainer` v1 | `g4dev-eval-g11a-gpu` v1; unseen repositories `g4dev-eval-rg-base-g11a-gpu` v1 |
+| Short-thought+ | G13a | Short-thought's recipe, 153 more runs (611) | `gemma-4-31b-agent-lora-short-thought-trainer-v3` v1 | `g4dev-eval-g11g13-gpu` v1; unseen `g4dev-eval-rg-g11g13-gpu` v1 |
 | Teacher-DPO | G17 v1 | the teacher's preferences at decision points, from the base | `gemma-4-31b-agent-teacher-guided-step-preferences` v1 | `g4dev-eval-rg-g17-gpu` v1 |
 | Teacher-DPO-2 | G17 v2 | preferences computed in each training step, on Short-thought (arm a); the teacher's steps by next-token loss only (arm b) | `gemma-4-31b-agent-in-step-teacher-preferences` v1 | `g4dev-eval-rg-g17v2a-gpu` v1, `g4dev-eval-rg-g17v2b-gpu` v1 |
 
@@ -155,7 +157,11 @@ The paper names each fine-tuned adapter after what it supervises; the run direct
 | Healing, KL and next-token arms | `gemma-4-31b-agent-pruned-model-teacher-healing` v1 | `runs/heal-c70-tpu/v1/heal_report.json` | `kernels/analysis/heal_report.py` |
 | The adapter through vLLM's LoRA path: 1.02x | `g4dev-prune-serve2b-gpu` v1 | `runs/prune-serve2b-gpu/v1/prune/serve-v2b/report.json` | |
 | Merged healing (+0.022, 1.15x) and the next-action test (Figures 1, 5) | `g4dev-prune-serve5-gpu` v1 | `runs/prune-serve5-gpu/v1/next_action.json`, `prune/serve-v5/` | `kernels/analysis/serve_next_action.py` |
-| Late episodes pass 43% (seven fewer timeouts, about 3 tasks) | `g4dev-eval-rg-same4-gpu` v1, `g4dev-eval-rg-same55-gpu` v1 | per-task results in both run directories | `kernels/analysis/late_episodes.py` |
+| How episodes end: no timeout passes; the healed cut's fewer timeouts became call-cap endings (21 vs 12-16), which pass one time in five; two in five solved episodes end after 7 minutes | `g4dev-eval-rg-same4-gpu` v1, `g4dev-eval-rg-same55-gpu` v1 | per-task results in both run directories | `kernels/analysis/late_episodes.py` |
+| A tolerant call parser repairs 53 of the cuts' 68 malformed next calls (Section 4) | `g4dev-prune-serve5-gpu` v1, `g4dev-prune-serve6-gpu` v1, `g4dev-prune-serve7-gpu` v2 | `runs/tolerant-parse/report.json` | `kernels/analysis/tolerant_parse.py` |
+| Checkpoint bytes (Table 2): the full model's `model.safetensors`, 23,265,352,448 bytes; each cut's written tensors | Kaggle's file listing of the competition model; `g4dev-prune-serve-gpu` v3 | `runs/prune-serve-gpu/v3/prune/serve-v1/report.json` | `kernels/colab/prune/slice_model.py` |
+| Task sets and data pools (Appendix B) | the notebooks above | each run directory's `paired.json` or report | |
+| Pre-registered analysis plans (Section 5) | | [`docs/preregistrations.md`](docs/preregistrations.md), verbatim from the logbook with times | |
 | The 55% cut, healed | `gemma-4-31b-agent-healing-a-deeper-pruning-cut` v1, `g4dev-eval-rg-same55-gpu` v1 | `runs/heal-c55-tpu/v1/heal_report.json`, `runs/eval-rg-same55-gpu/` | `heal_report.py`, `eval_models.py` |
 | Role score and where the failures move (Figure 6) | `g4dev-prune-score4-gpu` v1, `g4dev-prune-serve6-gpu` v1 | `runs/prune-score4-gpu/v1/`, `runs/prune-serve6-gpu/v1/role_test.json`, `call_attempts.json` | `kernels/analysis/role_test.py` |
 | N-gram speculative decoding (Figure 7) | `g4dev-prune-serve7-gpu` v2 | `runs/prune-serve7-gpu/v2/spec_test.json`, `prune/serve-v7/` | `kernels/analysis/spec_test.py` |

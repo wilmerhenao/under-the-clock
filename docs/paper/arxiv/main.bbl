@@ -1,17 +1,18 @@
-\begin{thebibliography}{53}
+\begin{thebibliography}{68}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
-\bibitem[Agarwal et~al.(2023)Agarwal, Vieillard, Zhou, Stanczyk, Ramos, Geist,
+\bibitem[Agarwal et~al.(2024)Agarwal, Vieillard, Zhou, Stanczyk, Ramos, Geist,
   and Bachem]{agarwal2023onpolicy}
 Rishabh Agarwal, Nino Vieillard, Yongchao Zhou, Piotr Stanczyk, Sabela Ramos,
   Matthieu Geist, and Olivier Bachem.
 \newblock {On-Policy Distillation of Language Models: Learning from
-  Self-Generated Mistakes}, 2023.
+  Self-Generated Mistakes}, 2024.
 \newblock URL \url{https://arxiv.org/abs/2306.13649}.
+\newblock ICLR 2024.
 
 \bibitem[An et~al.(2023)An, Zhao, Yu, Tang, and Wang]{an2023fluctuation}
 Yongqi An, Xu~Zhao, Tao Yu, Ming Tang, and Jinqiao Wang.
@@ -24,14 +25,6 @@ Thomas Anthony, Zheng Tian, and David Barber.
 \newblock {Thinking Fast and Slow with Deep Learning and Tree Search}, 2017.
 \newblock URL \url{https://arxiv.org/abs/1705.08439}.
 
-\bibitem[Azar et~al.(2023)Azar, Rowland, Piot, Guo, Calandriello, Valko, and
-  Munos]{azar2023general}
-Mohammad~Gheshlaghi Azar, Mark Rowland, Bilal Piot, Daniel Guo, Daniele
-  Calandriello, Michal Valko, and Rémi Munos.
-\newblock {A General Theoretical Paradigm to Understand Learning from Human
-  Preferences}, 2023.
-\newblock URL \url{https://arxiv.org/abs/2310.12036}.
-
 \bibitem[Badertdinov et~al.(2025)Badertdinov, Golubev, Nekrashevich, Shevtsov,
   Karasik, Andriushchenko, Trofimova, Litvintseva, and
   Yangel]{badertdinov2025swerebench}
@@ -41,6 +34,7 @@ Ibragim Badertdinov, Alexander Golubev, Maksim Nekrashevich, Anton Shevtsov,
 \newblock {SWE-rebench: An Automated Pipeline for Task Collection and
   Decontaminated Evaluation of Software Engineering Agents}, 2025.
 \newblock URL \url{https://arxiv.org/abs/2505.20411}.
+\newblock NeurIPS 2025.
 
 \bibitem[Bjarnason et~al.(2026)Bjarnason, Silva, and
   Monperrus]{bjarnason2026randomness}
@@ -55,6 +49,21 @@ Charlie Chen, Sebastian Borgeaud, Geoffrey Irving, Jean-Baptiste Lespiau,
 \newblock {Accelerating Large Language Model Decoding with Speculative
   Sampling}, 2023.
 \newblock URL \url{https://arxiv.org/abs/2302.01318}.
+
+\bibitem[Chen et~al.(2025)Chen, Li, Peng, Wang, Ren, Shi, and
+  Hu]{chen2025lotaqaf}
+Junyu Chen, Junzhuo Li, Zhen Peng, Wenjie Wang, Yuxiang Ren, Long Shi, and
+  Xuming Hu.
+\newblock {LoTA-QAF: Lossless Ternary Adaptation for Quantization-Aware
+  Fine-Tuning}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2505.18724}.
+
+\bibitem[Choi et~al.(2025)Choi, Lee, Park, Kwon, and Lee]{choi2025falqon}
+Kanghyun Choi, Hyeyoon Lee, SunJong Park, Dain Kwon, and Jinho Lee.
+\newblock {FALQON: Accelerating LoRA Fine-tuning with Low-Bit Floating-Point
+  Arithmetic}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2510.24061}.
+\newblock NeurIPS 2025.
 
 \bibitem[Choi et~al.(2026)Choi, Jeong, Kang, Nam, and Lee]{choi2026skim}
 Moonseok Choi, Jongwon Jeong, Minki Kang, Giung Nam, and Juho Lee.
@@ -73,6 +82,13 @@ Alejandro Cuadron, Dacheng Li, Wenjie Ma, Xingyao Wang, Yichuan Wang, Siyuan
   in Agentic Tasks}, 2025.
 \newblock URL \url{https://arxiv.org/abs/2502.08235}.
 
+\bibitem[Dettmers et~al.(2023)Dettmers, Pagnoni, Holtzman, and
+  Zettlemoyer]{dettmers2023qlora}
+Tim Dettmers, Artidoro Pagnoni, Ari Holtzman, and Luke Zettlemoyer.
+\newblock {QLoRA: Efficient Finetuning of Quantized LLMs}, 2023.
+\newblock URL \url{https://arxiv.org/abs/2305.14314}.
+\newblock NeurIPS 2023.
+
 \bibitem[Devvrit et~al.(2023)Devvrit, Kudugunta, Kusupati, Dettmers, Chen,
   Dhillon, Tsvetkov, Hajishirzi, Kakade, Farhadi, and
   Jain]{devvrit2023matformer}
@@ -82,17 +98,35 @@ Devvrit, Sneha Kudugunta, Aditya Kusupati, Tim Dettmers, Kaifeng Chen, Inderjit
 \newblock {MatFormer: Nested Transformer for Elastic Inference}, 2023.
 \newblock URL \url{https://arxiv.org/abs/2310.07707}.
 
-\bibitem[Dong et~al.(2025)Dong, Tang, Liu, Li, Chu, and Li]{dong2025compressed}
+\bibitem[Dong et~al.(2025{\natexlab{a}})Dong, Tang, Liu, Li, Chu, and
+  Li]{dong2025compressed}
 Peijie Dong, Zhenheng Tang, Xiang Liu, Lujun Li, Xiaowen Chu, and Bo~Li.
 \newblock {Can Compressed LLMs Truly Act? An Empirical Evaluation of Agentic
-  Capabilities in LLM Compression}, 2025.
+  Capabilities in LLM Compression}, 2025{\natexlab{a}}.
 \newblock URL \url{https://arxiv.org/abs/2505.19433}.
+
+\bibitem[Dong et~al.(2025{\natexlab{b}})Dong, Ruan, Cai, Lai, Xu, Zhao, and
+  Chen]{dong2024xgrammar}
+Yixin Dong, Charlie~F. Ruan, Yaxing Cai, Ruihang Lai, Ziyi Xu, Yilong Zhao, and
+  Tianqi Chen.
+\newblock {XGrammar: Flexible and Efficient Structured Generation Engine for
+  Large Language Models}, 2025{\natexlab{b}}.
+\newblock URL \url{https://arxiv.org/abs/2411.15100}.
+\newblock MLSys 2025.
 
 \bibitem[Dutta et~al.(2024)Dutta, Krishnan, Kwatra, and
   Ramjee]{dutta2024accuracy}
 Abhinav Dutta, Sanjeev Krishnan, Nipun Kwatra, and Ramachandran Ramjee.
 \newblock {Accuracy is Not All You Need}, 2024.
 \newblock URL \url{https://arxiv.org/abs/2407.09141}.
+
+\bibitem[Frantar et~al.(2023)Frantar, Ashkboos, Hoefler, and
+  Alistarh]{frantar2022gptq}
+Elias Frantar, Saleh Ashkboos, Torsten Hoefler, and Dan Alistarh.
+\newblock {GPTQ: Accurate Post-Training Quantization for Generative Pre-trained
+  Transformers}, 2023.
+\newblock URL \url{https://arxiv.org/abs/2210.17323}.
+\newblock ICLR 2023.
 
 \bibitem[{Gemma Team}(2026)]{gemmateam2026gemma4}
 {Gemma Team}.
@@ -106,16 +140,41 @@ Google.
 \newblock URL \url{https://github.com/google/tunix}.
 \newblock Accessed 2026-11-09.
 
-\bibitem[Gu et~al.(2023)Gu, Dong, Wei, and Huang]{gu2023minillm}
+\bibitem[{Google Research} and {The Gemma
+  Team}(2026)]{google2026gemma4competition}
+{Google Research} and {The Gemma Team}.
+\newblock {Google - The Gemma 4 Developer Agent Competition}.
+\newblock Kaggle competition, 2026.
+\newblock URL
+  \url{https://www.kaggle.com/competitions/gemma-4-developer-agent}.
+\newblock Accessed 2026-11-09.
+
+\bibitem[Gromov et~al.(2025)Gromov, Tirumala, Shapourian, Glorioso, and
+  Roberts]{gromov2024unreasonable}
+Andrey Gromov, Kushal Tirumala, Hassan Shapourian, Paolo Glorioso, and
+  Daniel~A. Roberts.
+\newblock {The Unreasonable Ineffectiveness of the Deeper Layers}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2403.17887}.
+\newblock ICLR 2025.
+
+\bibitem[Gu et~al.(2024)Gu, Dong, Wei, and Huang]{gu2023minillm}
 Yuxian Gu, Li~Dong, Furu Wei, and Minlie Huang.
-\newblock {MiniLLM: On-Policy Distillation of Large Language Models}, 2023.
+\newblock {MiniLLM: Knowledge Distillation of Large Language Models}, 2024.
 \newblock URL \url{https://arxiv.org/abs/2306.08543}.
+\newblock ICLR 2024.
 
 \bibitem[Gupta et~al.(2015)Gupta, Agrawal, Gopalakrishnan, and
   Narayanan]{gupta2015deep}
 Suyog Gupta, Ankur Agrawal, Kailash Gopalakrishnan, and Pritish Narayanan.
 \newblock {Deep Learning with Limited Numerical Precision}, 2015.
 \newblock URL \url{https://arxiv.org/abs/1502.02551}.
+
+\bibitem[Hassid et~al.(2025)Hassid, Synnaeve, Adi, and
+  Schwartz]{hassid2025overthink}
+Michael Hassid, Gabriel Synnaeve, Yossi Adi, and Roy Schwartz.
+\newblock {Don't Overthink it. Preferring Shorter Thinking Chains for Improved
+  LLM Reasoning}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2505.17813}.
 
 \bibitem[Hu et~al.(2021)Hu, Shen, Wallis, Allen-Zhu, Li, Wang, Wang, and
   Chen]{hu2021lora}
@@ -132,12 +191,13 @@ Naman Jain, Jaskirat Singh, Manish Shetty, Liang Zheng, Koushik Sen, and Ion
   Open-Weights SWE Agents}, 2025.
 \newblock URL \url{https://arxiv.org/abs/2504.07164}.
 
-\bibitem[Jaiswal et~al.(2023)Jaiswal, Gan, Du, Zhang, Wang, and
+\bibitem[Jaiswal et~al.(2024)Jaiswal, Gan, Du, Zhang, Wang, and
   Yang]{jaiswal2023compressing}
 Ajay Jaiswal, Zhe Gan, Xianzhi Du, Bowen Zhang, Zhangyang Wang, and Yinfei
   Yang.
-\newblock {Compressing LLMs: The Truth is Rarely Pure and Never Simple}, 2023.
+\newblock {Compressing LLMs: The Truth is Rarely Pure and Never Simple}, 2024.
 \newblock URL \url{https://arxiv.org/abs/2310.01382}.
+\newblock ICLR 2024.
 
 \bibitem[Jang et~al.(2026)Jang, Yang, Lim, and Park]{jang2026flat}
 Jiwon Jang, Kisu Yang, Heuiseok Lim, and Hyunwoo Park.
@@ -145,19 +205,28 @@ Jiwon Jang, Kisu Yang, Heuiseok Lim, and Hyunwoo Park.
   Quantized LLM Agents}, 2026.
 \newblock URL \url{https://arxiv.org/abs/2607.27275}.
 
-\bibitem[Jimenez et~al.(2023)Jimenez, Yang, Wettig, Yao, Pei, Press, and
+\bibitem[Ji et~al.(2025)Ji, Xiang, Li, Xia, Li, Duan, Wang, and
+  Zhang]{ji2025beware}
+Yixin Ji, Yang Xiang, Juntao Li, Qingrong Xia, Ping Li, Xinyu Duan, Zhefeng
+  Wang, and Min Zhang.
+\newblock {Beware of Calibration Data for Pruning Large Language Models}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2410.17711}.
+\newblock ICLR 2025.
+
+\bibitem[Jimenez et~al.(2024)Jimenez, Yang, Wettig, Yao, Pei, Press, and
   Narasimhan]{jimenez2023swebench}
 Carlos~E. Jimenez, John Yang, Alexander Wettig, Shunyu Yao, Kexin Pei, Ofir
   Press, and Karthik Narasimhan.
 \newblock {SWE-bench: Can Language Models Resolve Real-World GitHub Issues?},
-  2023.
+  2024.
 \newblock URL \url{https://arxiv.org/abs/2310.06770}.
+\newblock ICLR 2024.
 
 \bibitem[Kaggle(2025)]{kaggle2025benchmarks}
 Kaggle.
 \newblock {Kaggle Benchmarks}.
-\newblock \url{https://www.kaggle.com/benchmarks}; Python library
-  \url{https://github.com/Kaggle/kaggle-benchmarks}, 2025.
+\newblock Python library \url{https://github.com/Kaggle/kaggle-benchmarks},
+  2025.
 \newblock URL \url{https://www.kaggle.com/benchmarks}.
 \newblock Accessed 2026-11-09.
 
@@ -176,6 +245,7 @@ Woosuk Kwon, Zhuohan Li, Siyuan Zhuang, Ying Sheng, Lianmin Zheng, Cody~Hao Yu,
 \newblock {Efficient Memory Management for Large Language Model Serving with
   PagedAttention}, 2023.
 \newblock URL \url{https://arxiv.org/abs/2309.06180}.
+\newblock SOSP 2023.
 
 \bibitem[Leviathan et~al.(2022)Leviathan, Kalman, and
   Matias]{leviathan2022speculative}
@@ -188,6 +258,15 @@ Tung-Ling Li, Jiale Huang, Lee-Chi Wang, and Janaki~Ram Gotei.
 \newblock {Scale-QLoRA: Code-Invariant Adapter Merging for Native 4-bit
   Microscaling LLMs}, 2026.
 \newblock URL \url{https://arxiv.org/abs/2609.04526}.
+
+\bibitem[Liu et~al.(2024)Liu, Lu, Zhang, Liu, Guo, Yang, Blanchet, and
+  Wang]{liu2024provably}
+Zhihan Liu, Miao Lu, Shenao Zhang, Boyi Liu, Hongyi Guo, Yingxiang Yang, Jose
+  Blanchet, and Zhaoran Wang.
+\newblock {Provably Mitigating Overoptimization in RLHF: Your SFT Loss is
+  Implicitly an Adversarial Regularizer}, 2024.
+\newblock URL \url{https://arxiv.org/abs/2405.16436}.
+\newblock NeurIPS 2024.
 
 \bibitem[Lucas et~al.(2025)Lucas, Behdin, Wang, Song, Tang, and
   Mazumder]{lucas2025reasoning}
@@ -211,11 +290,26 @@ Xin Men, Mingyu Xu, Qingyu Zhang, Bingning Wang, Hongyu Lin, Yaojie Lu, Xianpei
   You Expect}, 2024.
 \newblock URL \url{https://arxiv.org/abs/2403.03853}.
 
+\bibitem[Merity et~al.(2017)Merity, Xiong, Bradbury, and
+  Socher]{merity2016pointer}
+Stephen Merity, Caiming Xiong, James Bradbury, and Richard Socher.
+\newblock {Pointer Sentinel Mixture Models}, 2017.
+\newblock URL \url{https://arxiv.org/abs/1609.07843}.
+\newblock ICLR 2017; the WikiText-103 corpus.
+
 \bibitem[Miller(2024)]{miller2024adding}
 Evan Miller.
 \newblock {Adding Error Bars to Evals: A Statistical Approach to Language Model
   Evaluations}, 2024.
 \newblock URL \url{https://arxiv.org/abs/2411.00640}.
+
+\bibitem[{moshegolderson}(2026)]{golderson2026freshswe}
+{moshegolderson}.
+\newblock {FreshSWE-Py: Post-Cutoff SWE Tasks for Gemma 4}.
+\newblock Kaggle dataset; 663 tasks from 33 Python repositories, created after
+  2026-04-02, 2026.
+\newblock URL \url{https://www.kaggle.com/datasets/moshegolderson/freshswe-py}.
+\newblock Accessed 2026-10-23.
 
 \bibitem[Muralidharan et~al.(2024)Muralidharan, Sreenivas, Joshi, Chochowski,
   Patwary, Shoeybi, Catanzaro, Kautz, and Molchanov]{muralidharan2024compact}
@@ -225,6 +319,14 @@ Saurav Muralidharan, Sharath~Turuvekere Sreenivas, Raviraj Joshi, Marcin
 \newblock {Compact Language Models via Pruning and Knowledge Distillation},
   2024.
 \newblock URL \url{https://arxiv.org/abs/2407.14679}.
+
+\bibitem[Nagel et~al.(2020)Nagel, Amjad, van Baalen, Louizos, and
+  Blankevoort]{nagel2020up}
+Markus Nagel, Rana~Ali Amjad, Mart van Baalen, Christos Louizos, and Tijmen
+  Blankevoort.
+\newblock {Up or Down? Adaptive Rounding for Post-Training Quantization}, 2020.
+\newblock URL \url{https://arxiv.org/abs/2004.10568}.
+\newblock ICML 2020.
 
 \bibitem[Nguyen et~al.(2026)Nguyen, Tran, Tran, and Le]{nguyen2026obcprune}
 Ha~Lan Nguyen, Huy~Hoang Tran, Trac-Duy Tran, and Dung~D. Le.
@@ -238,6 +340,14 @@ Gabriele Oliaro, Zhihao Jia, Daniel Campos, and Aurick Qiao.
 \newblock {SuffixDecoding: Extreme Speculative Decoding for Emerging AI
   Applications}, 2024.
 \newblock URL \url{https://arxiv.org/abs/2411.04975}.
+
+\bibitem[Pal et~al.(2024)Pal, Karkhanis, Dooley, Roberts, Naidu, and
+  White]{pal2024smaug}
+Arka Pal, Deep Karkhanis, Samuel Dooley, Manley Roberts, Siddartha Naidu, and
+  Colin White.
+\newblock {Smaug: Fixing Failure Modes of Preference Optimisation with
+  DPO-Positive}, 2024.
+\newblock URL \url{https://arxiv.org/abs/2402.13228}.
 
 \bibitem[Pan et~al.(2024)Pan, Wang, Neubig, Jaitly, Ji, Suhr, and
   Zhang]{pan2024training}
@@ -262,14 +372,6 @@ Noam Razin, Sadhika Malladi, Adithya Bhaskar, Danqi Chen, Sanjeev Arora, and
 \newblock {Unintentional Unalignment: Likelihood Displacement in Direct
   Preference Optimization}, 2024.
 \newblock URL \url{https://arxiv.org/abs/2410.08847}.
-
-\bibitem[Research and Team(2026)]{google2026gemma4competition}
-Google Research and The~Gemma Team.
-\newblock {Google - The Gemma 4 Developer Agent Competition}.
-\newblock Kaggle competition, 2026.
-\newblock URL
-  \url{https://www.kaggle.com/competitions/gemma-4-developer-agent}.
-\newblock Accessed 2026-11-09.
 
 \bibitem[Saxena(2023)]{saxena2023prompt}
 Apoorv Saxena.
@@ -304,11 +406,12 @@ Avi Singh, John~D. Co-Reyes, Rishabh Agarwal, Ankesh Anand, Piyush Patil,
   Language Models}, 2023.
 \newblock URL \url{https://arxiv.org/abs/2312.06585}.
 
-\bibitem[Sun et~al.(2023)Sun, Liu, Bair, and Kolter]{sun2023simple}
+\bibitem[Sun et~al.(2024)Sun, Liu, Bair, and Kolter]{sun2023simple}
 Mingjie Sun, Zhuang Liu, Anna Bair, and J.~Zico Kolter.
 \newblock {A Simple and Effective Pruning Approach for Large Language Models},
-  2023.
+  2024.
 \newblock URL \url{https://arxiv.org/abs/2306.11695}.
+\newblock ICLR 2024.
 
 \bibitem[Taghibakhshi et~al.(2026)Taghibakhshi, Cai, Muralidharan, Sreenivas,
   Vavre, Mahabaleshwarkar, Kartal, Liang, Chochowski, Chen, Bercovich,
@@ -339,13 +442,29 @@ Aaron Wang, Neelabh Madan, Vlad Sobal, Matthew Trager, Michael Kleinman, Elman
   Agents}, 2026.
 \newblock URL \url{https://arxiv.org/abs/2610.10833}.
 
-\bibitem[Wang et~al.(2025)Wang, Diao, Le, Wang, Wang, Lee, ping Yeh, and
+\bibitem[Wang et~al.(2025)Wang, Diao, Le, Wang, Wang, Lee, Yeh, and
   Yang]{wang2025think}
-Ziyan Wang, Enmao Diao, Qi~Le, Pu~Wang, Guanchu Wang, Minwoo Lee, Shu ping Yeh,
-  and Li~Yang.
+Ziyan Wang, Enmao Diao, Qi~Le, Pu~Wang, Guanchu Wang, Minwoo Lee, {Shu-ping}
+  Yeh, and Li~Yang.
 \newblock {Think Before You Prune: Self-Reflective Structured Pruning for
   Reasoning Language Models}, 2025.
 \newblock URL \url{https://arxiv.org/abs/2512.02185}.
+
+\bibitem[Wei et~al.(2025)Wei, Duchenne, Copet, Carbonneaux, Zhang, Fried,
+  Synnaeve, Singh, and Wang]{wei2025swerl}
+Yuxiang Wei, Olivier Duchenne, Jade Copet, Quentin Carbonneaux, Lingming Zhang,
+  Daniel Fried, Gabriel Synnaeve, Rishabh Singh, and Sida~I. Wang.
+\newblock {SWE-RL: Advancing LLM Reasoning via Reinforcement Learning on Open
+  Software Evolution}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2502.18449}.
+\newblock NeurIPS 2025.
+
+\bibitem[Williams and Aletras(2024)]{williams2024impact}
+Miles Williams and Nikolaos Aletras.
+\newblock {On the Impact of Calibration Data in Post-training Quantization and
+  Pruning}, 2024.
+\newblock URL \url{https://arxiv.org/abs/2311.09755}.
+\newblock ACL 2024.
 
 \bibitem[Xiang et~al.(2025)Xiang, Ji, Li, and Zhang]{xiang2025think}
 Yang Xiang, Yixin Ji, Juntao Li, and Min Zhang.
@@ -374,6 +493,14 @@ Huining Yuan, Xiangmin Yi, Zelai Xu, Zixu Wang, Xinlei Chen, Xiao-Ping Zhang,
   Yu~Wang, and Chao Yu.
 \newblock {ActionOPD: Distilling Decisions, Not Tokens}, 2026.
 \newblock URL \url{https://arxiv.org/abs/2610.19820}.
+
+\bibitem[Yuan et~al.(2025)Yuan, Li, Ding, Xie, Li, Zhao, Wan, Shi, Hu, and
+  Liu]{yuan2025understanding}
+Jiayi Yuan, Hao Li, Xinheng Ding, Wenya Xie, Yu-Jhe Li, Wentian Zhao, Kun Wan,
+  Jing Shi, Xia Hu, and Zirui Liu.
+\newblock {Understanding and Mitigating Numerical Sources of Nondeterminism in
+  LLM Inference}, 2025.
+\newblock URL \url{https://arxiv.org/abs/2506.09501}.
 
 \bibitem[Zelikman et~al.(2022)Zelikman, Wu, Mu, and Goodman]{zelikman2022star}
 Eric Zelikman, Yuhuai Wu, Jesse Mu, and Noah~D. Goodman.

@@ -1,0 +1,85 @@
+{
+ "serve-v5 (109 states)": {
+  "full": {
+   "calls": 102,
+   "malformed": 2,
+   "repaired": 2,
+   "exact_full": 0
+  },
+  "full_b": {
+   "calls": 102,
+   "malformed": 2,
+   "repaired": 2,
+   "exact_full": 0
+  },
+  "c85": {
+   "calls": 101,
+   "malformed": 6,
+   "repaired": 6,
+   "exact_full": 3
+  },
+  "c70": {
+   "calls": 100,
+   "malformed": 8,
+   "repaired": 8,
+   "exact_full": 2
+  },
+  "c70+kd~": {
+   "calls": 105,
+   "malformed": 2,
+   "repaired": 2,
+   "exact_full": 1
+  },
+  "c70own": {
+   "calls": 91,
+   "malformed": 6,
+   "repaired": 6,
+   "exact_full": 1
+  },
+  "c55": {
+   "calls": 96,
+   "malformed": 14,
+   "repaired": 9,
+   "exact_full": 4
+  }
+ },
+ "serve-v6 (141 states)": {
+  "full": {
+   "calls": 131,
+   "malformed": 2,
+   "repaired": 2,
+   "exact_full": 0
+  },
+  "c55": {
+   "calls": 122,
+   "malformed": 20,
+   "repaired": 11,
+   "exact_full": 4
+  },
+  "c55role": {
+   "calls": 112,
+   "malformed": 12,
+   "repaired": 11,
+   "exact_full": 3
+  }
+ },
+ "serve-v7 (109 states)": {
+  "full": {
+   "calls": 100,
+   "malformed": 2,
+   "repaired": 2,
+   "exact_full": 0
+  },
+  "full_b": {
+   "calls": 103,
+   "malformed": 2,
+   "repaired": 2,
+   "exact_full": 0
+  }
+ },
+ "total": {
+  "malformed": 78,
+  "repaired": 63,
+  "exact": 18
+ }
+}

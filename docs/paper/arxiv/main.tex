@@ -48,145 +48,164 @@
 \maketitle
 
 \begin{abstract}
-In the Gemma~4 Developer Agent competition, a coding agent works under a clock. Gemma~4 31B, in 4 bits on four L4
-GPUs, gets 8 minutes per repository issue. We made each step faster in two ways and traced each to tasks solved.
-Fine-tuning on the model's own verified trajectories changed the agent's reasoning length before each tool call more
-than its actions. Supervising only calls preceded by short reasoning solved more dev-set tasks (25 vs 18), though not
-on unseen repositories, and a teacher-guided preference stage halved the slow steps (125 to 56 seconds at the 90th
-percentile) but broke the agent's stopping. Pruning 30\% of the MLP channels, chosen on agent trajectories, costs
-$+0.08$ nats per agent token and decodes 1.15 times faster on one stream (1.1 at 8). Yet in one session on the
-8-minute clock the cut solved 20 of 112 tasks against 32 and 34 for two full-model runs, winning none of the tasks that
-separated them ($p=1.5\times10^{-5}$). Its string arguments ran into one another in 24\% of its calls (full model:
-2-3\%), and it looped on the failures. Healed with the full model as teacher and merged into the 4-bit weights by
-stochastic rounding, the cut kept its speed and solved 32 ($-1$ task, 95\% interval $-7.5$ to $+5$). With 45\%
-pruned, healing won back 14 of the 22 lost tasks. Average per-token loss ranked the cuts but neither sized nor located
-the failure. A 15-minute next-action test located it, and showed a role-aware channel score moving it instead of
-removing it. Code and notebooks: \url{https://github.com/wilmerhenao/under-the-clock}.
+In the Gemma~4 Developer Agent competition, Gemma~4 31B, in 4 bits on four L4 GPUs, gets 8 minutes and 24 tool calls
+per repository issue. We made steps faster two ways and traced each to tasks solved. Fine-tuning on the model's own
+verified trajectories moved its reasoning length before each tool call: supervising only calls after short reasoning
+solved more development tasks (25 vs 18, exploratory), not more unseen ones, and a teacher's preferences halved the slow
+steps but broke the agent's stopping. Keeping 70\% of the MLP channels, chosen on agent trajectories, decodes 1.15 times
+faster for $+0.08$ nats per agent token, yet the cut solved 20 of 112 tasks against 32 and 34 for two full-model runs
+($p=1.5\times10^{-5}$): its string arguments ran into one another in 24\% of its calls (full model: 2--3\%). Healed
+with the full model as teacher and merged into the 4-bit weights by stochastic rounding, it kept its speed and solved
+32 ($-1$ task, 95\% interval $-7.5$ to $+5$); keeping 55\%, healing won back 14 of 22 lost tasks. Average per-token loss
+ranked the cuts but did not locate the failure; a 15-minute next-action test did. Under a clock, how an agent writes
+its calls and when it stops decided more than how fast it decodes. Code and notebooks:
+\url{https://github.com/wilmerhenao/under-the-clock}.
 \end{abstract}
 
 \begin{figure*}[t]   % the teaser: at the top of page 2, after the abstract
   \centering
   \includegraphics[width=0.9\textwidth]{fig_teaser.pdf}
   \caption{One held-out agent state, three models. The 70\% cut (70\% of MLP channels kept) ends the path with a
-  backtick instead of Gemma's string delimiter \code{<|"|>} and swallows \code{start\_line}. Healed and merged, it
+  backtick instead of Gemma's string delimiter \code{<|"|>}, swallowing \code{start\_line}; healed and merged, it
   writes the full model's call.}
   \label{fig:teaser}
 \end{figure*}
 
 \section{Introduction}\label{sec:intro}
 
-An agent that writes fewer tokens per step, or writes each faster, gets more steps under a clock. Does it solve more
-tasks? We pulled two levers on seconds per step, fine-tuning and pruning (Figure~\ref{fig:framework}). How the agent
-reasons, writes tool calls and stops outweighed every gain in model speed we measured. Our contributions:
+An agent that writes fewer tokens per step, or writes each faster, gets more steps under a clock. We pulled two levers
+on seconds per step, fine-tuning and pruning. How the agent reasons, writes tool calls and stops outweighed every gain
+in model speed we measured. Our contributions:
 \begin{enumerate}
-  \item Fine-tuning moves reasoning length before decisions. A teacher at the agent's decision points shortened steps
+  \item Fine-tuning moves reasoning length before decisions; a teacher at the agent's decision points shortened steps
   and broke stopping.
-  \item An agent-chosen cut has the 4-bit loss and speed that its bf16 mask and bytes predict, yet fails through
-  malformed tool calls (Figure~\ref{fig:teaser}) that average per-token loss ranks but does not locate.
-  \item Healed from the full model and merged into the 4-bit weights by stochastic rounding, the cut keeps its speed and
-  stays within noise of the full model's task rate.
-  \item We measure agents under noise with an A/A floor, a same-session comparison of checkpoints and a next-action
-  test.
+  \item An agent-chosen cut has the 4-bit loss and speed its bf16 mask and bytes predict, yet fails through malformed
+  tool calls (Figure~\ref{fig:teaser}) that average loss ranks but does not locate.
+  \item Healed from the full model and merged by stochastic rounding, the cut keeps its speed and stays within noise of
+  the full model's task rate.
+  \item We measure agents under noise with an A/A floor, same-session comparisons and a next-action test.
 \end{enumerate}
 
 \section{Setting}\label{sec:setting}
 
 \paragraph{Harness.} The competition's harness~\citep{google2026gemma4competition} compiles a declarative agent (YAML,
-prompts, optional LoRA~\citep{hu2021lora} adapters) and runs it in a sandbox holding the repository at its pre-fix
-commit, with shell, file, edit, patch and three code-graph tools. Hidden tests grade the agent's diff, submitted or not,
-as in SWE-bench~\citep{jimenez2023swebench}. We allow each \emph{episode} (one attempt at a task) 8 minutes and 24 tool
-calls, a 4,096-token thinking budget and temperature 0.2. At 14,336 tokens the model summarizes older events
-(compaction). Evaluation repositories are outside our training pools (two, found later under other owners, change no
-result). The scorer serves one 4-bit (W4A16) checkpoint with LoRA adapters under 3\,GiB, so a pruned model cannot be
-submitted. We therefore study pruning for self-hosted agents on the competition's model, harness, hardware and clock.
+prompts, optional LoRA~\citep{hu2021lora} adapters) and runs it in a sandbox at the repository's pre-fix commit, with
+shell, file, edit, patch and three code-graph tools. Hidden tests grade the agent's diff, submitted or not, as in
+SWE-bench~\citep{jimenez2023swebench}, but a timeout loses the task: none of our 2,027 timed-out episodes passed, even
+after a submitted patch. Each \emph{episode} (one attempt at a task) gets 8 minutes, 24 tool calls, a 4,096-token
+thinking budget and temperature 0.2; the agent sees these budgets and can ask a status tool for the time left. An
+episode ends at the agent's own stop, at the 24-call cap or at the clock (a \emph{timeout}), and it \emph{loops} when
+it repeats one call, arguments included, three times in a row. At 14,336 tokens the model summarizes older events
+(compaction). Evaluation repositories are outside our training pools (two turned up later under new owners; no model
+solved their tasks, so they change no count; Appendix~\ref{app:sets}). The scorer serves one 4-bit (W4A16) checkpoint
+with LoRA adapters under 3\,GiB, so a pruned model cannot be submitted, and we study pruning for self-hosted agents on
+the competition's model, harness, hardware and clock.
 
 \paragraph{Hardware and clocks.} Training ran on a TPU v5e-8, serving on 4\X\,L4 with vLLM~\citep{kwon2023efficient}
 (tensor parallel 4) and the competition's checkpoint of Gemma~4 31B~\citep{gemmateam2026gemma4}, which has one scale
 per 32 inputs. \emph{Paired sessions} (Section~\ref{sec:finetune}) put two arms on one server, 8 concurrent tasks
-each, on a clock doubled to 16 minutes. At 16 concurrent requests a model call writing $n$ tokens takes $a + n\cdot b$
-seconds (Figure~\ref{fig:framework}), and calls take 98\% of episode time. Fine-tuning acts on $n$, pruning on $b$.
-For checkpoints that cannot share a server, the \emph{same-session comparison} (Section~\ref{sec:prune}) runs them one
-at a time on the same tasks, 8 at once on the 8-minute clock, in ABCD-DCBA order over two blocks, so neither order nor
-time favours a model.
+each, on a 16-minute clock. There a model call writing $n$ tokens takes $a + n\cdot b$ seconds, with $a=16.7$\,s and
+$b=0.139$\,s per token at these 16 concurrent requests (one stream alone decodes at 0.026\,s per token;
+Figure~\ref{fig:framework}), and calls take 98\% of episode time: fine-tuning acts on $n$, pruning on $b$ and on the
+prefill inside $a$. The arms share the server, so an arm that writes less also speeds up its control. For checkpoints
+that cannot share a server, the \emph{same-session comparison} (Section~\ref{sec:prune}) runs them one at a time on
+the same tasks, 8 at once on the 8-minute clock, in ABCD--DCBA order over two blocks, so neither order nor time
+favours a model.
 
 \begin{figure*}[b]   % bottom of page 2, below the text that follows the teaser
   \centering
   \includegraphics[width=0.8\textwidth]{fig_framework.pdf}
-  \caption{The agent under the clock and the two levers.}
+  \caption{The agent under the clock and the two levers. The step-time fit ($a$, $b$) is from paired sessions at 16
+  concurrent requests.}
   \label{fig:framework}
 \end{figure*}
 
 \section{Lever 1: fine-tuning moves length first}\label{sec:finetune}
 
 \paragraph{Pipeline.} We ran Gemma through the harness in private Kaggle Benchmarks~\citep{kaggle2025benchmarks} tasks
-on SWE-rebench-style~\citep{badertdinov2025swerebench} task banks and FreshSWE-Py (issues filed after the model's
-cutoff), excluding the public (development) repositories, and kept the 732 trajectories whose diffs passed the hidden
-tests. Each is re-rendered as the scorer sees it. A compaction simulator matched the token counts of all 82 captured
-scorer requests, and Gemma writes the summaries. A rank-16 LoRA on all projections is trained on TPU
-(JAX/Tunix~\citep{google2025tunix}, fp32 factors) with the loss on tool-call bodies only. Table~\ref{tab:adapters}
-lists the adapters.
+on SWE-rebench-style~\citep{badertdinov2025swerebench} task banks and FreshSWE-Py~\citep{golderson2026freshswe}
+(issues filed after the model's cutoff), excluding the development repositories, and kept the runs whose diffs passed
+the hidden tests (422 for \ad{Every-call}, 458 for \ad{Short-thought}, 611 for \ad{Short-thought+};
+Appendix~\ref{app:sets}). Each is re-rendered as the scorer sees it: a compaction simulator matched the token counts of
+all 82 captured scorer requests, and Gemma writes the summaries. A rank-16 LoRA on all projections is trained on TPU
+(JAX/Tunix~\citep{google2025tunix}, fp32 factors) with the loss on tool-call bodies only; each adapter is named after
+what it supervises (Table~\ref{tab:adapters}).
 
 \begin{table*}[t]
-  \centering
-  \caption{Fine-tuned adapters against the base model: step length and tasks solved. Each adapter is named after what it supervises.}
+  \caption{Fine-tuned adapters against the base model: step length and tasks solved. Each comparison is one paired
+  session on the tasks both arms finished (Appendix~\ref{app:sets}).}
   \label{tab:adapters}
   \small
   \setlength{\tabcolsep}{4pt}
-  \begin{tabularx}{\textwidth}{@{}l>{\raggedright\arraybackslash}p{2.2in}>{\raggedright\arraybackslash}p{1.15in}%
+  \begin{tabularx}{\textwidth}{@{}l>{\raggedright\arraybackslash}p{2.35in}>{\raggedright\arraybackslash}p{1.15in}%
     >{\raggedright\arraybackslash}X@{}}
     \toprule
     Adapter & Data and supervision & Step text vs base (p90, full sessions) & Solved vs base (discordant:
     only-this\,/\,only-base) \\
     \midrule
-    \ad{Imitation} & Stronger models' trajectories, whole turns & 0.24\X & 16 vs 26 of 103 (4/14), $p=0.031$ \\
+    \ad{Imitation} & Stronger models' public trajectories (SWE-smith, SWE-Gym, R2E-Gym, SWE-Zero), whole turns &
+    0.24\X & 16 vs 26 of 103 (4/14), $p=0.031$ \\
     \ad{Thought-first} & Own runs, only turns opening with a thought & 1.72\X & 19 vs 27 (0/8), $p=0.008$ \\
-    \ad{Every-call} & Own runs, compaction-aware, every call & 1.11\X & 16 vs 22 (2/8) \\
-    \textbf{\ad{Short-thought}} & \ad{Every-call}'s rows, calls after thoughts $\leq$\,1,500 chars & \textbf{0.90\X} & \textbf{25 vs 18 (8/1),
-    \textit{p}\,=\,0.039}; unseen: 17~vs~19 of~64~(2/4) \\
-    \ad{Short-thought+} & \ad{Short-thought}'s recipe, $+153$ runs & 1.03\X\ of \ad{Short-thought} & dev: 18 vs \ad{Short-thought} 18; unseen: 27~vs \ad{Short-thought}~35 of 125~(1/9),
-    $p=0.021$ \\
+    \ad{Every-call} & Own runs (422), compaction-aware, every call & 1.11\X & 16 vs 22 (2/8) \\
+    \textbf{\ad{Short-thought}} & \ad{Every-call}'s recipe, 458 runs, calls after thoughts $\leq$\,1,500 chars &
+    \textbf{0.90\X} & \textbf{25 vs 18 (8/1), \textit{p}\,=\,0.039}; unseen: 17~vs~19 of~64~(2/4) \\
+    \ad{Short-thought+} & The same, $+153$ runs & 1.03\X\ of \ad{Short-thought} & vs \ad{Short-thought}: 18 vs 18 dev;
+    27~vs~35 of 125 unseen~(1/9), $p=0.021$ \\
     \bottomrule
   \end{tabularx}
 \end{table*}
 
-\paragraph{Length moved in both directions.} \ad{Imitation} wrote short narrated thoughts and looped (26 consecutive re-reads of
-one file) while its validation loss fell from 1.05 to 0.37. \ad{Thought-first} trained only on turns that opened with a thought, which
-selected long ones. Served, it thought long on every turn, made 1,171 model calls to the base's 1,709 in the same time,
-and lost eight tasks without winning one.
+\paragraph{Length moved in both directions.} \ad{Imitation} wrote short narrated thoughts and looped (26 consecutive
+re-reads of one file) while its validation loss fell from 1.05 to 0.37. \ad{Thought-first} trained only on turns that
+opened with a thought, which selected long ones: served, it thought long on every turn, made 1,171 model calls to the
+base's 1,709 in the same time, and lost eight tasks without winning one.
 
-\paragraph{One filter reversed \ad{Every-call}'s longer steps.} With \ad{Every-call}'s rows and hyperparameters, \ad{Short-thought} supervised a call only
-if at most 1,500 characters of reasoning preceded it (59\% of calls): shorter steps, timeouts 38 to 24, and 25 vs 18
-solved. No reasoning token was trained, so length moved only through which calls were supervised. Our reading is that
-the adapter generalizes the deliberation that preceded them. The gain is exploratory. On unseen repositories \ad{Short-thought} tied
-the base (Table~\ref{tab:adapters}), with 90th-percentile steps still 0.89 times the base's, and more data (\ad{Short-thought+}) lost there (77
-timeouts vs \ad{Short-thought}'s 53), as on the public leaderboard (\ad{Short-thought} 0.18, \ad{Short-thought+} 0.10, base 0.15).
+\paragraph{One filter reversed \ad{Every-call}'s longer steps.} With \ad{Every-call}'s recipe and hyperparameters on 36
+more runs, \ad{Short-thought} supervised a call only if at most 1,500 characters of reasoning preceded it (59\% of
+calls): shorter steps, timeouts 38 to 24, and 25 vs 18 solved. No reasoning token was trained, so length moved only
+through which calls were supervised; the adapter seems to generalize the deliberation before them, as training on
+short chains did for reasoning models~\citep{hassid2025overthink}. The gain is exploratory: one session, against a low
+draw of the base (it solved 17--27 of these 71 tasks across sessions), and on unseen repositories \ad{Short-thought}
+tied the base (Table~\ref{tab:adapters}). More data (\ad{Short-thought+}) lost there (77 timeouts vs 53), as on the
+public leaderboard (\ad{Short-thought} 0.18, \ad{Short-thought+} 0.10, base 0.15).
 
-\paragraph{A teacher at decision points.} At 717 agent states (Figure~\ref{fig:teaser}), mostly from slow or failed episodes,
-the stronger Gemini 3.8 Flash judged Gemma's next step or wrote its own (589 preference pairs, \$9.21). Trained from the
-base (\ad{Teacher-DPO}), Gemma took the teacher's style (90th-percentile step 172 tokens, \ad{Short-thought}'s 514) but looped (36 of 98 episodes)
-and lost to \ad{Short-thought} (20 vs 27). A second stage on \ad{Short-thought} computed the preference in each training step (\ad{Teacher-DPO-2},
-DPO~\citep{rafailov2023direct} plus a next-token loss on the teacher's step). It removed the losses to \ad{Short-thought} (20 vs 17,
-5/2) and kept steps short (229 vs 610 tokens, 56 vs 125\,s at the 90th percentile). Yet the agent was not faster. Once a
-patch is submitted, an episode ends at the first response without a tool call, and \ad{Teacher-DPO-2}, after submitting early, kept
-calling tools until the clock. Of its episode time, 52\% came after a first patch that then changed in 1 of 65
-episodes. The next-token loss alone kept steps short and stops normal, but the agent looped (31 of 103). The teacher's
-data shortens steps, and the preference term prevents loops but breaks the stop.
+\paragraph{A teacher at decision points.} At 717 agent states, mostly from slow or failed episodes, the stronger
+Gemini~3.8 Flash (\code{gemini-3.8-flash}, medium thinking) judged Gemma's next step or wrote its own (589 preference
+pairs, \$9.21). Trained from the base (\ad{Teacher-DPO}), Gemma took the teacher's style (90th-percentile step 172
+tokens; \ad{Short-thought}, 514 in that session) but looped (36 of 98 episodes) and lost to \ad{Short-thought} (20 vs
+27). A second stage on \ad{Short-thought} computed the preference in each training step (\ad{Teacher-DPO-2}:
+DPO~\citep{rafailov2023direct} plus a next-token loss on the teacher's step, the RPO objective
+of~\citet{liu2024provably}). It removed the losses to \ad{Short-thought} (20 vs 17, 5/2), looped in 6 of 70 episodes
+besides re-submitting, and kept steps short (229 vs 610 tokens for \ad{Short-thought} in that session, 56 vs 125\,s at
+the 90th percentile), yet the agent was not faster. Once a patch is submitted, an episode ends at the first response
+without a tool call, but in 38 of its 65 submitting episodes \ad{Teacher-DPO-2} kept calling tools until the clock took
+the task, though its patch changed in only 1 of 65: 52\% of its episode time came after its first patch. A next-token
+arm on the same batches, without the preference term, kept stops normal but looped (31 of 103 episodes, near
+\ad{Teacher-DPO}'s rate); it solved 24 vs 19 on the 84 tasks both arms finished ($p=0.18$), partly because loops ended
+its episodes early at the call cap. The teacher's data shortens steps and brings loops; the in-step preference term
+prevents them but breaks the stop.
 
 \section{Lever 2: prune what the agent does not use}\label{sec:prune}
 
 Each of the model's 60 layers has a gated MLP with 21,504 hidden channels (about 70\% of the layer's weights). We score
-each channel by the RMS of its activation over 300 agent trajectories (2.37\,M tokens) times the norm of its
-down-projection weights. A cut is an exact mask, without retraining. Its \emph{damage} is the rise in nats per token on
-\emph{agent tokens}, the thought and call of each short-reasoning turn (at most 1,500 characters of reasoning, 17\% of
-the agent's text), in 40 held-out trajectories from other tasks. The 70\% cut (70\% of channels kept per layer, 21\% of
-layer weights removed) costs $+0.080$ with agent scores, $+0.867$ with WikiText-103 scores and $+0.533$ at random.
+each channel by the RMS of its activation over 300 agent rows (2.37\,M tokens; a row is a trajectory as the scorer
+renders it, or its part after a compaction) times the norm of its down-projection weights; a cut keeps the same share
+of channels in every layer, as an exact mask, without retraining or reconstruction. Its \emph{damage} is the rise in
+nats per token on \emph{agent tokens} (the thought and call of each turn with at most 1,500 characters of reasoning,
+17\% of the agent's text) in 40 held-out rows from other tasks; the full model scores 0.26. The 70\% cut (70\% of
+channels kept, 21\% of layer weights removed) costs $+0.080$ with agent scores, $+0.867$ with
+WikiText-103~\citep{merity2016pointer} scores (in chat format) and $+0.533$ at random (one seed). Each score keeps its
+own domain's channels: the WikiText-chosen cut costs WikiText only $+0.145$ against $+1.316$ for the agent-chosen one,
+so each cut hurts the other domain more than a random cut does.
 
-\paragraph{Real 4-bit cuts.} We cut the competition's 4-bit checkpoint and served each cut in vLLM. Single channels
-split the down projection's quantization groups of 32, so the projection is re-quantized (activation-weighted) or cut in
-whole groups. The 85\%, 70\% and 55\% cuts decode 1.05, 1.15 and 1.24 times faster (1.03-1.14 at 8 streams) for a
-served damage of $+0.025$, $+0.084$ and $+0.188$ (Appendix~\ref{app:cuts}). Removing 6 layers by block
-influence~\citep{men2024shortgpt} costs $+0.925$ at 1.07\X\ (Figure~\ref{fig:speed}). Every single-channel cut loses
-in vLLM what its bf16 mask predicted, within 0.005 nats. Whole groups lose twice as much.
+\paragraph{Real 4-bit cuts.} We cut the competition's 4-bit checkpoint and served each cut in vLLM, keeping a multiple
+of 512 channels per layer for the 4-bit kernels (18,432, 14,848 and 11,776 of 21,504, so 69\% for the 70\% cut; the
+bf16 masks keep exactly 85, 70 and 55\%). Single channels split the down projection's quantization groups of 32, so it
+is re-quantized (activation-weighted); keeping whole 32-channel groups, exact in 4 bits, loses twice as much. The 85\%,
+70\% and 55\% cuts decode 1.05, 1.15 and 1.24 times faster (1.03--1.14 at 8 streams) for a served damage of $+0.025$,
+$+0.084$ and $+0.188$, within 0.005 nats of what their bf16 masks predicted, a gap the size of the channel rounding
+(Appendix~\ref{app:cuts}). Removing 6 layers by block influence~\citep{men2024shortgpt} costs $+0.925$ at 1.07\X\
+(Figure~\ref{fig:speed}).
 
 \begin{figure}[!htb]
   \centering
@@ -196,13 +215,13 @@ in vLLM what its bf16 mask predicted, within 0.005 nats. Whole groups lose twice
 \end{figure}
 
 \paragraph{Tasks under the clock.} In the same-session comparison (112 unseen-repository tasks,
-Figure~\ref{fig:tasks}), the 70\% cut solved 20 tasks against 32 and 34 for two runs of the full model, which differed
-on only 8 tasks (3/5). The cut won none of the 12 and 14 tasks that separated it from them (exact paired sign-flip
-test, $p=1.5\times10^{-5}$), in both task blocks and both orders. It lost them at the clock (72 timeouts against
-43-44), and none of our 1,944 timed-out episodes passed the hidden tests. The failure is in the call syntax
-(Figure~\ref{fig:teaser}): a string closed with a backtick or a JSON quote instead of Gemma's delimiter swallows the
-next argument. Of the cut's calls, 24\% were malformed, against 2-3\% for the full model. The call fails, the agent
-resends it, and 42 episodes looped, 31 until the clock (full-model runs: 4 and 7).
+Figure~\ref{fig:tasks}) the 70\% cut solved 20 tasks against 32 and 34 for two full-model runs, which differed on 8
+tasks (3/5). It won none of the 12 and 14 tasks that separated it from them, in both task blocks and both orders
+(two-sided exact sign-flip test on the per-task difference from the two runs' mean, as pre-registered: 17 nonzero
+differences, all against it, $p=2^{-16}=1.5\times10^{-5}$), losing them at the clock (72 timeouts against 43--44). The
+failure is in the call syntax (Figure~\ref{fig:teaser}): a string closed with a backtick or a JSON quote instead of
+Gemma's delimiter swallows the next argument, in 24\% of the cut's calls against 2--3\% for the full model. The call
+fails, the agent resends it, and 42 episodes looped (full-model runs: 4 and 7).
 
 \begin{figure}[!htb]
   \centering
@@ -211,47 +230,59 @@ resends it, and 42 episodes looped, 31 until the clock (full-model runs: 4 and 7
   \label{fig:tasks}
 \end{figure}
 
-\paragraph{Healing from the full model (mask and adapter off).} A rank-16 LoRA is trained for two epochs on 628 agent
-trajectories in two arms on identical batches. The KL arm minimizes $\mathrm{KL}(\text{full}\,\|\,\text{cut})$ at
-every token, the next-token arm the next-token loss. A removed channel gets no gradient, so the adapter slices exactly
-onto the 4-bit cut. The KL arm met its pre-registered bar, damage below $+0.04$ and KL halved (2.4 TPU hours). In the
-trainer's bf16 evaluation the damage fell from $+0.085$ to $+0.021$ and the KL on agent tokens from 0.098 to 0.042. The next-token arm reached
-$-0.078$, below the full model, while its KL rose to 0.243. It fit the data, not the model. Served through vLLM's LoRA
-path, the adapter costs the whole speedup (1.02\X\ against 1.15\X). Rounding $W + dW$ to the nearest 4-bit value would
-erase the repair, since its deltas average 5\% of a grid step (Scale-QLoRA~\citep{li2026scaleqlora} saw the same). So
-we use stochastic rounding~\citep{gupta2015deep} (up or down at random, exact in expectation), and the merged cut keeps
-the repair ($+0.022$ nats) and the speed (1.15\X).
+\paragraph{Healing from the full model.} A rank-16 LoRA is trained for two epochs on 628 agent rows in two arms on
+identical batches: the KL arm minimizes $\mathrm{KL}(\text{full}\,\|\,\text{cut})$ at every token, the next-token arm
+the next-token loss. A removed channel gets no gradient, so the adapter slices exactly onto the 4-bit cut. The KL arm
+met its pre-registered bar (damage below $+0.04$, KL halved; 2.4 TPU hours): in the trainer's bf16 evaluation damage
+fell from $+0.085$ to $+0.021$ and KL on agent tokens from 0.098 to 0.042. The next-token arm reached $-0.078$, below
+the full model, while its KL rose to 0.243; it fit the data rather than the model, though at 38 held-out states its
+next calls matched the full model's as often as the KL arm's (16 of 38 each, against 13 for the unhealed cut), and
+neither arm wrote a malformed call there. Through vLLM's LoRA path the adapter costs the whole speedup (1.02\X\ against
+1.15\X). Rounding $W + dW$ to the nearest 4-bit value would erase the repair, whose deltas average 5\% of a grid step
+(as Scale-QLoRA~\citep{li2026scaleqlora} found), so we round stochastically~\citep{gupta2015deep} (up or down at
+random, exact in expectation) on the checkpoint's own grid. Per weight, that noise carries about 19 times the delta's
+energy, but it is independent across weights while the delta is low-rank: from one draw, the merged cut keeps the
+repair ($+0.022$ nats) and the speed (1.15\X). Merging in bf16 and re-quantizing with fresh scales, as
+GPTQ~\citep{frantar2022gptq} would, is the alternative we did not test.
 
 In the same-session comparison the merged cut solved 32 of 112, within noise of the full model ($-1$ task, 95\%
-interval $-7.5$ to $+5$, discordant 5/5 and 6/8; against the unhealed cut 15/3, $p=0.0075$). It made 3\% malformed
-calls and 36 timeouts against 43-44 (seven fewer, worth about 3 tasks, since full-model episodes ending after 7 minutes
-pass 43\% of the time). Its calls took 16.9\,s against 19.0-19.3\,s at equal length. On the 55\% cut (1.24\X),
-healing recovers the same share of the damage ($+0.185$ to $+0.047$, missing its $+0.04$ bar) and 14 of the 22 lost
-tasks, still short of the full model ($p=0.007$). Malformed calls fell from 43\% to 13\% (full model 1-2\%,
-Figure~\ref{fig:tasks}).
+interval $-7.5$ to $+5$, discordant 5/5 and 6/8; against the unhealed cut 15/3, $p=0.0075$), though with no margin
+fixed in advance this is not non-inferiority: the plan written before the run expected to detect a loss the size of
+the unhealed cut's, not half of it. It made 3\% malformed calls. Faster per call (16.9\,s against 19.0--19.3\,s at
+equal length), it had 36 timeouts against 43--44, but most of the difference became endings at the 24-call cap (21
+against 12--16), which pass one time in five: under the cap its speed was worth about one task. On the 55\% cut
+(1.24\X), healing recovers the same share of the damage ($+0.185$ to $+0.047$, missing its $+0.04$ bar) and 14 of the
+22 lost tasks, still short of the full model ($p=0.007$), and malformed calls fall from 43\% to 13\% (full model
+1--2\%).
 
-\paragraph{A next-action test.} At 102 held-out agent states (starts of short-reasoning turns in 40 trajectories), each
-model's greedy next call is compared with the full model's (Figure~\ref{fig:nextaction}). Two engines with the same
-weights agree on 78\% of calls, sampling at the agent's temperature on 64\%, and the cuts, healed or not, on 28-42\%.
-Exact agreement does not track tasks (the cuts solving 20 and 13 agree on 29\% and 28\%). The malformed share does, and
-so does agreement with the call the agent recorded (full 0.40, healed 0.34, 70\% 0.28, 55\% 0.24). The test is a gate,
-not a predictor.
+\paragraph{A next-action test.} At 109 held-out agent states (starts of short-reasoning turns in the 40 held-out rows),
+each model's greedy next call is compared with the full model's (Figure~\ref{fig:nextaction}). The same weights with
+other batching agree on 78\% of calls, a numerics floor~\citep{yuan2025understanding}, sampling at the agent's
+temperature on 64\%, and the cuts, healed or not, on 28--42\%. Exact agreement does not track tasks (the cuts solving
+20 and 13 agree on 29\% and 28\%), but the malformed share and agreement with the call the agent recorded do (full
+0.40, healed 0.34, 70\% 0.28, 55\% 0.24). The test is a gate, not a predictor, and a thin one: the 70\% cut wrote 8
+malformed calls of 100 against the full model's 2 of 102 (two-sided Fisher $p=0.057$), where its sessions, resending
+each failed call, reached 24\%; and the 85\% cut (6 of 101) never ran a session, so the gate has no calibrated bar.
 
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=\linewidth]{fig_nextaction.pdf}
-  \caption{The next-action test at 102 held-out states. Grey band: two engines with the same weights.}
+  \caption{The next-action test at 109 held-out states (agreement over the 102 where the full model calls; malformed
+  shares over each model's calls). Grey band: the same weights with other batching.}
   \label{fig:nextaction}
 \end{figure}
 
-\paragraph{Two scores for pruning reasoning.} Scoring channels only on agent tokens, in the spirit of RAC's calibration
-on the model's own chains~\citep{lucas2025reasoning}, changed nothing at 70\% (Figure~\ref{fig:nextaction}). Scoring
-by token role (after SKIM~\citep{choi2026skim}, Section~\ref{sec:related}) gives an equal vote to text read, prose,
-argument values, call syntax and the closing quote (0.08\% of positions). Split by role, the 55\% cut's loss rose most
-on that quote ($+0.50$ nats, against $+0.19$ overall). At 141 states the role-scored cut halved both that rise and the
-wrongly closed strings, but its calls lost their opener (their first token) instead (Figure~\ref{fig:failure}). In
-all, 20\% of its attempts failed against 19\% (pre-registered test, parsed calls only: 11\% vs 16\%, $p=0.14$). A
-format-enforcing grammar would block the failures the role score adds but not those it removes (inference).
+\paragraph{Two scores for pruning reasoning.} Scoring channels only on agent tokens, in the spirit of RAC's
+calibration on the model's own chains~\citep{lucas2025reasoning}, changed nothing at 70\% (Figure~\ref{fig:nextaction}).
+Scoring by token role (after SKIM~\citep{choi2026skim}, Section~\ref{sec:related}) gives an equal vote to text read,
+prose, argument values, call syntax and the closing quote (0.08\% of positions), where the 55\% cut's loss rose most
+($+0.50$ nats, against $+0.19$ overall). At 141 states the role-scored cut halved both that rise and the wrongly closed
+strings, but its calls lost their opener (their first token) instead (Figure~\ref{fig:failure}): 20\% of its attempts
+failed against 19\%. The pre-registered primary, the malformed share of parsed calls, was 12/112 against 20/122
+(one-sided Fisher $p=0.14$, bar 0.05); paired over the 103 states where both cuts called, 9 broke only for the plain cut
+and 1 only for the role-scored one (exact McNemar $p=0.02$, descriptive). Offline, a parser that accepts a backtick or
+a JSON quote as a string's closer repairs 53 of the cuts' 68 malformed next calls (18 then equal the full model's
+call); neither it nor grammar-constrained decoding~\citep{dong2024xgrammar} was tested on tasks.
 
 \begin{figure}[!htb]
   \centering
@@ -261,9 +292,9 @@ format-enforcing grammar would block the failures the role score adds but not th
 \end{figure}
 
 \paragraph{Speed without a cut.} N-gram speculative decoding~\citep{saxena2023prompt} kept the full model's calls (89\%
-the same next call, malformed 2/103) but sped up real agent turns only 1.05-1.07\X. Unlike a cut's, its gain depends on
-the text (3.4\X\ on a synthetic continuation, Figure~\ref{fig:speculation}). We did not test Gemma~4's own draft model,
-a multi-token-prediction (MTP) drafter~\citep{gemmateam2026gemma4}.
+the same next call, malformed 2/103) but sped up real agent turns only 1.05--1.07\X: unlike a cut's, its gain depends
+on the text (3.4\X\ on a synthetic continuation, Figure~\ref{fig:speculation}). We did not test Gemma~4's own drafter,
+a multi-token-prediction head~\citep{gemmateam2026gemma4}.
 
 \begin{figure}[!htb]
   \centering
@@ -274,75 +305,84 @@ a multi-token-prediction (MTP) drafter~\citep{gemmateam2026gemma4}.
 
 \section{Measuring agents under noise}\label{sec:noise}
 
-\paragraph{Pairing and the noise floor.} Between sessions the same model moved by up to ten tasks and flipped 7-14\% of
-the same unseen tasks. Paired sessions, compared by discordant tasks (exact McNemar), separated adapters. Two identical
-full-model arms on one server, the A/A floor, flipped 6 of 82 tasks (2/4), as many as across sessions. Pairing
-controls load and time of day but leaves the flips, so only lopsided splits such as 8/1 carry signal.
-
-\paragraph{Exploratory and confirmatory.} Single-session $p$-values near 0.04, among about twenty adapter comparisons,
-are exploratory, and we claim only directions that held across sessions or mechanisms. The same-session, role and
-speculation tests are confirmatory, with analysis set, primary test and gates fixed before each run.
+Between sessions the same model moved by up to ten tasks and flipped 7--14\% of the same unseen tasks, so paired
+sessions, compared by discordant tasks (exact McNemar), separated adapters. Two identical full-model arms on one
+server, the A/A floor, flipped 6 of 82 tasks (2/4), as many as across sessions: pairing controls load and time of day
+but not the flips, so only lopsided splits such as 8/1 carry signal. Pairing also shares the server, so an arm that
+writes less speeds up its control. Competitions give a clean, held-out test~\citep{sculley2025position}, but a
+leaderboard score is one more session: the base model's own submissions scored 0.10--0.18, the same range as every
+adapter's, so we ranked adapters only by paired sessions. Single-session $p$-values near 0.04, among about twenty
+adapter comparisons, are exploratory, and we claim only directions that held across sessions or mechanisms. The
+same-session, healing, role and speculation tests are confirmatory: their analysis sets, primary tests and bars were
+fixed in dated logbook entries before each run, released with the code (\code{docs/preregistrations.md}).
 
 \section{Related work}\label{sec:related}
 
 Fine-tuning on a model's own filtered successes dates to expert iteration~\citep{anthony2017thinking},
-STaR~\citep{zelikman2022star} and ReST-EM~\citep{singh2023beyond}. SWE-Gym~\citep{pan2024training} found it weak for
-software agents. SWE-smith~\citep{yang2025swesmith}, R2E-Gym~\citep{jain2025r2egym} and
-SWE-rebench~\citep{badertdinov2025swerebench} supply tasks. \citet{cuadron2025danger} measured overthinking in agents,
-and On the Clock~\citep{wang2026clock} agents under wall-clock budgets. Our preference stages use
-DPO~\citep{rafailov2023direct} and IPO~\citep{azar2023general}. \ad{Teacher-DPO}'s collapse matches likelihood
-displacement~\citep{razin2024unintentional}.
+STaR~\citep{zelikman2022star} and ReST-EM~\citep{singh2023beyond}; SWE-Gym~\citep{pan2024training} found it weak for
+software agents, and SWE-smith~\citep{yang2025swesmith}, R2E-Gym~\citep{jain2025r2egym} and
+SWE-rebench~\citep{badertdinov2025swerebench} supply tasks and trajectories. Training on shorter chains helps reasoning
+models~\citep{hassid2025overthink}. \citet{cuadron2025danger} measured overthinking in agents, and On the
+Clock~\citep{wang2026clock} agents under wall-clock budgets, which fill spare time with repeated actions, as
+\ad{Teacher-DPO-2} did; its remedy, showing the agent the time, was already in our harness. \ad{Teacher-DPO}'s collapse
+under DPO~\citep{rafailov2023direct} resembles likelihood displacement~\citep{razin2024unintentional,pal2024smaug}, and
+\ad{Teacher-DPO-2}'s objective is RPO~\citep{liu2024provably}.
 
 Perplexity misses what compression breaks~\citep{jaiswal2023compressing}, for agents too
-(ACBench~\citep{dong2025compressed}, worst on JSON outputs), and flips and KL track it better~\citep{dutta2024accuracy}.
-Quantization amplifies agents' existing failures~\citep{jang2026flat}, and we trace them to call syntax. Our channel
-score is a structured Wanda~\citep{sun2023simple}, FLAP's Wanda-sp~\citep{an2023fluctuation}. Reasoning models are
-pruned with calibration on their own chains (RAC~\citep{lucas2025reasoning}, SSGR~\citep{xiang2025think},
-RESP~\citep{wang2025think}, OBC-Prune~\citep{nguyen2026obcprune}), without tools or a clock. Concurrent work,
-SKIM~\citep{choi2026skim}, prunes tool-calling agents by per-role saliency and heals on-policy, under a grammar that
-enforces the format.
+(ACBench~\citep{dong2025compressed}, worst on JSON outputs); flips and KL track it better~\citep{dutta2024accuracy}.
+4-bit quantization hides amplified agent failures behind flat scores~\citep{jang2026flat}; for pruning, we trace such
+failures to call syntax, and under pruning tool calls lose grounded specificity before schema-level
+intent~\citep{zhang2026breaks}. Our channel score is FLAP's Wanda-sp~\citep{an2023fluctuation}, a structured
+Wanda~\citep{sun2023simple}, and calibration data steer it~\citep{williams2024impact,ji2025beware}, as our crossed
+agent and WikiText scores show. Reasoning models are pruned with calibration on their own chains
+(RAC~\citep{lucas2025reasoning}, SSGR~\citep{xiang2025think}, RESP~\citep{wang2025think},
+OBC-Prune~\citep{nguyen2026obcprune}), without tools or a clock. Concurrent SKIM~\citep{choi2026skim} prunes
+tool-calling agents by per-role saliency and heals on-policy, under a grammar that enforces the format; engines such as
+XGrammar~\citep{dong2024xgrammar} make such grammars cheap.
 
-Minitron~\citep{muralidharan2024compact} is our cut-then-distil template. LLM-Pruner~\citep{ma2023llmpruner} retrains,
-D-Pruner~\citep{zhang2024pruning} calibrates on a target domain, and self-data
-distillation~\citep{thangarasa2024selfdata} heals with the unpruned model's outputs. We heal with an off-policy forward
-KL \citep[on-policy:][]{agarwal2023onpolicy,gu2023minillm} and merge by stochastic rounding, whereas
-QA-LoRA~\citep{xu2023qalora} trains merge-ready adapters and PEQA~\citep{kim2023memory} tunes the quantization scales.
-Speculative decoding~\citep{leviathan2022speculative,chen2023accelerating} speeds decoding without changing the model,
-and SuffixDecoding~\citep{oliaro2024suffixdecoding} targets agents. On error bars, see \citet{miller2024adding}. Agent
-reruns vary by 2-6 points~\citep{bjarnason2026randomness}.
+Minitron~\citep{muralidharan2024compact} is our cut-then-distil template, and healing after pruning goes back
+to~\citet{gromov2024unreasonable}, who heal with QLoRA~\citep{dettmers2023qlora} after removing layers.
+LLM-Pruner~\citep{ma2023llmpruner} retrains, D-Pruner~\citep{zhang2024pruning} calibrates on a target domain, and
+self-data distillation~\citep{thangarasa2024selfdata} heals with the unpruned model's outputs. We heal with off-policy
+forward KL \citep[on-policy:][]{agarwal2023onpolicy,gu2023minillm} and merge by stochastic
+rounding~\citep{gupta2015deep}, where adaptive rounding~\citep{nagel2020up} and GPTQ~\citep{frantar2022gptq} choose
+roundings that minimize the layer's output error; QA-LoRA~\citep{xu2023qalora} and LoTA-QAF~\citep{chen2025lotaqaf}
+train adapters that merge onto the grid, PEQA~\citep{kim2023memory} tunes the scales, and FALQON~\citep{choi2025falqon}
+meets the same sub-step updates when merging LoRA into an FP8 backbone. Speculative
+decoding~\citep{leviathan2022speculative,chen2023accelerating} keeps the model's outputs, and
+SuffixDecoding~\citep{oliaro2024suffixdecoding} targets agents. On error bars, see~\citet{miller2024adding}; agent
+reruns vary by 2--6 points~\citep{bjarnason2026randomness}.
 
 \paragraph{Further related work.} Nested models such as MatFormer~\citep{devvrit2023matformer} and Star
-Elastic~\citep{taghibakhshi2026starelastic}, which also works in 4 bits, are trained to be cut. Ours was cut post hoc.
-Pruning degrades tool-call arguments before intent~\citep{zhang2026breaks}. In the study of \citet{jang2026flat},
-agents' scores stay flat while 4-bit quantization amplifies their existing failures. Under our clock, the amplified
-failure cost tasks. Scale-QLoRA~\citep{li2026scaleqlora} also finds that stochastic re-rounding collapses QAT-LoRA
-adapters, but those adapters are trained for a nearest-rounding grid, a different case from our single unbiased merge
-of an adapter trained in floating point. ActionOPD~\citep{yuan2026actionopd} distils a black-box teacher's decisions at
-the states a student visits. Kaggle's staff call competitions the gold standard of evaluation~\citep{sculley2025position},
-and Google deploys repair agents under latency limits~\citep{ziftci2026catching}.
+Elastic~\citep{taghibakhshi2026starelastic}, which also works in 4 bits, are trained to be cut; ours was cut post hoc.
+Scale-QLoRA~\citep{li2026scaleqlora} also finds that stochastic re-rounding collapses QAT-LoRA adapters, but those
+adapters are trained for a nearest-rounding grid, a different case from our single unbiased merge of an adapter
+trained in floating point. ActionOPD~\citep{yuan2026actionopd} distils a black-box teacher's decisions at the states a
+student visits, and Google deploys repair agents under latency limits~\citep{ziftci2026catching}.
 
 \section{Limitations and conclusion}\label{sec:conclusion}
 
 With one model, harness and competition, the mechanisms (supervised actions condition reasoning length, cuts break rare
 syntax tokens, preference terms move stopping) may generalize but the numbers need not. The fine-tuning gain held on
-development repositories only. We did not try policy-gradient training. Each cut has one mask and one healing run. The
-token-level tests cover short-reasoning turns within 8,192 tokens, on held-out tasks that share repositories with
-training rows. No affordable control changes time with behaviour fixed. The healed cut's result is one session of 112
-tasks, at our own load of 8 tasks at a time, not a documented scorer setting.
+development repositories only, and we did not try policy-gradient training~\citep{wei2025swerl}. Each cut has one
+mask, uniform across layers and without reconstruction, one healing run and one rounding draw. The token-level tests
+cover short-reasoning turns within 8,192 tokens, on held-out tasks that share repositories with training rows. We did
+not rescale the clock: two in five of the full model's solved episodes end after 7 minutes, so speed should pay more
+where the call cap does not bind. The healed cut's result is one session of 112 tasks at our own load (8 tasks at a
+time), sized to detect the unhealed cut's loss, not to bound a small one.
 
 Before asking what a faster model buys an agent, measure the agent: its tokens per step, which fine-tuning moves first,
 and its time per token, which follows the bytes read. Before any long run, check cheaply whether it still writes its
-calls and stops as it did. On a clock, those decided every result we measured. Healed by its full model, the 70\% cut
-chosen by the agent's use stayed within noise of the full model's task rate at 1.15 times its decode speed, but the
-55\% cut did not.
+calls and stops as it did; on a clock, those decided every result we measured.
 
 \section*{Code and data}
 The code, the result files and this paper's sources are at \url{https://github.com/wilmerhenao/under-the-clock}: the
 code that builds the training rows, trains the adapters, scores, cuts, heals and serves the pruned models, and
-analyses the runs; the small result files behind every number here; and the script that draws the figures from them.
-Every experiment ran as a Kaggle notebook. Appendix~\ref{app:notebooks} lists them, and the repository's README maps
-each number to a notebook version and a result file. Task data, agent trajectories and model weights are not
-redistributed: the notebooks rebuild or load them from their sources.
+analyses the runs; the small result files behind every number here; the pre-registered analysis plans
+(\code{docs/preregistrations.md}); and the script that draws the figures from them. Every experiment ran as a Kaggle
+notebook. Appendix~\ref{app:notebooks} lists them, and the repository's README maps each number to a notebook version
+and a result file. Task data, agent trajectories and model weights are not redistributed: the notebooks rebuild or
+load them from their sources.
 
 \section*{Disclosure}
 This work was done independently, outside the author's role at Invesco, and used no Invesco resources. The views
@@ -351,40 +391,116 @@ expressed are the author's own and not necessarily those of Invesco.
 \bibliographystyle{plainnat}
 \bibliography{refs}
 
-\clearpage
 \appendix
 
 \section{Real 4-bit cuts}\label{app:cuts}
 
 Table~\ref{tab:cuts} gives the measurements behind Figure~\ref{fig:speed}. The model is Gemma~4 31B in W4A16
 (compressed-tensors, group 32), served by vLLM on 4\X\,L4. Decode speed is for one stream at a 2,000-token prompt, and
-``8 streams'' is the total decode rate of eight 2,000-token prompts at once. Damage is the rise in held-out nats per
-token on the agent's own text (40 trajectories, 25,896 tokens). ``Predicted'' is the bf16 mask's damage before any
-4-bit serving.
+``8 streams'' is the total decode rate of eight 2,000-token prompts at once. GB are the checkpoint's bytes: the full
+model's \code{model.safetensors} (23,265,352,448 bytes) and each cut's written tensors. Every removed channel takes
+9,072 bytes from each layer (its 4-bit row of the gate and up projections, its column of the down projection, and their
+scales), so the 3,072, 3,584 and 3,072 channels between successive cuts remove 1.67, 1.95 and 1.67\,GB: the uneven
+steps come from rounding the kept channels to multiples of 512.
+
+Damage is the rise in held-out nats per token on the agent's own text (40 rows, 25,896 tokens). ``Predicted'' is the
+damage of the bf16 mask before any 4-bit serving. Those masks keep exactly 85, 70 and 55\% of the channels (18,278,
+15,053 and 11,827), while the served cuts keep 18,432, 14,848 and 11,776. At 70\% the served cut therefore removes 205
+more channels per layer, about 0.004 nats on the slope between the 85\% and 70\% masks: the gap between the mask's
+$+0.080$ and the served $+0.084$. The healing trainer's own bf16 evaluation of the served mask gives $+0.085$
+(Section~\ref{sec:prune}). At 70\%, the WikiText-scored cut costs the agent $+0.867$ and WikiText $+0.145$, the
+agent-scored one $+0.080$ and $+1.316$, and a random cut (one seed) $+0.533$ and $+0.866$.
 
 \begin{table}[!ht]
   \centering
-  \caption{Real 4-bit cuts: weights read, decode speed and damage. Speeds are relative to the full model's 38.9 tok/s
-  on one stream and 210 tok/s on 8.}
+  \caption{Real 4-bit cuts: kept channels, checkpoint size, decode speed and damage. Speeds are relative to the full
+  model's 38.9 tok/s on one stream and 210 tok/s on 8.}
   \label{tab:cuts}
-  \small
-  \setlength{\tabcolsep}{3.5pt}
-  \begin{tabular*}{\columnwidth}{@{\extracolsep{\fill}}lrrrrr@{}}
+  \footnotesize
+  \setlength{\tabcolsep}{2.4pt}
+  \begin{tabular*}{\columnwidth}{@{\extracolsep{\fill}}lrrrrrr@{}}
     \toprule
-    & & \multicolumn{2}{c}{Decode speed} & \multicolumn{2}{c}{Damage} \\
-    \cmidrule(lr){3-4}\cmidrule(l){5-6}
-    MLP kept & GB & 1 stream & 8 streams & served & predicted \\
+    & & & \multicolumn{2}{c}{Decode speed} & \multicolumn{2}{c}{Damage} \\
+    \cmidrule(lr){4-5}\cmidrule(l){6-7}
+    MLP kept & channels & GB & 1 stream & 8 streams & served & predicted \\
     \midrule
-    100\% & 23.5 & 1.00\X & 1.00\X & 0 & 0 \\
-    85\% & 21.6 & 1.05\X & 1.03\X & $+0.025$ & $+0.025$ \\
-    70\% & 19.6 & 1.15\X & 1.09\X & $+0.084$ & $+0.080$ \\
-    55\% & 18.0 & 1.24\X & 1.14\X & $+0.188$ & $+0.185$ \\
-    6 layers$^{a}$ & 21.6 & 1.07\X & 1.09\X & $+0.925$ & $+0.970$ \\
+    100\% & 21,504 & 23.3 & 1.00\X & 1.00\X & 0 & 0 \\
+    85\% & 18,432 & 21.6 & 1.05\X & 1.03\X & $+0.025$ & $+0.025$ \\
+    85\%, groups$^{b}$ & 18,432 & 21.6 & 1.05\X & 1.04\X & $+0.059$ & -- \\
+    70\% & 14,848 & 19.6 & 1.15\X & 1.09\X & $+0.084$ & $+0.080$ \\
+    70\%, groups$^{b}$ & 14,848 & 19.6 & 1.15\X & 1.10\X & $+0.182$ & -- \\
+    55\% & 11,776 & 18.0 & 1.24\X & 1.14\X & $+0.188$ & $+0.185$ \\
+    6 layers$^{a}$ & 21,504 & 21.6 & 1.07\X & 1.09\X & $+0.925$ & $+0.970$ \\
     \bottomrule
   \end{tabular*}
   \par\smallskip
-  {\footnotesize\raggedright $^{a}$Removed by block influence~\citep{men2024shortgpt}. The other rows keep that share of
-  MLP channels in every layer.\par}
+  {\footnotesize\raggedright $^{a}$Layers 4, 13, 14, 16, 18 and 21, removed by block influence~\citep{men2024shortgpt};
+  the other rows keep that share of MLP channels in every layer. $^{b}$Whole 32-channel groups, exact in 4 bits (no
+  re-quantization).\par}
+\end{table}
+
+\section{Task sets and data}\label{app:sets}
+
+A paired session runs both arms on one server until its time budget, so each arm finishes as many tasks as its speed
+allows, and a comparison counts the tasks both arms finished (Table~\ref{tab:sets}). The development set is the 71
+tasks of the competition's public repositories. The unseen pool is repograph's \code{priv\_eval} minus the 10
+repositories that overlap our pools (198 tasks); sessions take its first 150 (one earlier session, 125), and the
+same-session comparisons two blocks of 56 of those. Two of the 70\% comparison's 112 tasks came from training
+repositories listed under new owners; no run solved them, so dropping them changes no count, and the 55\% comparison
+excludes them. Table~\ref{tab:data} gives the training and measurement
+data.
+
+\begin{table*}[t]
+  \caption{Every task comparison in the paper. Paired sessions run on the 16-minute clock, same-session comparisons on
+  the 8-minute one; discordant tasks are listed as only-first\,/\,only-second.}
+  \label{tab:sets}
+  \small
+  \setlength{\tabcolsep}{4pt}
+  \begin{tabularx}{\textwidth}{@{}lllr>{\raggedright\arraybackslash}X@{}}
+    \toprule
+    Comparison & Tasks from & Compared & Solved & Discordant; notes \\
+    \midrule
+    \ad{Imitation} vs base & development, two passes & 103 (50 + 53) & 16 vs 26 & 4/14 \\
+    \ad{Thought-first} vs base & development & 69 & 19 vs 27 & 0/8 \\
+    \ad{Every-call} vs base & development & 71 & 16 vs 22 & 2/8 \\
+    \ad{Short-thought} vs base & development & 71 & 25 vs 18 & 8/1 \\
+    \ad{Short-thought+} vs \ad{Short-thought} & development & 71 & 18 vs 18 & 5/5 \\
+    \ad{Short-thought} vs base & unseen, 150 & 64 & 17 vs 19 & 2/4 \\
+    \ad{Short-thought+} vs \ad{Short-thought} & unseen, 125 & 125 & 27 vs 35 & 1/9 \\
+    \ad{Teacher-DPO} vs \ad{Short-thought} & unseen, 150 & 91 & 20 vs 27 & 3/10; loops in 36 of its 98 episodes \\
+    \ad{Teacher-DPO-2} vs \ad{Short-thought} & unseen, 150 & 70 & 20 vs 17 & 5/2; loops in 6 of 70; 65 of 70 submitted \\
+    Next-token arm vs \ad{Short-thought} & unseen, 150 & 84 & 24 vs 19 & 7/2; loops in 31 of its 103 episodes \\
+    Full model vs full model (A/A) & unseen, 150 & 82 & 23 vs 25 & 2/4 \\
+    \midrule
+    Full, full, 70\% cut, 70\% healed & unseen, 2\X\,56 & 112 & 32, 34, 20, 32 & malformed calls 2.3, 3.3, 24.2, 3.0\% \\
+    Full, full, 55\% cut, 55\% healed & unseen, 2\X\,56 & 112 & 37, 33, 13, 27 & malformed calls 0.9, 1.9, 43.4, 13.4\% \\
+    \bottomrule
+  \end{tabularx}
+\end{table*}
+
+\begin{table}[!ht]
+  \centering
+  \caption{Training and measurement data. A row is a trajectory as the scorer renders it, or its part after a
+  compaction.}
+  \label{tab:data}
+  \footnotesize
+  \setlength{\tabcolsep}{3pt}
+  \begin{tabularx}{\columnwidth}{@{}>{\raggedright\arraybackslash}p{0.78in}>{\raggedright\arraybackslash}X@{}}
+    \toprule
+    Use & Data \\
+    \midrule
+    \ad{Imitation} & 320 rows of public trajectories under 8,192 tokens, as many as the 4-hour training cap allowed
+    (SWE-smith 155, SWE-Zero 101, R2E-Gym 53, SWE-Gym 6, Qwen 5) \\
+    \ad{Every-call} & 422 verified runs of our agent (793 rows) \\
+    \ad{Short-thought} & 458 verified runs (887 rows, 694 with a supervised call) \\
+    \ad{Short-thought+} & 611 verified runs ($+153$) \\
+    Teacher & 717 agent states, mostly from slow or failed episodes; 589 preference pairs \\
+    Pruning & \ad{Short-thought}'s 694 rows split by task (1 task in 10 held out): 628 training rows heal; the first 300
+    with agent tokens within 8,192 tokens score channels (2.37\,M tokens). Of the 66 held-out rows, the first 40 measure
+    damage (25,896 agent tokens) and give the 109 next-action states; the role test draws 141 states from 54 rows \\
+    WikiText-103 & 301k tokens to score, 24 held-out chunks of 2,048 \\
+    \bottomrule
+  \end{tabularx}
 \end{table}
 
 \section{Notebooks}\label{app:notebooks}
