@@ -41,13 +41,16 @@ numbers and figures.
 - **Healing from the full model repairs the calls.** A LoRA trained with KL to the full model and merged into the 4-bit weights by
   stochastic rounding keeps the speed and solves **32 of 112**, within noise of the full model (**−1 task**, 95%
   interval −7.5 to +5).
+- **A tolerant parser recovers the tasks without training.** Served with a vLLM tool-parser plugin that accepts its
+  wrong closing quotes, the unhealed 70% cut solved **15 vs 8** of the same 56 tasks (9 gained, 2 lost, p 0.065;
+  pre-registered, compared across sessions), the full model's 14 and 15, with no malformed calls left.
 - **Average loss ranks cuts but cannot find the failure.** A 15-minute next-action test locates it, and shows a
   role-aware channel score moving the failure instead of removing it.
 
 <p align="center">
-  <img src="docs/paper/figs/fig_teaser.png" alt="Figure 1: one held-out agent state, three models" width="94%">
+  <img src="docs/paper/figs/fig_teaser.png" alt="Figure 1: three models' next call after one held-out transcript" width="94%">
   <br>
-  <sub><b>Figure 1.</b> One held-out agent state, three models. The 70% cut ends the path with a backtick instead of
+  <sub><b>Figure 1.</b> Three models' next call after one held-out transcript. The 70% cut ends the path with a backtick instead of
   Gemma's string delimiter <code>&lt;|"|&gt;</code> and swallows <code>start_line</code>. Healed and merged, it writes
   the full model's call.</sub>
 </p>
@@ -61,6 +64,7 @@ numbers and figures.
 | ✂️ | **70% cut**: 30% of MLP channels pruned, scored on agent trajectories | **1.15×** decode | **20 vs 32 / 34** of 112 (p 1.5e-5); 24% malformed calls |
 | 🩹 | **70% cut, healed and merged** into the 4-bit weights | **1.15×** decode | **32 of 112**, −1 task (95% interval −7.5 to +5); 3% malformed |
 | 🩹 | **55% cut, healed and merged** | **1.24×** decode | wins back **14 of 22** lost tasks; malformed calls 43% → 13% |
+| 🔧 | **70% cut, tolerant parser**: a vLLM tool-parser plugin, no training | **1.15×** decode | **15 vs 8** of 56 (9/2, p 0.065; full model 14 and 15); no malformed calls left |
 | ⚡ | n-gram speculative decoding, full model | **1.05–1.07×** on agent turns | keeps the full model's calls; 3.4× only on synthetic text |
 
 ## How the pruning pipeline works
@@ -70,6 +74,8 @@ flowchart LR
     T["Agent trajectories<br/>300 runs · 2.37 M tokens"] --> S["Score each MLP channel<br/>activation RMS × down-projection norm"]
     S --> C["Cut: keep 70% or 55%<br/>exact mask, re-quantized to 4 bits"]
     C --> H["Heal: rank-16 LoRA<br/>KL to the full model"]
+    C --> P["Or parse leniently<br/>vLLM tool-parser plugin"]
+    P --> E
     H --> M["Merge into 4 bits<br/>stochastic rounding"]
     M --> E["Same-session test<br/>112 unseen-repository tasks"]
     C -.->|15-minute next-action test| N["Where calls break:<br/>closing quotes, openers"]
@@ -77,6 +83,8 @@ flowchart LR
 ```
 
 ## Figures
+
+Numbers follow the Kaggle text; the arXiv version adds the speculative-decoding figure as its Figure 4.
 
 <table>
   <tr>
@@ -89,7 +97,7 @@ flowchart LR
   </tr>
   <tr>
     <td width="50%"><img src="docs/paper/figs/fig_failure_moves.png" alt="Figure 6"><br><sub><b>Figure 6.</b> Scoring by token role (55% cut): the closing quote recovers and the opener breaks.</sub></td>
-    <td width="50%"><img src="docs/paper/figs/fig_speculation.png" alt="Figure 7"><br><sub><b>Figure 7.</b> N-gram speculative decoding against plain decoding (full model, same session).</sub></td>
+    <td width="50%"><img src="docs/paper/figs/fig_speculation.png" alt="arXiv Figure 4"><br><sub><b>arXiv Figure 4.</b> N-gram speculative decoding against plain decoding (full model, same session).</sub></td>
   </tr>
 </table>
 
@@ -104,6 +112,7 @@ python kernels/analysis/fig_paper.py            # the seven figures, Kaggle layo
 python kernels/analysis/fig_paper.py --twocol   # arXiv two-column layout       -> docs/paper/arxiv/figs/
 python kernels/analysis/late_episodes.py        # how episodes end (clock, call cap, own stop) and how often each passes
 python kernels/analysis/tolerant_parse.py       # a tolerant call parser repairs 53 of the cuts' 68 malformed next calls
+python kernels/analysis/tol70_report.py runs/eval-rg-tol70-gpu   # served on 56 tasks: the pre-registered comparison
 python kernels/analysis/heal_report.py runs/heal-c70-tpu/v1/tpu/log.jsonl   # the healing criteria
 
 cd docs/paper/arxiv && pdflatex main && pdflatex main   # the paper (main.bbl is included)
@@ -150,7 +159,7 @@ The paper names each fine-tuned adapter after what it supervises; the run direct
 | Table 1, step length (p90, full sessions) | the dev evaluations | `runs/dev-step-stats/` | `kernels/analysis/eval_trace_stats.py` |
 | Teacher: 717 states, 589 pairs, $9.21 | `g4dev-g17-labels-cpu` (rows: the private dataset `g4dev-g17-data`) | `runs/g17-data/stats.json`, `states_stats.json` | `kernels/analysis/g17_states.py`, `g17_build.py` |
 | Teacher-DPO-2: losses removed, step lengths, 52% of time after a first patch, arm b's loops | `g4dev-eval-rg-g17v2a-gpu` v1, `g4dev-eval-rg-g17v2b-gpu` v1 | `paired.json`, `trace_stats.json`, `post_submit.json`, `loops.json` | `eval_paired.py`, `eval_trace_stats.py`, `eval_post_submit.py`, `eval_loops.py` |
-| A/A floor: 6 of 82 tasks flip (Section 5) | `g4dev-eval-rg-aa-gpu` v1 | `runs/eval-rg-aa-gpu/paired.json` | `eval_paired.py` |
+| A/A floor: 6 of 82 tasks flip (Section 6) | `g4dev-eval-rg-aa-gpu` v1 | `runs/eval-rg-aa-gpu/paired.json` | `eval_paired.py` |
 | Damage of the cuts: agent, WikiText-103 and random scores (Section 4) | `g4dev-prune-score-gpu` v2, `g4dev-prune-score3-gpu` v1 | `runs/prune-score-gpu/v2/prune/score-v1/report.json`, `runs/prune-score3-gpu/v1/prune/score-v3/report.json` | `kernels/colab/prune/prune_score.py` |
 | Real 4-bit cuts, decode speed, served damage (Figure 3, Table 2) | `g4dev-prune-serve-gpu` v3 | `runs/prune-serve-gpu/v3/prune/serve-v1/` | `kernels/colab/prune/prune_serve.py`, `serve_bench.py` |
 | Same-session comparison, 70% cut (Figure 4) | `g4dev-eval-rg-same4-gpu` v1 | `runs/eval-rg-same4-gpu/` (`models.json`, `blocks.json`, `swallowed.json`, `loops.json`) | `eval_models.py`, `eval_swallowed.py`, `eval_loops.py` |
@@ -158,13 +167,14 @@ The paper names each fine-tuned adapter after what it supervises; the run direct
 | The adapter through vLLM's LoRA path: 1.02x | `g4dev-prune-serve2b-gpu` v1 | `runs/prune-serve2b-gpu/v1/prune/serve-v2b/report.json` | |
 | Merged healing (+0.022, 1.15x) and the next-action test (Figures 1, 5) | `g4dev-prune-serve5-gpu` v1 | `runs/prune-serve5-gpu/v1/next_action.json`, `prune/serve-v5/` | `kernels/analysis/serve_next_action.py` |
 | How episodes end: no timeout passes; the healed cut's fewer timeouts became call-cap endings (21 vs 12-16), which pass one time in five; two in five solved episodes end after 7 minutes | `g4dev-eval-rg-same4-gpu` v1, `g4dev-eval-rg-same55-gpu` v1 | per-task results in both run directories | `kernels/analysis/late_episodes.py` |
-| A tolerant call parser repairs 53 of the cuts' 68 malformed next calls (Section 4) | `g4dev-prune-serve5-gpu` v1, `g4dev-prune-serve6-gpu` v1, `g4dev-prune-serve7-gpu` v2 | `runs/tolerant-parse/report.json` | `kernels/analysis/tolerant_parse.py` |
+| A tolerant call parser repairs 53 of the cuts' 68 malformed next calls (Section 5) | `g4dev-prune-serve5-gpu` v1, `g4dev-prune-serve6-gpu` v1, `g4dev-prune-serve7-gpu` v2 | `runs/tolerant-parse/report.json` | `kernels/analysis/tolerant_parse.py` |
+| The parser served on tasks: 15 vs 8 of the same 56 (9/2), timeouts 37 → 20, loops 20 → 4, 92 of 1,165 calls rewritten, none left malformed (Section 5) | `g4dev-eval-rg-tol70-gpu` v1 (the plugin: `kernels/colab/prune/gemma4_tolerant.py`) | `runs/eval-rg-tol70-gpu/tol70_report.json`, `train_eval/report.json` | `kernels/analysis/tol70_report.py` |
 | Checkpoint bytes (Table 2): the full model's `model.safetensors`, 23,265,352,448 bytes; each cut's written tensors | Kaggle's file listing of the competition model; `g4dev-prune-serve-gpu` v3 | `runs/prune-serve-gpu/v3/prune/serve-v1/report.json` | `kernels/colab/prune/slice_model.py` |
 | Task sets and data pools (Appendix B) | the notebooks above | each run directory's `paired.json` or report | |
-| Pre-registered analysis plans (Section 5) | | [`docs/preregistrations.md`](docs/preregistrations.md), verbatim from the logbook with times | |
+| Pre-registered analysis plans (Section 6) | | [`docs/preregistrations.md`](docs/preregistrations.md), verbatim from the logbook with times | |
 | The 55% cut, healed | `gemma-4-31b-agent-healing-a-deeper-pruning-cut` v1, `g4dev-eval-rg-same55-gpu` v1 | `runs/heal-c55-tpu/v1/heal_report.json`, `runs/eval-rg-same55-gpu/` | `heal_report.py`, `eval_models.py` |
 | Role score and where the failures move (Figure 6) | `g4dev-prune-score4-gpu` v1, `g4dev-prune-serve6-gpu` v1 | `runs/prune-score4-gpu/v1/`, `runs/prune-serve6-gpu/v1/role_test.json`, `call_attempts.json` | `kernels/analysis/role_test.py` |
-| N-gram speculative decoding (Figure 7) | `g4dev-prune-serve7-gpu` v2 | `runs/prune-serve7-gpu/v2/spec_test.json`, `prune/serve-v7/` | `kernels/analysis/spec_test.py` |
+| N-gram speculative decoding (arXiv Figure 4) | `g4dev-prune-serve7-gpu` v2 | `runs/prune-serve7-gpu/v2/spec_test.json`, `prune/serve-v7/` | `kernels/analysis/spec_test.py` |
 
 </details>
 
@@ -196,7 +206,7 @@ attached). The links open once the notebooks are public. To re-run one, copy it 
 </details>
 
 <details>
-<summary><b>Pruning (Section 4)</b></summary>
+<summary><b>Pruning and repair (Sections 4 and 5)</b></summary>
 
 | what | notebook |
 |---|---|
@@ -210,6 +220,7 @@ attached). The links open once the notebooks are public. To re-run one, copy it 
 | the role score's test | [`g4dev-prune-serve6-gpu`](https://www.kaggle.com/code/verracodeguacas/g4dev-prune-serve6-gpu) |
 | n-gram speculative decoding | [`g4dev-prune-serve7-gpu`](https://www.kaggle.com/code/verracodeguacas/g4dev-prune-serve7-gpu) |
 | same-session comparisons, 70% and 55% cuts | [`g4dev-eval-rg-same4-gpu`](https://www.kaggle.com/code/verracodeguacas/g4dev-eval-rg-same4-gpu), [`g4dev-eval-rg-same55-gpu`](https://www.kaggle.com/code/verracodeguacas/g4dev-eval-rg-same55-gpu) |
+| the tolerant parser on tasks | [`g4dev-eval-rg-tol70-gpu`](https://www.kaggle.com/code/verracodeguacas/g4dev-eval-rg-tol70-gpu) |
 
 </details>
 

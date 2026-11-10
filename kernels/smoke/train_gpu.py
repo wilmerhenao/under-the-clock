@@ -22,6 +22,7 @@ from pathlib import Path
 EVAL_PY = None  # @embed eval_harness.py
 TRAIN_PY = None  # @embed ../train/train_lora.py
 SLICE_SRC = None  # @embed ../colab/prune/slice_model.py
+TOLERANT_SRC = None  # @embed ../colab/prune/gemma4_tolerant.py
 BUNDLES = None  # @embed_dir ../bundles/sub-v5b ../bundles/sub-v9 ../bundles/sub-v9c ../bundles/sub-v9t ../bundles/sub-v9r ../bundles/sub-v9k ../bundles/sub-v9g
 DEADLINE_S = 3 * 3600  # @define
 TRAIN_CAP_MIN = 75  # @define
@@ -69,6 +70,8 @@ BLOCKS = 2  # @define
 BLOCK_TASKS = 64  # @define
 SEG_CAP_MIN = 95  # @define (wall-clock cap of one segment, BLOCK_TASKS tasks with EVAL_CONC at a time)
 BLOCK_EXCLUDE_REPOS = []  # @define (MODELS mode: repos dropped from the blocks, e.g. ones found in a training pool)
+BLOCK_IDS = {}  # @define (MODELS mode, B209: fixed blocks {'block0': [instance ids], ...} instead of the computed ones,
+               # e.g. an earlier session's exact tasks; every id must be in EVAL_SET)
 TRAIN_ONLY = False  # @define (stop after training: adapter to /kaggle/working/adapter_out, no serving or eval; the
                     # g5b adapter from this trainer was served on the current wheels by g4dev-runtime-paired-gpu, 10-10)
 LOSS_CHUNK = 1024  # @define (trainable positions per logits chunk)
@@ -236,12 +239,45 @@ def run_models(serve_model, data, splits, env_args):
     if excl_b:
         stage('block_exclude', repos=sorted(excl_b), dropped=sum(1 for t in order if t['instance_id'] in ids
                                                                   and short(t.get('repo')) in excl_b))
-    if len(seq) < BLOCKS * BLOCK_TASKS:
-        raise RuntimeError(f'{len(seq)} tasks for {BLOCKS} blocks of {BLOCK_TASKS}')
-    blocks = {f'block{b}': seq[b * BLOCK_TASKS:(b + 1) * BLOCK_TASKS] for b in range(BLOCKS)}
+    if BLOCK_IDS:   # B209: an earlier session's exact blocks
+        blocks = {k: list(v) for k, v in BLOCK_IDS.items()}
+        missing = sorted(i for v in blocks.values() for i in v if i not in ids)
+        if missing or sorted(blocks) != [f'block{b}' for b in range(BLOCKS)]:
+            raise RuntimeError(f'BLOCK_IDS: {len(missing)} ids not in {EVAL_SET} ({missing[:5]}), keys {sorted(blocks)}')
+    else:
+        if len(seq) < BLOCKS * BLOCK_TASKS:
+            raise RuntimeError(f'{len(seq)} tasks for {BLOCKS} blocks of {BLOCK_TASKS}')
+        blocks = {f'block{b}': seq[b * BLOCK_TASKS:(b + 1) * BLOCK_TASKS] for b in range(BLOCKS)}
     bfile = WORK / 'blocks.json'
     bfile.write_text(json.dumps(blocks, indent=1))
     stage('models_blocks', sizes={k: len(v) for k, v in blocks.items()}, first=[v[:3] for v in blocks.values()])
+    # 1b. B209: a model served with the tolerant tool-call parser (vLLM plugin) is checked here first, in this process,
+    # against the installed vLLM's own Gemma 4 parser and the model's tokenizer: a malformed call must come out repaired
+    plugin = WORK / 'gemma4_tolerant.py'
+    if any(m.get('tool_parser') == 'gemma4_tolerant' for m in MODELS):
+        plugin.write_text(TOLERANT_SRC)
+        import importlib.util as _iu
+        import types as _types
+        from transformers import AutoTokenizer
+        _spec = _iu.spec_from_file_location('gemma4_tolerant', str(plugin))
+        _mod = _iu.module_from_spec(_spec)
+        _spec.loader.exec_module(_mod)
+        from vllm.tool_parsers.abstract_tool_parser import ToolParserManager
+        cls = ToolParserManager.get_tool_parser('gemma4_tolerant')
+        tp = cls(AutoTokenizer.from_pretrained(str(serve_model)))
+        q = '<|"|>'
+        req = _types.SimpleNamespace(tools=[_types.SimpleNamespace(function=_types.SimpleNamespace(
+            name='read_file', parameters={'properties': {'filepath': {}, 'start_line': {}, 'end_line': {}}}))])
+        got = {}
+        for label, body in (('backtick', f'filepath:{q}src/a.py`,start_line:70,end_line:170'),
+                            ('json_key', f'filepath:{q}src/a.py{q},start_line":70,end_line":170'),
+                            ('clean', f'filepath:{q}src/a.py{q},start_line:70,end_line:170')):
+            r = tp.extract_tool_calls('<|tool_call>call:read_file{' + body + '}<tool_call|>', req)
+            got[label] = json.loads(r.tool_calls[0].function.arguments) if r.tools_called else None
+        want = {'filepath': 'src/a.py', 'start_line': 70, 'end_line': 170}
+        stage('tolerant_selftest', parser=f'{cls.__module__}.{cls.__name__}', got=got)
+        if any(v != want for v in got.values()):
+            raise RuntimeError(f'tolerant parser self-test failed: {got}')
     # 2. the checkpoints: the full model, cuts (sliced once per distinct cut), merged healing adapters
     dirs, cut_cache = {}, {}
     for m in MODELS:
@@ -289,6 +325,7 @@ def run_models(serve_model, data, splits, env_args):
     bundle_args = ['--bundle', str(bdir), '--time-scale', str(EVAL_TIME_SCALE)]
     # 4. segments: block b in the listed order (b even) or reversed (b odd); one server per model change
     names = [m['name'] for m in MODELS]
+    mcfg = {m['name']: m for m in MODELS}
     segs = [(b, n) for b in range(BLOCKS) for n in (names if b % 2 == 0 else names[::-1])]
     cur, mid, results = None, None, {}
     for k, (b, name) in enumerate(segs):
@@ -307,10 +344,16 @@ def run_models(serve_model, data, splits, env_args):
                 server = None
                 time.sleep(20)                                        # let the GPUs empty before the next model
             t = time.time()
+            parser = mcfg[name].get('tool_parser', 'gemma4')          # B209: 'gemma4_tolerant' = the vLLM plugin
+            extra = ['--tool-parser-plugin', str(plugin)] if parser == 'gemma4_tolerant' else []
+            if extra:
+                os.environ['G4DEV_TOLERANT_LOG'] = str(OUT / f'tolerant_rewrites_{name}.jsonl')
+            else:
+                os.environ.pop('G4DEV_TOLERANT_LOG', None)
             server = VllmServer(VllmConfig(
                 model=str(dirs[name]), port=8000, host='127.0.0.1', dtype='auto', gpu_memory_utilization=0.92,
-                tool_call_parser='gemma4', reasoning_parser='gemma4', max_model_len=32768, enable_auto_tool_choice=True,
-                enable_lora=False, tensor_parallel_size=4, startup_timeout=1500))
+                tool_call_parser=parser, reasoning_parser='gemma4', max_model_len=32768, enable_auto_tool_choice=True,
+                enable_lora=False, tensor_parallel_size=4, startup_timeout=1500, extra_args=extra))
             server.start()
             cur = name
             mid = str(getattr(server, 'effective_model_path', None) or server.config.model)
@@ -332,6 +375,11 @@ def run_models(serve_model, data, splits, env_args):
                                                           'n_errors', 'n_llm_calls', 'tool_calls_per_llm_call')}
         stage('models_segment_done', segment=k, block=b, model=name, minutes=round((time.time() - t) / 60, 1),
               **results[f'{name}_b{b}'])
+        rw = OUT / f'tolerant_rewrites_{name}.jsonl'
+        if rw.exists():   # B209: calls the tolerant parser rewrote so far (and the server's 'registered' marker)
+            ev = [json.loads(x) for x in rw.read_text().splitlines() if x.strip()]
+            stage('tolerant_rewrites', model=name, registered=sum(e.get('event') == 'registered' for e in ev),
+                  rewritten=sum('tool' in e for e in ev))
         if not sm.get('n_finished'):
             raise RuntimeError(f'segment {k} ({name}, block {b}) finished no task: stopping to save quota')
     if server is not None:

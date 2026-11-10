@@ -14,7 +14,9 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from serve_next_action import PARAMS, ALL_PARAMS, Q, first_call, parse_call, swallowed  # noqa: E402
+from serve_next_action import PARAMS, ALL_PARAMS, first_call, parse_call, swallowed  # noqa: E402
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'colab' / 'prune'))
+from gemma4_tolerant import rewrite_args  # noqa: E402  (the same rewrite the serving kernel runs, B209)
 
 ROOT = Path(__file__).resolve().parents[2]
 RUNS = {  # next-action tests whose saved turns we re-parse: (directory, models)
@@ -31,32 +33,11 @@ def bad(c):
 
 
 def rewrite(c):
-    """The call body with stray closers turned into <|"|> (inside an open string) and JSON-style key quotes dropped."""
+    """The call with the plugin's rewrites (kernels/colab/prune/gemma4_tolerant.py: the rule the serving kernel runs)."""
     m = re.match(r'(\s*call:([A-Za-z_]\w*)\{)(.*)(\}\s*)$', c, re.S)
     if not m:
         return c
-    head, name, body, tail = m.group(1), m.group(2), m.group(3), m.group(4)
-    keys = sorted(PARAMS.get(name) or ALL_PARAMS, key=len, reverse=True)
-    body = re.sub(r'\b(' + '|'.join(map(re.escape, keys)) + r')"\s*:', r'\1:', body)       # (2) start_line": 151
-    out, i, open_s = [], 0, False
-    nxt = re.compile(r'\s*,\s*(?:' + '|'.join(map(re.escape, keys)) + r')\s*:')
-    while i < len(body):
-        if body.startswith(Q, i):
-            open_s = not open_s
-            out.append(Q)
-            i += len(Q)
-            continue
-        ch = body[i]
-        w = 2 if body.startswith('\\"', i) else 1                       # a JSON-escaped quote, \", closes as well
-        if open_s and (ch in '`"' or w == 2) and (nxt.match(body, i + w) or body[i + w:].strip() == ''):   # (1)
-            if body.find(Q, i + w) < 0 or nxt.match(body, i + w):
-                out.append(Q)
-                open_s = False
-                i += w
-                continue
-        out.append(ch)
-        i += 1
-    return head + ''.join(out) + tail
+    return m.group(1) + rewrite_args(m.group(3), PARAMS.get(m.group(2)) or ALL_PARAMS) + m.group(4)
 
 
 def main(out=None):

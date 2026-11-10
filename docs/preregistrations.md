@@ -1,7 +1,7 @@
 # Pre-registered analysis plans
 
-The paper calls four tests confirmatory: the healing criteria, the two same-session comparisons, the role-aware
-score's next-action test and the speculative-decoding test. Their plans are copied below verbatim from the project's
+The paper calls five tests confirmatory: the healing criteria, the two same-session comparisons, the role-aware
+score's next-action test with the speculative-decoding test, and the tolerant parser's task session. Their plans are copied below verbatim from the project's
 dated logbook, each with the entry it comes from, the time that entry was written and when the run it governs was
 pushed and ran. The logbook's internal names: `c70` / `c55` = the 70% / 55% cuts; `c70kd` / `c55kd` (served as
 `c70+kd~`) = the cut healed with the full model as teacher (KL) and merged into the 4-bit weights by stochastic
@@ -86,3 +86,24 @@ results B205-B206).
   engine's next calls agree with plain greedy's at >= 0.70 (the numerics floor's lower bound) and malformed calls are
   <= 3/100; speed reported as same-session ratios. Analysis `kernels/analysis/spec_test.py`. CPU tests: serve test
   modes V6 and V7 (synthetic data) pass; the fake vLLM now returns `token_ids` as vLLM does.
+
+## 5. The tolerant tool-call parser on the 70% cut (Section 5)
+
+Entry B209, written 20:20 UTC 2026-11-10 and committed before `g4dev-eval-rg-tol70-gpu` v1 was pushed at
+20:25 UTC; the analysis script (`kernels/analysis/tol70_report.py`) was committed at 20:30, before any result. Results:
+B211.
+
+- **Pre-registered analysis (fixed before the push):** analysis set = the block-0 tasks `c70tol` finishes.
+  1. Primary: `c70tol` vs same4's c70 on those tasks: solved, discordant tasks, exact McNemar (two-sided). This is a
+     cross-session comparison, so the A/A floor applies (6 of 82 tasks flip between identical arms; 7-14% across
+     sessions): a difference counts as recovery only if `c70tol` solves >= 4 more than c70 with discordant tasks at
+     least 3:1. Also reported: the share of the cut's gap closed, (`c70tol` - 8) / (14.5 - 8).
+  2. Mechanism (descriptive): calls the plugin rewrote, as a share of the segment's calls (the cut's own malformed
+     rate; same4's c70 wrote 20.7%), and the `registered` marker; malformed calls left in the traces
+     (`eval_swallowed.py`); timeouts, call-cap endings and loops (`eval_loops.py`) against same4's c70 and full runs.
+  3. Reading: (a) recovery with fewer timeouts: a tolerant parser is a cheap, training-free alternative to healing for
+     self-hosted agents, and the paper says so with the cross-session caveat; (b) rewrites near c70's rate but no
+     recovery: the cut loses tasks beyond call syntax, and healing does more than fix syntax; (c) the plugin rarely
+     fires (< 5% of calls): the session's failures differ from the next-action test's, reported as such.
+- **Gates:** the self-test passes before slicing (else the run stops after ~7 min); the server writes its marker; a
+  segment that finishes no task stops the run; no other GPU session of ours running at push.

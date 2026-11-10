@@ -1,0 +1,198 @@
+{
+  "machine": "gpu-4xL4",
+  "started": "2026-11-10 20:25:27",
+  "stages": [
+    {
+      "stage": "env",
+      "t": 0.0,
+      "python": "3.12.13",
+      "gpus": [
+        "NVIDIA L4, 23034 MiB",
+        "NVIDIA L4, 23034 MiB",
+        "NVIDIA L4, 23034 MiB",
+        "NVIDIA L4, 23034 MiB"
+      ],
+      "cpus": 48
+    },
+    {
+      "stage": "train_libs",
+      "t": 102.4,
+      "installed": {}
+    },
+    {
+      "stage": "libs",
+      "t": 112.4,
+      "versions": "2.10.0+cu128 5.13.1 0.19.1 0.46.1 1.13.0"
+    },
+    {
+      "stage": "vllm",
+      "t": 115.1,
+      "version": "0.19.1",
+      "chat_utils_mentions_reasoning_content": true,
+      "wheel_drops_past_thoughts": true,
+      "patched": false,
+      "reasoning_lines": [
+        "reasoning: str | None",
+        "\"\"\"The reasoning content for interleaved thinking.\"\"\"",
+        "reasoning: str | None",
+        "\"\"\"The reasoning content for interleaved thinking.\"\"\"",
+        "reasoning_content: str | None",
+        "\"\"\"Deprecated: The reasoning content for interleaved thinking.\"\"\"",
+        "reasoning = message.get(\"reasoning\")",
+        "# Include reasoning if present for interleaved thinking.",
+        "if reasoning is not None:",
+        "result_msg[\"reasoning\"] = cast(str, reasoning)",
+        "result_msg[\"reasoning_content\"] = cast(",
+        "str, reasoning"
+      ]
+    },
+    {
+      "stage": "repograph_data",
+      "t": 396.9,
+      "split": "priv_eval",
+      "tasks": 221,
+      "trusted": 215,
+      "eval_ids": 150,
+      "excluded_repos": 10,
+      "graphs": 220,
+      "embeddings": 220,
+      "controls": [
+        "/kaggle/input/notebooks/verracodeguacas/g4dev-repograph-controls-cpu/controls/controls.csv",
+        "/kaggle/input/notebooks/verracodeguacas/g4dev-repograph-controls2-cpu/controls/controls.csv"
+      ]
+    },
+    {
+      "stage": "inputs",
+      "t": 396.9,
+      "sft": "/kaggle/input/notebooks/verracodeguacas/g4dev-render-daily-cpu/render/sft.jsonl",
+      "qat_bf16": "/kaggle/input/models/google/gemma-4/transformers/gemma-4-31b-it-qat-q4_0-unquantized/2",
+      "serve": "/kaggle/input/models/google/gemma-4/other/gemma-4-31b-it-qat-w4a16-ct/2",
+      "env_args": [
+        "--py313-kit",
+        "/kaggle/input/datasets/verracodeguacas/g4dev-sandbox313",
+        "--find-links",
+        "/kaggle/input/datasets/verracodeguacas/g4dev-py313-wheels",
+        "--official-env",
+        "--repo-wheels",
+        "/kaggle/input/datasets/debmalya84/repograph-verified-swe-tasks-wheels"
+      ],
+      "eval_data": "/kaggle/working/rgdata"
+    },
+    {
+      "stage": "models_blocks",
+      "t": 418.3,
+      "sizes": {
+        "block0": 56
+      },
+      "first": [
+        [
+          "skylos_961",
+          "casbin_pycasbin_402",
+          "openenv_1252"
+        ]
+      ]
+    },
+    {
+      "stage": "tolerant_selftest",
+      "t": 429.3,
+      "parser": "gemma4_tolerant.Gemma4TolerantToolParser",
+      "got": {
+        "backtick": {
+          "filepath": "src/a.py",
+          "start_line": 70,
+          "end_line": 170
+        },
+        "json_key": {
+          "filepath": "src/a.py",
+          "start_line": 70,
+          "end_line": 170
+        },
+        "clean": {
+          "filepath": "src/a.py",
+          "start_line": 70,
+          "end_line": 170
+        }
+      }
+    },
+    {
+      "stage": "models_prepared",
+      "t": 807.6,
+      "model": "c70tol",
+      "dir": "/tmp/model_c70tol",
+      "minutes": 6.3,
+      "cut": {
+        "shards": 5,
+        "bytes": 19642091640,
+        "gb": 18.29,
+        "layers": 60,
+        "ff_channels": 14848,
+        "dropped": [],
+        "format": "w4 g32, down_proj re-quantized",
+        "requant_rel_err": {
+          "mean": 0.06305,
+          "max": 0.07137
+        }
+      }
+    },
+    {
+      "stage": "models_server_up",
+      "t": 1086.0,
+      "model": "c70tol",
+      "startup_s": 278.4,
+      "model_id": "/tmp/model_c70tol"
+    },
+    {
+      "stage": "models_segment_start",
+      "t": 1086.0,
+      "segment": 0,
+      "block": 0,
+      "model": "c70tol",
+      "budget_min": 65.5
+    },
+    {
+      "stage": "models_segment_done",
+      "t": 4498.7,
+      "segment": 0,
+      "block": 0,
+      "model": "c70tol",
+      "minutes": 56.9,
+      "status": "complete",
+      "healthy": true,
+      "n_tasks": 56,
+      "n_finished": 56,
+      "n_resolved": 15,
+      "n_errors": 20,
+      "n_llm_calls": 1210,
+      "tool_calls_per_llm_call": 0.83
+    },
+    {
+      "stage": "tolerant_rewrites",
+      "t": 4498.7,
+      "model": "c70tol",
+      "registered": 2,
+      "rewritten": 92
+    },
+    {
+      "stage": "models_done",
+      "t": 4504.7,
+      "results": {
+        "c70tol_b0": {
+          "status": "complete",
+          "healthy": true,
+          "n_tasks": 56,
+          "n_finished": 56,
+          "n_resolved": 15,
+          "n_errors": 20,
+          "n_llm_calls": 1210,
+          "tool_calls_per_llm_call": 0.83
+        }
+      }
+    },
+    {
+      "stage": "stopped",
+      "t": 4504.7,
+      "reason": "models: done"
+    }
+  ],
+  "total_min": 75.1
+}

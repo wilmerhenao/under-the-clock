@@ -1,0 +1,181 @@
+{
+ "tasks_compared": 56,
+ "endings": {
+  "c70tol": {
+   "n": 56,
+   "solved": 15,
+   "clock": [
+    20,
+    0
+   ],
+   "call_cap": [
+    9,
+    0
+   ],
+   "own_stop": [
+    27,
+    15
+   ],
+   "tool_calls": 1007
+  },
+  "c70": {
+   "n": 56,
+   "solved": 8,
+   "clock": [
+    37,
+    0
+   ],
+   "call_cap": [
+    7,
+    0
+   ],
+   "own_stop": [
+    12,
+    8
+   ],
+   "tool_calls": 964
+  },
+  "full": {
+   "n": 56,
+   "solved": 14,
+   "clock": [
+    21,
+    0
+   ],
+   "call_cap": [
+    8,
+    0
+   ],
+   "own_stop": [
+    27,
+    14
+   ],
+   "tool_calls": 967
+  },
+  "full2": {
+   "n": 56,
+   "solved": 15,
+   "clock": [
+    23,
+    0
+   ],
+   "call_cap": [
+    8,
+    1
+   ],
+   "own_stop": [
+    25,
+    14
+   ],
+   "tool_calls": 1001
+  },
+  "c70kd": {
+   "n": 56,
+   "solved": 14,
+   "clock": [
+    16,
+    0
+   ],
+   "call_cap": [
+    13,
+    2
+   ],
+   "own_stop": [
+    27,
+    12
+   ],
+   "tool_calls": 1008
+  }
+ },
+ "c70tol_vs_c70": {
+  "c70tol": 15,
+  "c70": 8,
+  "only_c70tol": 9,
+  "only_c70": 2,
+  "mcnemar_exact_p": 0.0654
+ },
+ "c70tol_vs_full": {
+  "c70tol": 15,
+  "full": 14,
+  "only_c70tol": 4,
+  "only_full": 3,
+  "mcnemar_exact_p": 1.0
+ },
+ "c70tol_vs_full2": {
+  "c70tol": 15,
+  "full2": 15,
+  "only_c70tol": 3,
+  "only_full2": 3,
+  "mcnemar_exact_p": 1.0
+ },
+ "c70tol_vs_c70kd": {
+  "c70tol": 15,
+  "c70kd": 14,
+  "only_c70tol": 5,
+  "only_c70kd": 4,
+  "mcnemar_exact_p": 1.0
+ },
+ "primary": {
+  "difference": 7,
+  "discordant": [
+   9,
+   2
+  ],
+  "p": 0.0654,
+  "recovery_by_rule": true,
+  "gap_closed": 1.08,
+  "full_mean": 14.5
+ },
+ "rewrites": {
+  "registered_markers": 2,
+  "rewritten_calls": 92,
+  "share_of_calls": 0.0914,
+  "by_kind": {
+   "backtick": 51,
+   "JSON-style key or quote": 17,
+   "escaped quote": 14,
+   "other quote": 10
+  },
+  "by_tool": {
+   "edit_file": 42,
+   "read_file": 43,
+   "run_command": 1,
+   "write_file": 6
+  },
+  "share_of_trace_calls": 0.079
+ },
+ "traces": {
+  "c70tol": {
+   "sessions": 56,
+   "tool_calls": 1165,
+   "malformed": 0,
+   "share": 0.0,
+   "loop_sessions": 6,
+   "real_loop_sessions": 4
+  },
+  "c70": {
+   "sessions": 56,
+   "tool_calls": 1265,
+   "malformed": 262,
+   "share": 0.2071,
+   "loop_sessions": 23,
+   "real_loop_sessions": 20
+  },
+  "full": {
+   "sessions": 56,
+   "tool_calls": 1047,
+   "malformed": 27,
+   "share": 0.0258,
+   "loop_sessions": 2,
+   "real_loop_sessions": 2
+  },
+  "full2": {
+   "sessions": 56,
+   "tool_calls": 1106,
+   "malformed": 35,
+   "share": 0.0316,
+   "loop_sessions": 5,
+   "real_loop_sessions": 5
+  }
+ }
+}
