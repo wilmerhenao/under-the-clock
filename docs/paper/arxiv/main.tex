@@ -249,7 +249,9 @@ rows in two arms on identical batches: one imitates the full model by minimizing
 \text{cut})$ at every token, the other minimizes the plain next-token loss. A removed channel gets no gradient, so the adapter slices exactly onto the 4-bit cut. The KL
 arm met its pre-registered bar (damage below $+0.04$ and KL halved; 2.4 TPU hours): in the trainer's bf16 evaluation
 damage fell from $+0.085$ to $+0.021$ and KL on agent tokens from 0.098 to 0.042. The next-token arm went below the full
-model's loss ($-0.078$) while its KL rose to 0.243: it fit the data rather than the full model. Served through vLLM's
+model's loss ($-0.078$) while its KL rose to 0.243: it fit the data rather than the full model. Trained on the tool calls alone (token level only), the KL arm
+cut the calls' KL from 0.045 to 0.025, short of its pre-registered half, while the next-token arm let the rest drift
+($+0.195$). Served through vLLM's
 LoRA path, the adapter costs the whole speedup (1.02\X\ against 1.15\X), so it must be merged into the 4-bit weights.
 Rounding each merged weight to the nearest 4-bit value would erase the repair, whose changes average 5\% of a
 quantization step (as Scale-QLoRA~\citep{li2026scaleqlora} found), so we round stochastically~\citep{gupta2015deep}:
@@ -428,8 +430,7 @@ Damage is the rise in held-out nats per token on the agent's own text (40 rows, 
 damage of the bf16 mask before any 4-bit serving. Those masks keep exactly 85, 70 and 55\% of the channels (18,278,
 15,053 and 11,827), while the served cuts keep 18,432, 14,848 and 11,776. At 70\% the served cut therefore removes 205
 more channels per layer, about 0.004 nats on the slope between the 85\% and 70\% masks: the gap between the mask's
-$+0.080$ and the served $+0.084$. The healing trainer's own bf16 evaluation of the served mask gives $+0.085$
-(Section~\ref{sec:prune}). At 70\%, the WikiText-scored cut costs the agent $+0.867$ and WikiText $+0.145$, the
+$+0.080$ and the served $+0.084$. At 70\%, the WikiText-scored cut costs the agent $+0.867$ and WikiText $+0.145$, the
 agent-scored one $+0.080$ and $+1.316$, and a random cut (one seed) $+0.533$ and $+0.866$.
 
 \begin{table}[!ht]
